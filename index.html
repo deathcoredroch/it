@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подготовка к экзамену по итальянскому | Premium Study Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0d0d0d;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .gold-gradient {
+            background: linear-gradient(135deg, #d4af37 0%, #f2d06b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card {
+            background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+            border: 1px solid #2a2a2a;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            border-color: #d4af37;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #d4af37 0%, #c49a2e 100%);
+            color: #0d0d0d;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, #8b0000, #d4af37);
+            height: 6px;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+        
+        .flashcard {
+            perspective: 1000px;
+            cursor: pointer;
+        }
+        
+        .flashcard-inner {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        .flashcard.flipped .flashcard-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .flashcard-front, .flashcard-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .flashcard-front {
+            background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+            border: 2px solid #d4af37;
+        }
+        
+        .flashcard-back {
+            background: linear-gradient(145deg, #2a1a0f, #1a0f0a);
+            border: 2px solid #8b0000;
+            transform: rotateY(180deg);
+        }
+        
+        .quiz-option {
+            background: #1a1a1a;
+            border: 2px solid #2a2a2a;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .quiz-option:hover {
+            border-color: #d4af37;
+        }
+        
+        .quiz-option.correct {
+            border-color: #4ade80;
+            background: rgba(74, 222, 128, 0.1);
+        }
+        
+        .quiz-option.incorrect {
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+        }
+        
+        .tab-btn {
+            color: #888;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-btn.active {
+            color: #d4af37;
+            border-bottom-color: #d4af37;
+        }
+        
+        .italian-text {
+            font-style: italic;
+            color: #f2d06b;
+        }
+        
+        .explanation {
+            background: #1a1a1a;
+            border-left: 4px solid #8b0000;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 4px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+            margin: 40px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-black bg-opacity-95 backdrop-blur-sm border-b border-gray-800">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <h1 class="text-3xl font-bold gold-gradient">Итальянский | Percorsi 3 & 4</h1>
+                <div class="flex items-center gap-6">
+                    <div class="text-right">
+                        <p class="text-sm text-gray-400">Прогресс подготовки</p>
+                        <div class="w-48 bg-gray-800 rounded-full h-2 mt-1">
+                            <div id="mainProgress" class="progress-bar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-2xl font-bold gold-gradient" id="totalScore">0%</p>
+                        <p class="text-xs text-gray-400">Завершено</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="bg-black bg-opacity-50 border-b border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="flex gap-8">
+                <button class="tab-btn active py-4 px-2" onclick="switchTab('percorso4')">
+                    📚 Percorso 4: Letteratura
+                </button>
+                <button class="tab-btn py-4 px-2" onclick="switchTab('percorso3')">
+                    🌾 Percorso 3: Scienze Agrarie
+                </button>
+                <button class="tab-btn py-4 px-2" onclick="switchTab('exam-prep')">
+                    ⚡ Экспресс-подготовка
+                </button>
+                <button class="tab-btn py-4 px-2" onclick="switchTab('statistics')">
+                    📊 Статистика
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12">
+        <!-- Percorso 4: Letteratura di viaggio -->
+        <div id="percorso4" class="tab-content">
+            <div class="text-center mb-12">
+                <h2 class="text-5xl font-bold gold-gradient mb-4">Percorso 4: Letteratura di viaggio</h2>
+                <p class="text-xl text-gray-400">Литература путешествий | Грамматика и лексика</p>
+            </div>
+
+            <!-- Module 1: Grammatica -->
+            <section class="mb-16">
+                <h3 class="text-3xl font-bold text-white mb-8 flex items-center">
+                    <span class="w-12 h-12 bg-gradient-to-br from-yellow-600 to-yellow-800 rounded-full flex items-center justify-center mr-4">1</span>
+                    Грамматика
+                </h3>
+
+                <!-- Aggettivi e pronomi indefiniti -->
+                <div class="card rounded-xl p-8 mb-8">
+                    <h4 class="text-2xl font-semibold mb-6 gold-gradient">Неопределенные прилагательные и местоимения</h4>
+                    
+                    <div class="grid md:grid-cols-2 gap-6 mb-8">
+                        <div class="bg-black bg-opacity-50 p-6 rounded-lg">
+                            <h5 class="text-lg font-semibold text-yellow-500 mb-3">Aggettivi indefiniti (Прилагательные)</h5>
+                            <ul class="space-y-2 text-gray-300">
+                                <li><span class="italian-text">ogni</span> — каждый (ед.ч., неизменяемое)</li>
+                                <li><span class="italian-text">qualche</span> — несколько (ед.ч., неизменяемое)</li>
+                                <li><span class="italian-text">alcuni/e</span> — некоторые (мн.ч.)</li>
+                                <li><span class="italian-text">tutto/a/i/e</span> — весь, вся, все</li>
+                                <li><span class="italian-text">altro/a/i/e</span> — другой, иной</li>
+                                <li><span class="italian-text">molto/a/i/e</span> — много, многие</li>
+                                <li><span class="italian-text">poco/a/chi/che</span> — мало, немного</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-black bg-opacity-50 p-6 rounded-lg">
+                            <h5 class="text-lg font-semibold text-yellow-500 mb-3">Pronomi indefiniti (Местоимения)</h5>
+                            <ul class="space-y-2 text-gray-300">
+                                <li><span class="italian-text">qualcuno</span> — кто-то, некто</li>
+                                <li><span class="italian-text">qualcosa</span> — что-то, нечто</li>
+                                <li><span class="italian-text">nessuno</span> — никто</li>
+                                <li><span class="italian-text">niente/nulla</span> — ничто</li>
+                                <li><span class="italian-text">ognuno</span> — каждый</li>
+                                <li><span class="italian-text">chiunque</span> — кто угодно</li>
+                                <li><span class="italian-text">altri</span> — другие</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-red-900 bg-opacity-20 border-l-4 border-red-700 p-6 rounded">
+                        <p class="font-semibold mb-2">💡 Примеры использования:</p>
+                        <ul class="space-y-2 text-gray-300">
+                            <li><span class="italian-text">Ogni viaggiatore porta con sé qualcosa di speciale.</span> — Каждый путешественник несет с собой что-то особенное.</li>
+                            <li><span class="italian-text">Alcuni preferiscono il mare, altri la montagna.</span> — Некоторые предпочитают море, другие — горы.</li>
+                            <li><span class="italian-text">Qualcuno ha lasciato un messaggio per te.</span> — Кто-то оставил для тебя сообщение.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Forma impersonale -->
+                <div class="card rounded-xl p-8 mb-8">
+                    <h4 class="text-2xl font-semibold mb-6 gold-gradient">La forma impersonale (Безличная форма)</h4>
+                    
+                    <div class="mb-6">
+                        <p class="text-gray-300 mb-4">Безличная форма используется, когда не указывается конкретный субъект действия (аналог русского "люди говорят", "говорят").</p>
+                        
+                        <div class="bg-black bg-opacity-50 p-6 rounded-lg mb-4">
+                            <h5 class="text-lg font-semibold text-yellow-500 mb-3">Образование с SI</h5>
+                            <p class="text-gray-300 mb-3"><strong>si + глагол в 3-м лице</strong></p>
+                            <ul class="space-y-2 text-gray-300">
+                                <li><span class="italian-text">Si viaggia molto in estate.</span> — Летом много путешествуют.</li>
+                                <li><span class="italian-text">In Italia si mangia bene.</span> — В Италии хорошо едят (вкусная еда).</li>
+                                <li><span class="italian-text">Si parte domani mattina.</span> — Завтра утром отправляются/уезжаем.</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-black bg-opacity-50 p-6 rounded-lg">
+                            <h5 class="text-lg font-semibold text-yellow-500 mb-3">Сложные времена</h5>
+                            <p class="text-gray-300 mb-3">Вспомогательный глагол: <strong>essere</strong></p>
+                            <ul class="space-y-2 text-gray-300">
+                                <li><span class="italian-text">Si è partiti alle sette.</span> — Уехали в семь.</li>
+                                <li><span class="italian-text">Si è stati felici durante il viaggio.</span> — Были счастливы во время путешествия.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Condizionale -->
+                <div class="card rounded-xl p-8 mb-8">
+                    <h4 class="text-2xl font-semibold mb-6 gold-gradient">Il Condizionale (Условное наклонение)</h4>
+                    
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div class="bg-black bg-opacity-50 p-6 rounded-lg">
+                            <h5 class="text-lg font-semibold text-yellow-500 mb-3">Condizionale Presente</h5>
+                            <p class="text-gray-300 mb-3">Окончания: -rei, -resti, -rebbe, -remmo, -reste, -rebbero</p>
+                            <div class="space-y-2 text-sm">
+                                <p><span class="italian-text">parlare</span> → io parlerei, tu parleresti...</p>
+                                <p><span class="italian-text">vendere</span> → io venderei, tu venderesti...</p>
+                                <p><span class="italian-text">partire</span> → io partirei, tu partiresti...</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-black bg-opacity-50 p-6 rounded-lg">
+                            <h5 class="text-lg font-semibold text-yellow-500 mb-3">Использование</h5>
+                            <ul class="space-y-2 text-gray-300 text-sm">
+                                <li>✓ Вежливая просьба: <span class="italian-text">Vorrei un caffè.</span></li>
+                                <li>✓ Совет: <span class="italian-text">Dovresti studiare di più.</span></li>
+                                <li>✓ Желание: <span class="italian-text">Mi piacerebbe viaggiare.</span></li>
+                                <li>✓ Сомнение: <span class="italian-text">Potrebbe piovere.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-red-900 bg-opacity-20 border-l-4 border-red-700 p-6 rounded">
+                        <p class="font-semibold mb-2">⚠️ Неправильные формы:</p>
+                        <div class="grid md:grid-cols-3 gap-4 text-sm">
+                            <div>
+                                <p class="italian-text">essere → sarei</p>
+                                <p class="italian-text">avere → avrei</p>
+                                <p class="italian-text">fare → farei</p>
+                            </div>
+                            <div>
+                                <p class="italic-text">andare → andrei</p>
+                                <p class="italian-text">dare → darei</p>
+                                <p class="italian-text">stare → starei</p>
+                            </div>
+                            <div>
+                                <p class="italian-text">potere → potrei</p>
+                                <p class="italian-text">dovere → dovrei</p>
+                                <p class="italian-text">volere → vorrei</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pronomi relativi -->
+                <div class="card rounded-xl p-8 mb-8">
+                    <h4 class="text-2xl font-semibold mb-6 gold-gradient">Pronomi relativi: quale (Относительные местоимения)</h4>
+                    
+                    <div class="mb-6">
+                        <div class="bg-black bg-opacity-50 p-6 rounded-lg mb-4">
+                            <h5 class="text-lg font-semibold text-yellow-500 mb-3">Основные формы</h5>
+                            <ul class="space-y-3 text-gray-300">
+                                <li><strong>che</strong> — который, которая (неизменяемое, субъект или прямой объект)</li>
+                                <li><strong>cui</strong> — которого, которому (с предлогами)</li>
+                                <li><strong>il quale / la quale / i quali / le quali</strong> — который/которая (изменяемое, более формальное)</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-black bg-opacity-50 p-6 rounded-lg">
+                            <h5 class="text-lg font-semibold text-yellow-500 mb-3">Примеры</h5>
+                            <ul class="space-y-2 text-gray-300">
+                                <li><span class="italian-text">Il libro che ho letto era interessante.</span> — Книга, которую я прочитал, была интересной.</li>
+                                <li><span class="italian-text">La ragazza di cui ti ho parlato.</span> — Девушка, о которой я тебе говорил.</li>
+                                <li><span class="italian-text">Il viaggio durante il quale ho conosciuto Maria.</span> — Путешествие, во время которого я познакомился с Марией.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gerundio -->
+                <div class="card rounded-xl p-8 mb-8">
+                    <h4 class="text-2xl font-semibold mb-6 gold-gradient">Il Gerundio (Герундий)</h4>
+                    
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div class="bg-black bg-opacity-50 p-6 rounded-lg">
+                            <h5 class="text-lg font-semibold text-yellow-500 mb-3">Образование</h5>
+                            <ul class="space-y-2 text-gray-300">
+                                <li><strong>-are</strong> → -ando: <span class="italian-text">parlare → parlando</span></li>
+                                <li><strong>-ere</strong> → -endo: <span class="italian-text">leggere → leggendo</span></li>
+                                <li><strong>-ire</strong> → -endo: <span class="italian-text">partire → partendo</span></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-black bg-opacity-50 p-6 rounded-lg">
+                            <h5 class="text-lg font-semibold text-yellow-500 mb-3">Использование</h5>
+                            <ul class="space-y-2 text-gray-300">
+                                <li>Одновременность: <span class="italian-text">Camminando, penso.</span></li>
+                                <li>Способ действия: <span class="italian-text">Studiando imparo.</span></li>
+                                <li>Причина: <span class="italian-text">Essendo stanco, dormo.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-red-900 bg-opacity-20 border-l-4 border-red-700 p-6 rounded">
+                        <p class="font-semibold mb-2">💡 Gerundio Passato (Прошедший герундий):</p>
+                        <p class="text-gray-300"><strong>avendo/essendo + participio passato</strong></p>
+                        <ul class="space-y-2 text-gray-300 mt-3">
+                            <li><span class="italian-text">Avendo finito i compiti, sono uscito.</span> — Закончив домашнее задание, я вышел.</li>
+                            <li><span class="italian-text">Essendo arrivato in ritardo, ho perso l'inizio.</span> — Прибыв с опозданием, я пропустил начало.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Flashcards: Grammar -->
+                <div class="mt-8">
+                    <h5 class="text-xl font-semibold mb-4 text-yellow-500">🎴 Карточки для запоминания (нажмите для переворота)</h5>
+                    <div class="grid md:grid-cols-3 gap-4" id="grammar-flashcards"></div>
+                </div>
+            </section>
+
+            <div class="section-divider"></div>
+
+            <!-- Module 2: Lessico -->
+            <section class="mb-16">
+                <h3 class="text-3xl font-bold text-white mb-8 flex items-center">
+                    <span class="w-12 h-12 bg-gradient-to-br from-yellow-600 to-yellow-800 rounded-full flex items-center justify-center mr-4">2</span>
+                    Лексика путешествий
+                </h3>
+
+                <div class="card rounded-xl p-8 mb-8">
+                    <h4 class="text-2xl font-semibold mb-6 gold-gradient">Collocazioni di viaggio (Устойчивые сочетания)</h4>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-black bg-opacity-50 p-6 rounded-lg">
+                            <h5 class="text-lg font-semibold text-yellow-500 mb-3">С глаголом FARE</h5>
+                            <ul class="space-y-2 text-gray-300">
+                                <li><span class="italian-text">fare un viaggio</span> — совершить путешествие</li>
+                                <li><span class="italian-text">fare le valigie</span> — собирать чемоданы</li>
+                                <li><span class="italian-text">fare una passeggiata</span> — прогуляться</li>
+                                <li><span class="italian-text">fare tappa</span> — сделать остановку</li>
+                                <li><span class="italian-text">fare il check-in</span> — зарегистрироваться</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-black bg-opacity-50 p-6 rounded-lg">
+                            <h5 class="text-lg font-semibold text-yellow-500 mb-3">С существительным VIAGGIO</h5>
+                            <ul class="space-y-2 text-gray-300">
+                                <li><span class="italian-text">viaggio d'affari</span> — деловая поездка</li>
+                                <li><span class="italian-text">viaggio di nozze</span> — медовый месяц</li>
+                                <li><span class="italian-text">viaggio organizzato</span> — организованный тур</li>
+                                <li><span class="italian-text">compagno di viaggio</span> — попутчик</li>
+                                <li><span class="italian-text">diario di viaggio</span> — дневник путешествий</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card rounded-xl p-8">
+                    <h4 class="text-2xl font-semibold mb-6 gold-gradient">Lessico letterario (Литературная лексика)</h4>
+                    
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="bg-black bg-opacity-50 p-4 rounded-lg">
+                            <p class="text-yellow-500 font-semibold mb-2">Существительные</p>
+                            <ul class="space-y-1 text-sm text-gray-300">
+                                <li><span class="italian-text">autore/autrice</span> — автор</li>
+                                <li><span class="italian-text">narratore</span> — рассказчик</li>
+                                <li><span class="italian-text">personaggio</span> — персонаж</li>
+                                <li><span class="italian-text">trama</span> — сюжет</li>
+                                <li><span class="italian-text">ambientazione</span> — обстановка</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-black bg-opacity-50 p-4 rounded-lg">
+                            <p class="text-yellow-500 font-semibold mb-2">Глаголы</p>
+                            <ul class="space-y-1 text-sm text-gray-300">
+                                <li><span class="italian-text">descrivere</span> — описывать</li>
+                                <li><span class="italian-text">narrare</span> — повествовать</li>
+                                <li><span class="italian-text">raccontare</span> — рассказывать</li>
+                                <li><span class="italian-text">esprimere</span> — выражать</li>
+                                <li><span class="italian-text">rappresentare</span> — представлять</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-black bg-opacity-50 p-4 rounded-lg">
+                            <p class="text-yellow-500 font-semibold mb-2">Прилагательные</p>
+                            <ul class="space-y-1 text-sm text-gray-300">
+                                <li><span class="italian-text">avventuroso</span> — авантюрный</li>
+                                <li><span class="italian-text">emozionante</span> — волнующий</li>
+                                <li><span class="italian-text">suggestivo</span> — впечатляющий</li>
+                                <li><span class="italian-text">esotico</span> — экзотический</li>
+                                <li><span class="italian-text">pittoresco</span> — живописный</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="section-divider"></div>
+
+            <!-- Quiz Percorso 4 -->
+            <section class="mb-16">
+                <h3 class="text-3xl font-bold text-white mb-8 flex items-center">
+                    <span class="w-12 h-12 bg-gradient-to-br from-red-600 to-red-800 rounded-full flex items-center justify-center mr-4">📝</span>
+                    Тест по Percorso 4
+                </h3>
+                <div id="quiz-percorso4" class="card rounded-xl p-8"></div>
+            </section>
+        </div>
+
+        <!-- Percorso 3: Scienze Agrarie -->
+        <div id="percorso3" class="tab-content hidden">
+            <div class="text-center mb-12">
+                <h2 class="text-5xl font-bold gold-gradient mb-4">Percorso 3: Scienze Agrarie e Biotecnologie</h2>
+                <p class="text-xl text-gray-400">Агрономия и биотехнологии | Специализированная лексика</p>
+            </div>
+
+            <!-- Module 1: Grammatica Percorso 3 -->
+            <section class="mb-16">
+                <h3 class="text-3xl font-bold text-white mb-8 flex items-center">
+                    <span class="w-12 h-12 bg-gradient-to-br from-green-600 to-green-800 rounded-full flex items-center justify-center mr-4">1</span>
+                    Грамматика
+                </h3>
+
+                <!-- Imperativo -->
+                <div class="card rounded-xl p-8 mb-8">
+                    <h4 class="text-2xl font-semibold mb-6 gold-gradient">L'Imperativo (Повелительное наклонение)</h4>
+                    
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div class="bg-black bg-opacity-50 p-6 rounded-lg">
+                            <h5 class="text-lg font-semibold text-yellow-500 mb-3">Формы (tu, noi, voi)</h5>
+                            <table class="w-full text-sm">
+                                <thead>
+                                    <tr class="border-b border-gray-700">
+                                        <th class="text-left py-2"></th>
+                                        <th class="text-left py-2">-are</th>
+                                        <th class="text-left py-2">-ere</th>
+                                        <th class="text-left py-2">-ire</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-gray-300">
+                                    <tr>
+                                        <td class="py-1">tu</td>
+                                        <td class="py-1 italian-text">parl-a</td>
+                                        <td class="py-1 italian-text">scriv-i</td>
+                                        <td class="py-1 italian-text">sent-i</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-1">noi</td>
+                                        <td class="py-1 italian-text">parl-iamo</td>
+                                        <td class="py-1 italian-text">scriv-iamo</td>
+                                        <td class="py-1 italian-text">sent-iamo</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-1">voi</td>
+                                        <td class="py-1 italian-text">parl-ate</td>
+                                        <td class="py-1 italian-text">scriv-ete</td>
+                                        <td class="py-1 italian-text">sent-ite</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="bg-black bg-opacity-50 p-6 rounded-lg">
+                            <h5 class="text-lg font-semibold text-yellow-500 mb-3">Forma di cortesia (Lei)</h5>
+                            <p class="text-gray-300 mb-3">Используется congiuntivo presente:</p>
+                            <ul class="space-y-2 text-gray-300 text-sm">
+                                <li><span class="italian-text">parlare → parli!</span> (говорите!)</li>
+                                <li><span class="italian-text">scrivere → scriva!</span> (пишите!)</li>
+                                <li><span class="italian-text">sentire → senta!</span> (слушайте!)</li>
+                            </ul>
+                            <p class="text-gray-400 mt-3 text-xs">⚠️ Отрицательная форма для tu: <strong>non + infinito</strong><br>
+                            <span class="italian-text">Non parlare!</span> — Не говори!</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-red-900 bg-opacity-20 border-l-4 border-red-700 p-6 rounded">
+                        <p class="font-semibold mb-2">⚠️ Неправильные формы (tu):</p>
+                        <div class="grid md:grid-cols-4 gap-3 text-sm text-gray-300">
+                            <div><span class="italian-text">andare → va'/vai</span></div>
+                            <div><span class="italian-text">fare → fa'/fai</span></div>
+                            <div><span class="italian-text">dare → da'/dai</span></div>
+                            <div><span class="italian-text">stare → sta'/stai</span></div>
+                            <div><span class="italian-text">dire → di'</span></div>
+                            <div><span class="italian-text">avere → abbi</span></div>
+                            <div><span class="italian-text">essere → sii</span></div>
+                            <div><span class="italian-text">sapere → sappi</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Posizione dei pronomi -->
+                <div class="card rounded-xl p-8 mb-8">
+                    <h4 class="text-2xl font-semibold mb-6 gold-gradient">Posizione dei pronomi con l'imperativo</h4>
+                    
+                    <div class="bg-black bg-opacity-50 p-6 rounded-lg mb-4">
+                        <h5 class="text-lg font-semibold text-yellow-500 mb-3">Утвердительная форма</h5>
+                        <p class="text-gray-300 mb-3">Местоимения присоединяются к глаголу:</p>
+                        <ul class="space-y-2 text-gray-300">
+                            <li><span class="italian-text">Mangia<strong>lo</strong>!</span> — Съешь это!</li>
+                            <li><span class="italian-text">Compra<strong>mi</strong> un libro!</span> — Купи мне книгу!</li>
+                            <li><span class="italian-text">Dì<strong>glielo</strong>!</span> — Скажи ему это!</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-black bg-opacity-50 p-6 rounded-lg">
+                        <h5 class="text-lg font-semibold text-yellow-500 mb-3">Отрицательная форма (tu)</h5>
+                        <p class="text-gray-300 mb-3">Местоимения могут стоять до или после:</p>
+                        <ul class="space-y-2 text-gray-300">
+                            <li><span class="italian-text">Non mangiarlo! / Non lo mangiare!</span> — Не ешь это!</li>
+                            <li><span class="italian-text">Non dirmi niente!</span> — Ничего мне не говори!</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Forma passiva -->
+                <div class="card rounded-xl p-8 mb-8">
+                    <h4 class="text-2xl font-semibold mb-6 gold-gradient">Forma passiva e Si passivante (Пассивный залог)</h4>
+                    
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div class="bg-black bg-opacity-50 p-6 rounded-lg">
+                            <h5 class="text-lg font-semibold text-yellow-500 mb-3">Forma passiva con ESSERE</h5>
+                            <p class="text-gray-300 mb-3"><strong>essere + participio passato</strong></p>
+                            <ul class="space-y-2 text-gray-300 text-sm">
+                                <li><span class="italian-text">La lettera è scritta da Marco.</span> — Письмо написано Марко.</li>
+                                <li><span class="italian-text">I prodotti sono venduti al mercato.</span> — Продукты продаются на рынке.</li>
+                                <li><span class="italian-text">Il campo fu coltivato dagli agricoltori.</span> — Поле было обработано фермерами.</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-black bg-opacity-50 p-6 rounded-lg">
+                            <h5 class="text-lg font-semibold text-yellow-500 mb-3">Forma passiva con VENIRE</h5>
+                            <p class="text-gray-300 mb-3">Используется для процесса (не в сложных временах):</p>
+                            <ul class="space-y-2 text-gray-300 text-sm">
+                                <li><span class="italian-text">I prodotti vengono venduti ogni giorno.</span> — Продукты продаются каждый день.</li>
+                                <li><span class="italian-text">Il grano viene raccolto in estate.</span> — Пшеница собирается летом.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-red-900 bg-opacity-20 border-l-4 border-red-700 p-6 rounded">
+                        <p class="font-semibold mb-2">💡 Si passivante (Пассивное SI):</p>
+                        <p class="text-gray-300 mb-3">Альтернативный способ выражения пассива: <strong>si + глагол (согласуется с объектом)</strong></p>
+                        <ul class="space-y-2 text-gray-300">
+                            <li><span class="italian-text">Si coltiva il grano.</span> — Пшеница выращивается. (ед.ч.)</li>
+                            <li><span class="italian-text">Si coltivano i pomodori.</span> — Помидоры выращиваются. (мн.ч.)</li>
+                            <li><span class="italian-text">Si sono raccolti i frutti.</span> — Фрукты были собраны.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Pronomi relativi: cui -->
+                <div class="card rounded-xl p-8 mb-8">
+                    <h4 class="text-2xl font-semibold mb-6 gold-gradient">Pronomi relativi: CUI possessivo</h4>
+                    
+                    <div class="bg-black bg-opacity-50 p-6 rounded-lg">
+                        <h5 class="text-lg font-semibold text-yellow-500 mb-3">Конструкция il/la cui (чей, чья)</h5>
+                        <p class="text-gray-300 mb-3"><strong>артикль + cui</strong> = чей, чья, чьи</p>
+                        <ul class="space-y-3 text-gray-300">
+                            <li><span class="italian-text">L'agricoltore <strong>il cui</strong> campo è grande...</span> — Фермер, чье поле большое...</li>
+                            <li><span class="italian-text">La pianta <strong>le cui</strong> foglie sono verdi...</span> — Растение, чьи листья зелёные...</li>
+                            <li><span class="italian-text">Gli scienziati <strong>i cui</strong> esperimenti sono importanti...</span> — Ученые, чьи эксперименты важны...</li>
+                        </ul>
+                        <p class="text-gray-400 mt-4 text-sm">⚠️ Артикль согласуется с существительным после cui, а не перед!</p>
+                    </div>
+                </div>
+
+                <!-- Aggettivi seguiti dalla preposizione -->
+                <div class="card rounded-xl p-8">
+                    <h4 class="text-2xl font-semibold mb-6 gold-gradient">Aggettivi seguiti dalla preposizione (Прилагательные с предлогами)</h4>
+                    
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="bg-black bg-opacity-50 p-4 rounded-lg">
+                            <p class="text-yellow-500 font-semibold mb-2">+ DI</p>
+                            <ul class="space-y-1 text-sm text-gray-300">
+                                <li><span class="italian-text">contento di</span> — довольный</li>
+                                <li><span class="italian-text">felice di</span> — счастливый</li>
+                                <li><span class="italian-text">capace di</span> — способный</li>
+                                <li><span class="italian-text">sicuro di</span> — уверенный</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-black bg-opacity-50 p-4 rounded-lg">
+                            <p class="text-yellow-500 font-semibold mb-2">+ A</p>
+                            <ul class="space-y-1 text-sm text-gray-300">
+                                <li><span class="italian-text">abituato a</span> — привыкший к</li>
+                                <li><span class="italian-text">pronto a</span> — готовый к</li>
+                                <li><span class="italian-text">disposto a</span> — склонный к</li>
+                                <li><span class="italian-text">utile a</span> — полезный для</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-black bg-opacity-50 p-4 rounded-lg">
+                            <p class="text-yellow-500 font-semibold mb-2">+ DA</p>
+                            <ul class="space-y-1 text-sm text-gray-300">
+                                <li><span class="italian-text">diverso da</span> — отличный от</li>
+                                <li><span class="italian-text">lontano da</span> — далекий от</li>
+                                <li><span class="italian-text">stanco da</span> — уставший от</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="section-divider"></div>
+
+            <!-- Module 2: Lessico scientifico -->
+            <section class="mb-16">
+                <h3 class="text-3xl font-bold text-white mb-8 flex items-center">
+                    <span class="w-12 h-12 bg-gradient-to-br from-green-600 to-green-800 rounded-full flex items-center justify-center mr-4">2</span>
+                    Научная лексика
+                </h3>
+
+                <div class="card rounded-xl p-8 mb-8">
+                    <h4 class="text-2xl font-semibold mb-6 gold-gradient">Agricoltura biologica e OGM</h4>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-black bg-opacity-50 p-6 rounded-lg">
+                            <h5 class="text-lg font-semibold text-yellow-500 mb-3">Базовые термины</h5>
+                            <ul class="space-y-2 text-gray-300">
+                                <li><span class="italian-text">agricoltura biologica</span> — органическое земледелие</li>
+                                <li><span class="italian-text">OGM (Organismi Geneticamente Modificati)</span> — ГМО</li>
+                                <li><span class="italian-text">pesticidi</span> — пестициды</li>
+                                <li><span class="italian-text">fertilizzanti</span> — удобрения</li>
+                                <li><span class="italian-text">coltivazione</span> — выращивание, культивация</li>
+                                <li><span class="italian-text">raccolto</span> — урожай</li>
+                                <li><span class="italian-text">semina</span> — посев</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-black bg-opacity-50 p-6 rounded-lg">
+                            <h5 class="text-lg font-semibold text-yellow-500 mb-3">Biotecnologie</h5>
+                            <ul class="space-y-2 text-gray-300">
+                                <li><span class="italian-text">ingegneria genetica</span> — генная инженерия</li>
+                                <li><span class="italian-text">DNA</span> — ДНК</li>
+                                <li><span class="italian-text">gene</span> — ген</li>
+                                <li><span class="italian-text">modificazione genetica</span> — генная модификация</li>
+                                <li><span class="italian-text">clonazione</span> — клонирование</li>
+                                <li><span class="italian-text">cellula</span> — клетка</li>
+                                <li><span class="italian-text">organismo</span> — организм</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card rounded-xl p-8 mb-8">
+                    <h4 class="text-2xl font-semibold mb-6 gold-gradient">Avverbi di modo in -mente (Наречия образа действия)</h4>
+                    
+                    <div class="bg-black bg-opacity-50 p-6 rounded-lg mb-4">
+                        <h5 class="text-lg font-semibold text-yellow-500 mb-3">Правило образования</h5>
+                        <p class="text-gray-300 mb-3"><strong>прилагательное (женский род) + -mente</strong></p>
+                        <ul class="space-y-2 text-gray-300">
+                            <li><span class="italian-text">lento → lent<strong>a</strong> → lenta<strong>mente</strong></span> (медленно)</li>
+                            <li><span class="italian-text">rapido → rapid<strong>a</strong> → rapida<strong>mente</strong></span> (быстро)</li>
+                            <li><span class="italian-text">attento → attent<strong>a</strong> → attenta<strong>mente</strong></span> (внимательно)</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-black bg-opacity-50 p-6 rounded-lg">
+                        <h5 class="text-lg font-semibold text-yellow-500 mb-3">Исключения</h5>
+                        <p class="text-gray-300 mb-3">Прилагательные на -le/-re теряют -e:</p>
+                        <ul class="space-y-2 text-gray-300">
+                            <li><span class="italian-text">facile → facil<strong>mente</strong></span> (легко)</li>
+                            <li><span class="italian-text">particolare → particolar<strong>mente</strong></span> (особенно)</li>
+                            <li><span class="italian-text">regolare → regolar<strong>mente</strong></span> (регулярно)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card rounded-xl p-8">
+                    <h4 class="text-2xl font-semibold mb-6 gold-gradient">Connettivi causali e conclusivi</h4>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-black bg-opacity-50 p-6 rounded-lg">
+                            <h5 class="text-lg font-semibold text-yellow-500 mb-3">Причинные (perché, poiché)</h5>
+                            <ul class="space-y-2 text-gray-300">
+                                <li><span class="italian-text">perché</span> — потому что</li>
+                                <li><span class="italian-text">poiché</span> — поскольку (формально)</li>
+                                <li><span class="italian-text">siccome</span> — так как (в начале)</li>
+                                <li><span class="italian-text">dato che</span> — учитывая что</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-black bg-opacity-50 p-6 rounded-lg">
+                            <h5 class="text-lg font-semibold text-yellow-500 mb-3">Заключительные (perciò, quindi)</h5>
+                            <ul class="space-y-2 text-gray-300">
+                                <li><span class="italian-text">quindi</span> — следовательно</li>
+                                <li><span class="italian-text">perciò</span> — поэтому</li>
+                                <li><span class="italian-text">di conseguenza</span> — вследствие</li>
+                                <li><span class="italian-text">dunque</span> — итак, стало быть</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="section-divider"></div>
+
+            <!-- Quiz Percorso 3 -->
+            <section class="mb-16">
+                <h3 class="text-3xl font-bold text-white mb-8 flex items-center">
+                    <span class="w-12 h-12 bg-gradient-to-br from-red-600 to-red-800 rounded-full flex items-center justify-center mr-4">📝</span>
+                    Тест по Percorso 3
+                </h3>
+                <div id="quiz-percorso3" class="card rounded-xl p-8"></div>
+            </section>
+        </div>
+
+        <!-- Exam Prep Section -->
+        <div id="exam-prep" class="tab-content hidden">
+            <div class="text-center mb-12">
+                <h2 class="text-5xl font-bold gold-gradient mb-4">⚡ Экспресс-подготовка к экзамену</h2>
+                <p class="text-xl text-gray-400">Все ключевые формулы и конструкции в одном месте</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Percorso 4 Quick Reference -->
+                <div class="card rounded-xl p-8">
+                    <h3 class="text-2xl font-bold mb-6 gold-gradient">📚 Percorso 4: Чек-лист</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-black bg-opacity-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-yellow-500 mb-2">✓ Неопределенные местоимения</h4>
+                            <p class="text-sm text-gray-300">ogni, qualche, alcuni, tutto, qualcuno, nessuno</p>
+                        </div>
+                        
+                        <div class="bg-black bg-opacity-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-yellow-500 mb-2">✓ Безличная форма</h4>
+                            <p class="text-sm text-gray-300">si + глагол 3 лица (Si viaggia molto)</p>
+                        </div>
+                        
+                        <div class="bg-black bg-opacity-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-yellow-500 mb-2">✓ Condizionale</h4>
+                            <p class="text-sm text-gray-300">-rei, -resti, -rebbe (vorrei, dovresti, potrebbe)</p>
+                        </div>
+                        
+                        <div class="bg-black bg-opacity-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-yellow-500 mb-2">✓ Относительные местоимения</h4>
+                            <p class="text-sm text-gray-300">che, cui, il quale/la quale</p>
+                        </div>
+                        
+                        <div class="bg-black bg-opacity-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-yellow-500 mb-2">✓ Gerundio</h4>
+                            <p class="text-sm text-gray-300">-ando/-endo (parlando, leggendo)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Percorso 3 Quick Reference -->
+                <div class="card rounded-xl p-8">
+                    <h3 class="text-2xl font-bold mb-6 gold-gradient">🌾 Percorso 3: Чек-лист</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-black bg-opacity-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-yellow-500 mb-2">✓ Imperativo</h4>
+                            <p class="text-sm text-gray-300">Parla! Parlate! (отриц. tu: Non parlare!)</p>
+                        </div>
+                        
+                        <div class="bg-black bg-opacity-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-yellow-500 mb-2">✓ Позиция местоимений</h4>
+                            <p class="text-sm text-gray-300">Mangialo! / Non lo mangiare!</p>
+                        </div>
+                        
+                        <div class="bg-black bg-opacity-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-yellow-500 mb-2">✓ Пассивный залог</h4>
+                            <p class="text-sm text-gray-300">essere/venire + participio, Si passivante</p>
+                        </div>
+                        
+                        <div class="bg-black bg-opacity-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-yellow-500 mb-2">✓ Наречия на -mente</h4>
+                            <p class="text-sm text-gray-300">lenta → lentamente, facile → facilmente</p>
+                        </div>
+                        
+                        <div class="bg-black bg-opacity-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-yellow-500 mb-2">✓ Коннекторы</h4>
+                            <p class="text-sm text-gray-300">perché, poiché, quindi, perciò, di conseguenza</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Common Mistakes -->
+            <div class="card rounded-xl p-8 mt-8">
+                <h3 class="text-2xl font-bold mb-6 gold-gradient">⚠️ Типичные ошибки</h3>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-red-900 bg-opacity-20 border-l-4 border-red-700 p-4 rounded">
+                        <p class="font-semibold mb-2">❌ НЕПРАВИЛЬНО</p>
+                        <ul class="space-y-1 text-sm text-gray-300">
+                            <li><span class="italian-text">*Ogni viaggiatori</span></li>
+                            <li><span class="italian-text">*Si è viaggiato</span></li>
+                            <li><span class="italian-text">*Non mangilo!</span></li>
+                            <li><span class="italian-text">*Facilementemente</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-green-900 bg-opacity-20 border-l-4 border-green-700 p-4 rounded">
+                        <p class="font-semibold mb-2">✅ ПРАВИЛЬНО</p>
+                        <ul class="space-y-1 text-sm text-gray-300">
+                            <li><span class="italian-text">Ogni viaggiatore</span></li>
+                            <li><span class="italian-text">Si è partiti</span></li>
+                            <li><span class="italian-text">Non mangiarlo! / Non lo mangiare!</span></li>
+                            <li><span class="italian-text">Facilmente</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics Section -->
+        <div id="statistics" class="tab-content hidden">
+            <div class="text-center mb-12">
+                <h2 class="text-5xl font-bold gold-gradient mb-4">📊 Ваша статистика</h2>
+                <p class="text-xl text-gray-400">Отслеживайте свой прогресс подготовки</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="card rounded-xl p-6 text-center">
+                    <div class="text-5xl mb-2">📚</div>
+                    <p class="text-3xl font-bold gold-gradient" id="stat-percorso4">0%</p>
+                    <p class="text-gray-400">Percorso 4</p>
+                </div>
+                
+                <div class="card rounded-xl p-6 text-center">
+                    <div class="text-5xl mb-2">🌾</div>
+                    <p class="text-3xl font-bold gold-gradient" id="stat-percorso3">0%</p>
+                    <p class="text-gray-400">Percorso 3</p>
+                </div>
+                
+                <div class="card rounded-xl p-6 text-center">
+                    <div class="text-5xl mb-2">⚡</div>
+                    <p class="text-3xl font-bold gold-gradient" id="stat-total">0%</p>
+                    <p class="text-gray-400">Общий прогресс</p>
+                </div>
+            </div>
+
+            <div class="card rounded-xl p-8">
+                <h3 class="text-2xl font-bold mb-6 gold-gradient">История тестов</h3>
+                <div id="test-history" class="space-y-3"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-gray-800 py-8 mt-20">
+        <div class="container mx-auto px-6 text-center text-gray-500">
+            <p>Подготовка к экзамену по итальянскому языку | Percorsi 3 & 4</p>
+            <p class="text-sm mt-2">Все материалы основаны на официальной программе экзамена</p>
+        </div>
+    </footer>
+
+    <script>
+        // Data Structure
+        const appData = {
+            progress: {
+                percorso4: 0,
+                percorso3: 0
+            },
+            testHistory: []
+        };
+
+        // Load saved data
+        function loadProgress() {
+            const saved = localStorage.getItem('italianExamProgress');
+            if (saved) {
+                Object.assign(appData, JSON.parse(saved));
+                updateProgressDisplay();
+            }
+        }
+
+        // Save data
+        function saveProgress() {
+            localStorage.setItem('italianExamProgress', JSON.stringify(appData));
+            updateProgressDisplay();
+        }
+
+        // Update progress display
+        function updateProgressDisplay() {
+            const total = (appData.progress.percorso4 + appData.progress.percorso3) / 2;
+            document.getElementById('mainProgress').style.width = total + '%';
+            document.getElementById('totalScore').textContent = Math.round(total) + '%';
+            document.getElementById('stat-percorso4').textContent = Math.round(appData.progress.percorso4) + '%';
+            document.getElementById('stat-percorso3').textContent = Math.round(appData.progress.percorso3) + '%';
+            document.getElementById('stat-total').textContent = Math.round(total) + '%';
+            
+            // Update test history
+            updateTestHistory();
+        }
+
+        // Tab switching
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.getElementById(tabName).classList.remove('hidden');
+            event.target.classList.add('active');
+        }
+
+        // Flashcards
+        const grammarFlashcards = [
+            { front: 'ogni', back: 'каждый (неизменяемое, ед.ч.)' },
+            { front: 'qualche', back: 'несколько (неизменяемое, ед.ч.)' },
+            { front: 'qualcuno', back: 'кто-то, некто' },
+            { front: 'Si viaggia molto', back: 'Много путешествуют (безличная форма)' },
+            { front: 'Vorrei un caffè', back: 'Я хотел бы кофе (condizionale)' },
+            { front: 'Il libro che leggo', back: 'Книга, которую я читаю (che)' },
+            { front: 'La persona di cui parlo', back: 'Человек, о котором я говорю (cui)' },
+            { front: 'Parlando imparo', back: 'Разговаривая, я учусь (gerundio)' },
+            { front: 'Parla!', back: 'Говори! (imperativo tu)' }
+        ];
+
+        function createFlashcards() {
+            const container = document.getElementById('grammar-flashcards');
+            container.innerHTML = grammarFlashcards.map((card, index) => `
+                <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <p class="text-xl font-semibold italian-text">${card.front}</p>
+                        </div>
+                        <div class="flashcard-back">
+                            <p class="text-lg text-gray-200">${card.back}</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Quiz questions
+        const quizPercorso4 = [
+            {
+                question: 'Выберите правильную форму: "_____ viaggiatore porta con sé un ricordo."',
+                options: ['Ogni', 'Ognuno', 'Qualche', 'Alcuni'],
+                correct: 0,
+                explanation: 'OGNI используется с существительным в единственном числе и неизменяемо.'
+            },
+            {
+                question: 'Как переводится: "Si parte domani"?',
+                options: ['Он уезжает завтра', 'Уезжают/уезжаем завтра', 'Она уезжает завтра', 'Я уезжаю завтра'],
+                correct: 1,
+                explanation: 'SI + глагол 3-го лица = безличная форма (люди уезжают, мы уезжаем).'
+            },
+            {
+                question: 'Выберите condizionale presente от глагола VOLERE (io):',
+                options: ['Voglio', 'Volevo', 'Vorrei', 'Volli'],
+                correct: 2,
+                explanation: 'VOLERE → VORREI (условное наклонение настоящего времени).'
+            },
+            {
+                question: 'Какое местоимение использовать: "La ragazza ___ cui ti ho parlato"?',
+                options: ['che', 'di cui', 'la quale', 'cui'],
+                correct: 1,
+                explanation: 'После предлога (parlare DI) используется CUI: di cui, a cui, con cui.'
+            },
+            {
+                question: 'Образуйте gerundio от глагола LEGGERE:',
+                options: ['Leggando', 'Leggendo', 'Leggente', 'Leggato'],
+                correct: 1,
+                explanation: 'Глаголы на -ERE образуют герундий с окончанием -ENDO: leggere → leggendo.'
+            },
+            {
+                question: 'Переведите: "Camminando, penso."',
+                options: ['Я гуляю и думаю', 'Гуляя, я думаю', 'Я думаю о прогулке', 'Прогулка заставляет думать'],
+                correct: 1,
+                explanation: 'Герундий выражает одновременность действий: "Гуляя (пока гуляю), я думаю".'
+            },
+            {
+                question: 'Вставьте правильное слово: "___ ha lasciato un messaggio per te."',
+                options: ['Qualche', 'Ognuno', 'Qualcuno', 'Alcuni'],
+                correct: 2,
+                explanation: 'QUALCUNO = кто-то (местоимение, используется без существительного).'
+            },
+            {
+                question: 'Как сказать "Я бы хотел путешествовать" на итальянском?',
+                options: ['Voglio viaggiare', 'Vorrei viaggiare', 'Volevo viaggiare', 'Ho voluto viaggiare'],
+                correct: 1,
+                explanation: 'VORREI + инфинитив выражает желание в вежливой форме.'
+            }
+        ];
+
+        const quizPercorso3 = [
+            {
+                question: 'Выберите правильную форму императива (tu) от глагола PARLARE:',
+                options: ['Parli!', 'Parla!', 'Parlare!', 'Parlando!'],
+                correct: 1,
+                explanation: 'Imperativo для TU от -ARE глаголов: убираем -RE, получаем -A (parla!).'
+            },
+            {
+                question: 'Отрицательная форма императива (tu): "Non ___ (mangiare) troppo!"',
+                options: ['mangia', 'mangiare', 'mangiate', 'mangi'],
+                correct: 1,
+                explanation: 'Отрицательный императив для TU: NON + INFINITO (Non mangiare!).'
+            },
+            {
+                question: 'Где стоит местоимение в утвердительном императиве: "Скажи мне!"?',
+                options: ['Dì mi!', 'Dimmi!', 'Mi dì!', 'Dì a me!'],
+                correct: 1,
+                explanation: 'В утвердительном императиве местоимения присоединяются к глаголу: Dimmi!'
+            },
+            {
+                question: 'Переведите пассивный залог: "I prodotti sono venduti al mercato."',
+                options: ['Продукты продают на рынке', 'Продукты продаются на рынке', 'Продукты будут проданы', 'Продукты были проданы'],
+                correct: 1,
+                explanation: 'ESSERE + participio passato = пассивный залог (продукты продаются).'
+            },
+            {
+                question: 'Выберите si passivante: "_____ il grano in estate."',
+                options: ['Si coltiva', 'Si coltivano', 'È coltivato', 'Sono coltivati'],
+                correct: 0,
+                explanation: 'SI passivante согласуется с объектом: il grano (ед.ч.) → si coltiva.'
+            },
+            {
+                question: 'Образуйте наречие от прилагательного LENTO:',
+                options: ['Lentomente', 'Lentemente', 'Lentamente', 'Lentemente'],
+                correct: 2,
+                explanation: 'Женская форма (lenta) + -mente = lentamente (медленно).'
+            },
+            {
+                question: 'Как переводится: "L\'agricoltore il cui campo è grande..."?',
+                options: ['Фермер, который имеет поле...', 'Фермер, чье поле большое...', 'Фермер с большим полем...', 'Фермер в большом поле...'],
+                correct: 1,
+                explanation: 'IL CUI / LA CUI = чей, чья (относительное местоимение).'
+            },
+            {
+                question: 'Выберите правильный коннектор: "È stanco, ___ va a dormire."',
+                options: ['perché', 'poiché', 'quindi', 'siccome'],
+                correct: 2,
+                explanation: 'QUINDI = следовательно, поэтому (заключительный коннектор).'
+            }
+        ];
+
+        // Quiz rendering
+        function renderQuiz(questions, containerId, percorso) {
+            const container = document.getElementById(containerId);
+            let currentQuestion = 0;
+            let score = 0;
+            let answered = false;
+
+            function showQuestion() {
+                const q = questions[currentQuestion];
+                container.innerHTML = `
+                    <div class="fade-in">
+                        <div class="mb-6">
+                            <p class="text-sm text-gray-400 mb-2">Вопрос ${currentQuestion + 1} из ${questions.length}</p>
+                            <div class="w-full bg-gray-800 rounded-full h-2">
+                                <div class="progress-bar" style="width: ${((currentQuestion + 1) / questions.length) * 100}%"></div>
+                            </div>
+                        </div>
+                        
+                        <h4 class="text-xl font-semibold mb-6 text-white">${q.question}</h4>
+                        
+                        <div class="space-y-3 mb-6">
+                            ${q.options.map((option, index) => `
+                                <button class="quiz-option w-full text-left p-4 rounded-lg transition-all" 
+                                        data-index="${index}">
+                                    ${option}
+                                </button>
+                            `).join('')}
+                        </div>
+                        
+                        <div id="quiz-feedback"></div>
+                        
+                        <div class="flex justify-between mt-6">
+                            <button onclick="previousQuestion()" 
+                                    class="px-6 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition-all"
+                                    ${currentQuestion === 0 ? 'disabled style="opacity: 0.5"' : ''}>
+                                ← Назад
+                            </button>
+                            <button id="next-btn" onclick="nextQuestion()" 
+                                    class="px-6 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition-all"
+                                    style="opacity: 0.5" disabled>
+                                ${currentQuestion === questions.length - 1 ? 'Завершить →' : 'Далее →'}
+                            </button>
+                        </div>
+                    </div>
+                `;
+
+                // Add click handlers
+                document.querySelectorAll('.quiz-option').forEach(btn => {
+                    btn.addEventListener('click', () => checkAnswer(btn));
+                });
+            }
+
+            function checkAnswer(btn) {
+                if (answered) return;
+                answered = true;
+
+                const selectedIndex = parseInt(btn.dataset.index);
+                const q = questions[currentQuestion];
+                const feedback = document.getElementById('quiz-feedback');
+                const nextBtn = document.getElementById('next-btn');
+
+                if (selectedIndex === q.correct) {
+                    btn.classList.add('correct');
+                    score++;
+                    feedback.innerHTML = `
+                        <div class="explanation bg-green-900 bg-opacity-20 border-l-4 border-green-500">
+                            <p class="font-semibold text-green-400">✅ Правильно!</p>
+                            <p class="text-gray-300 mt-2">${q.explanation}</p>
+                        </div>
+                    `;
+                } else {
+                    btn.classList.add('incorrect');
+                    document.querySelectorAll('.quiz-option')[q.correct].classList.add('correct');
+                    feedback.innerHTML = `
+                        <div class="explanation bg-red-900 bg-opacity-20 border-l-4 border-red-500">
+                            <p class="font-semibold text-red-400">❌ Неправильно</p>
+                            <p class="text-gray-300 mt-2">${q.explanation}</p>
+                        </div>
+                    `;
+                }
+
+                nextBtn.disabled = false;
+                nextBtn.style.opacity = '1';
+                nextBtn.classList.remove('bg-gray-800');
+                nextBtn.classList.add('btn-primary');
+            }
+
+            window.nextQuestion = function() {
+                if (!answered) return;
+                
+                currentQuestion++;
+                answered = false;
+
+                if (currentQuestion >= questions.length) {
+                    showResults();
+                } else {
+                    showQuestion();
+                }
+            };
+
+            window.previousQuestion = function() {
+                if (currentQuestion > 0) {
+                    currentQuestion--;
+                    answered = true; // Позволяет вернуться
+                    showQuestion();
+                }
+            };
+
+            function showResults() {
+                const percentage = (score / questions.length) * 100;
+                appData.progress[percorso] = percentage;
+                appData.testHistory.push({
+                    percorso,
+                    score: percentage,
+                    date: new Date().toLocaleString('ru-RU')
+                });
+                saveProgress();
+
+                container.innerHTML = `
+                    <div class="text-center fade-in">
+                        <div class="text-6xl mb-4">${percentage >= 80 ? '🎉' : percentage >= 60 ? '👍' : '📚'}</div>
+                        <h3 class="text-3xl font-bold gold-gradient mb-4">Тест завершен!</h3>
+                        <p class="text-5xl font-bold text-white mb-2">${score} / ${questions.length}</p>
+                        <p class="text-2xl gold-gradient mb-8">${Math.round(percentage)}%</p>
+                        
+                        <div class="bg-black bg-opacity-50 p-6 rounded-lg mb-8 max-w-md mx-auto">
+                            <p class="text-gray-300">
+                                ${percentage >= 80 ? 
+                                    'Отличный результат! Вы готовы к экзамену! 🎓' : 
+                                    percentage >= 60 ? 
+                                    'Хороший результат! Повторите сложные темы. 📖' : 
+                                    'Рекомендуем повторить материал. Не сдавайтесь! 💪'}
+                            </p>
+                        </div>
+                        
+                        <button onclick="location.reload()" 
+                                class="btn-primary px-8 py-3 rounded-lg text-lg">
+                            Пройти тест заново
+                        </button>
+                    </div>
+                `;
+            }
+
+            showQuestion();
+        }
+
+        function updateTestHistory() {
+            const container = document.getElementById('test-history');
+            if (!container) return;
+
+            if (appData.testHistory.length === 0) {
+                container.innerHTML = '<p class="text-gray-500 text-center py-8">Вы еще не проходили тесты</p>';
+                return;
+            }
+
+            container.innerHTML = appData.testHistory.slice().reverse().map(test => `
+                <div class="bg-black bg-opacity-50 p-4 rounded-lg flex justify-between items-center">
+                    <div>
+                        <p class="font-semibold text-white">
+                            ${test.percorso === 'percorso4' ? '📚 Percorso 4' : '🌾 Percorso 3'}
+                        </p>
+                        <p class="text-sm text-gray-400">${test.date}</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-2xl font-bold gold-gradient">${Math.round(test.score)}%</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProgress();
+            createFlashcards();
+            renderQuiz(quizPercorso4, 'quiz-percorso4', 'percorso4');
+            renderQuiz(quizPercorso3, 'quiz-percorso3', 'percorso3');
+        });
+    </script>
+</body>
+</html>
