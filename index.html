@@ -1,0 +1,3259 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Italiano — Справочник по итальянскому языку</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green:       #2d6a4f;
+  --green-dark:  #1b4332;
+  --green-light: #52b788;
+  --green-pale:  #d8f3dc;
+  --green-bg:    #f0faf4;
+  --accent:      #e9c46a;
+  --accent-dark: #c9a227;
+  --red-soft:    #e63946;
+  --text:        #1a1a2e;
+  --text-muted:  #4a5568;
+  --border:      #c3e6cb;
+  --white:       #ffffff;
+  --card-bg:     #ffffff;
+  --sidebar-w:   280px;
+  --header-h:    60px;
+  --radius:      12px;
+  --shadow:      0 4px 24px rgba(27,67,50,.09);
+  --transition:  .22s ease;
+  font-size: 16px;
+}
+
+/* DARK THEME */
+[data-theme="dark"] {
+  --green:       #52b788;
+  --green-dark:  #95d5b2;
+  --green-light: #95d5b2;
+  --green-pale:  #1e3a2b;
+  --green-bg:    #111a15;
+  --accent:      #e9c46a;
+  --accent-dark: #f0d070;
+  --red-soft:    #ff6b6b;
+  --text:        #e8f5ee;
+  --text-muted:  #8aab96;
+  --border:      #2a4a35;
+  --white:       #1c2e23;
+  --card-bg:     #1c2e23;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--green-bg);
+  color: var(--text);
+  line-height: 1.75;
+  transition: background .3s ease, color .3s ease;
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  height: var(--header-h);
+  background: var(--green-dark);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px;
+  box-shadow: 0 2px 16px rgba(0,0,0,.3);
+  gap: 12px;
+  overflow: visible;
+}
+
+.header-logo {
+  display: flex; align-items: center; gap: 10px;
+  color: #fff; text-decoration: none;
+  min-width: 0; flex-shrink: 1;
+}
+
+.header-logo .flag { font-size: 24px; flex-shrink: 0; }
+.header-logo .title-wrap { min-width: 0; }
+.header-logo .site-title {
+  font-size: 1rem; font-weight: 700; letter-spacing: .3px;
+  line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.header-logo .site-sub {
+  font-size: .65rem; opacity: .65; letter-spacing: 1px; text-transform: uppercase;
+}
+
+.header-actions {
+  display: flex; align-items: center; gap: 6px; flex-shrink: 0;
+}
+
+/* Dark mode toggle */
+.theme-toggle {
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 20px; padding: 5px 10px;
+  color: #fff; cursor: pointer; font-size: .8rem;
+  transition: var(--transition); white-space: nowrap;
+  display: flex; align-items: center; gap: 5px;
+}
+.theme-toggle:hover { background: rgba(255,255,255,.22); }
+
+/* Progress badge in header */
+.header-progress {
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 20px; padding: 5px 10px;
+  color: #fff; font-size: .75rem; font-weight: 600;
+  white-space: nowrap; display: none;
+}
+
+.burger {
+  display: none;
+  flex-direction: column; gap: 5px; cursor: pointer;
+  background: none; border: none; padding: 6px; flex-shrink: 0;
+}
+.burger span {
+  display: block; width: 24px; height: 2px;
+  background: #fff; border-radius: 2px;
+  transition: var(--transition);
+}
+.burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burger.open span:nth-child(2) { opacity: 0; }
+.burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.layout {
+  display: flex;
+  padding-top: var(--header-h);
+  min-height: 100vh;
+}
+
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+.sidebar {
+  position: fixed;
+  top: var(--header-h); left: 0; bottom: 0;
+  width: var(--sidebar-w);
+  background: var(--card-bg);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  z-index: 900;
+  transition: transform var(--transition);
+  padding-bottom: 40px;
+}
+
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-track { background: transparent; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--green-light); border-radius: 4px; }
+
+.sidebar-search {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; background: var(--card-bg); z-index: 1;
+}
+.sidebar-search input {
+  width: 100%; padding: 9px 12px 9px 36px;
+  border: 1.5px solid var(--border); border-radius: 22px;
+  font-size: .85rem; outline: none; background: var(--green-bg);
+  color: var(--text);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='%232d6a4f' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.099zm-5.598 1.04a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: 11px center;
+}
+.sidebar-search input:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(82,183,136,.15);
+  background-color: var(--white);
+}
+
+.sidebar-hint {
+  padding: 6px 14px 8px;
+  font-size: .68rem; color: var(--text-muted); letter-spacing: .3px;
+  border-bottom: 1px solid var(--border);
+}
+
+.module-group { padding: 4px 0; }
+
+.module-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px;
+  cursor: pointer; user-select: none;
+  font-weight: 700; font-size: .78rem; letter-spacing: .7px;
+  text-transform: uppercase; color: var(--green-dark);
+  transition: background var(--transition);
+  gap: 8px;
+}
+.module-header:hover { background: var(--green-pale); }
+.module-header .mod-icon { font-size: .95rem; }
+.module-header .chevron {
+  font-size: .65rem; transition: transform var(--transition);
+  margin-left: auto; opacity: .5;
+}
+.module-group.open .chevron { transform: rotate(180deg); }
+
+.module-items { display: none; }
+.module-group.open .module-items { display: block; }
+
+.nav-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 56px 8px 36px;
+  font-size: .85rem; color: var(--text-muted);
+  text-decoration: none; border-left: 3px solid transparent;
+  transition: all var(--transition); position: relative;
+}
+.nav-item:hover {
+  background: var(--green-bg); color: var(--green);
+  border-left-color: var(--green-light);
+}
+.nav-item.active {
+  background: var(--green-pale); color: var(--green-dark);
+  border-left-color: var(--green);
+  font-weight: 600;
+}
+
+/* Progress checkbox in nav */
+.nav-item .topic-check {
+  position: absolute; right: 12px;
+  width: 16px; height: 16px;
+  border: 1.5px solid var(--border); border-radius: 4px;
+  cursor: pointer; background: var(--card-bg);
+  flex-shrink: 0; transition: var(--transition);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .65rem;
+}
+.nav-item .topic-check.done {
+  background: var(--green); border-color: var(--green); color: #fff;
+}
+
+/* ============================================================
+   MAIN CONTENT
+   ============================================================ */
+.main {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  padding: 36px 48px 80px;
+  max-width: 920px;
+}
+
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+.section { display: none; animation: fadeIn .2s ease; }
+.section.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+.section-title {
+  font-size: 1.85rem; font-weight: 800; color: var(--green-dark);
+  margin-bottom: 6px; line-height: 1.2;
+  font-family: 'Lora', Georgia, serif;
+}
+.section-subtitle {
+  font-size: .95rem; color: var(--text-muted); margin-bottom: 28px;
+  padding-bottom: 14px; border-bottom: 2px solid var(--border);
+  line-height: 1.6;
+}
+
+h2 {
+  font-size: 1.3rem; font-weight: 700; color: var(--green);
+  margin: 36px 0 12px;
+  display: flex; align-items: center; gap: 10px;
+}
+h2::before {
+  content: ''; display: inline-block;
+  width: 4px; height: 1.3em; background: var(--green);
+  border-radius: 2px; flex-shrink: 0;
+}
+
+h3 {
+  font-size: 1.05rem; font-weight: 700; color: var(--green-dark);
+  margin: 24px 0 10px;
+}
+
+p { margin-bottom: 14px; }
+
+strong { color: var(--green-dark); }
+
+/* ============================================================
+   RULE BOX (highlight important rules)
+   ============================================================ */
+.rule-box {
+  background: var(--green-pale);
+  border-left: 4px solid var(--green);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 14px 18px;
+  margin: 18px 0;
+}
+.rule-box .rule-title {
+  font-weight: 700; font-size: .82rem; letter-spacing: .6px;
+  text-transform: uppercase; color: var(--green-dark);
+  margin-bottom: 6px;
+}
+.rule-box p { margin: 0; font-size: .92rem; }
+
+.rule-box.warning { background: #fff8e1; border-left-color: var(--accent-dark); }
+.rule-box.warning .rule-title { color: var(--accent-dark); }
+
+.rule-box.danger { background: #fdecea; border-left-color: var(--red-soft); }
+.rule-box.danger .rule-title { color: var(--red-soft); }
+
+.rule-box.info { background: #e8f4fd; border-left-color: #3498db; }
+.rule-box.info .rule-title { color: #2980b9; }
+
+[data-theme="dark"] .rule-box { background: var(--green-pale); }
+[data-theme="dark"] .rule-box.warning { background: #2a2010; }
+[data-theme="dark"] .rule-box.danger { background: #2e1515; }
+[data-theme="dark"] .rule-box.info { background: #0d1e2d; }
+
+/* Dark theme comprehensive fixes */
+[data-theme="dark"] table { background: var(--card-bg); }
+[data-theme="dark"] thead tr { background: #0d2318; }
+[data-theme="dark"] tbody tr:nth-child(even) { background: #172a1e; }
+[data-theme="dark"] tbody tr:hover { background: #1e3a2b; }
+[data-theme="dark"] .example-list li { background: var(--card-bg); }
+[data-theme="dark"] .vocab-card { background: var(--card-bg); }
+[data-theme="dark"] .vocab-card.flipped { background: #1e3a2b; }
+[data-theme="dark"] .collapsible-header { background: var(--green-pale); color: var(--green-dark); }
+[data-theme="dark"] .collapsible-header:hover { background: #253d2e; }
+[data-theme="dark"] .formula { background: #0d2318; color: var(--text); }
+[data-theme="dark"] .progress-widget { background: var(--card-bg); }
+[data-theme="dark"] .progress-mod-item { background: #172a1e; }
+[data-theme="dark"] .sidebar-search input { background: #172a1e; color: var(--text); }
+[data-theme="dark"] .sidebar-search input:focus { background: var(--card-bg); }
+[data-theme="dark"] mark { color: #1a1a2e; }
+[data-theme="dark"] header {
+  background: #0d2318;
+}
+[data-theme="dark"] .formula { background: #0d2318; border: 1px solid var(--border); }
+
+[data-theme="dark"] .hero { box-shadow: 0 8px 32px rgba(0,0,0,.5); }
+[data-theme="dark"] .back-to-top { box-shadow: 0 4px 14px rgba(0,0,0,.4); }
+[data-theme="dark"] .important-badge { background: #3d2600; border-color: #c9a227; color: #f0d070; }
+[data-theme="dark"] .bookmarks-panel { background: #1c2e23; border-color: var(--border); box-shadow: 0 8px 32px rgba(0,0,0,.5); }
+[data-theme="dark"] .bookmark-item { background: #172a1e; border-color: var(--border); }
+[data-theme="dark"] .bookmark-item:hover { background: #1e3a2b; }
+
+/* ============================================================
+   GRAMMAR TABLES
+   ============================================================ */
+
+/* Outer container: clips shadows, allows scroll */
+.table-wrap {
+  position: relative;
+  margin: 16px 0;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+/* Inner scroller */
+.table-scroller {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Left & right fade overlays — fixed to .table-wrap, don't scroll */
+.table-wrap::before,
+.table-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 36px;
+  pointer-events: none;
+  z-index: 2;
+  transition: opacity .18s ease;
+  opacity: 0;
+}
+.table-wrap::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(0,0,0,.13), transparent);
+  border-radius: var(--radius) 0 0 var(--radius);
+}
+.table-wrap::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(0,0,0,.13), transparent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+.table-wrap.can-scroll-right::after { opacity: 1; }
+.table-wrap.can-scroll-left::before { opacity: 1; }
+
+[data-theme="dark"] .table-wrap::before {
+  background: linear-gradient(to right, rgba(0,0,0,.38), transparent);
+}
+[data-theme="dark"] .table-wrap::after {
+  background: linear-gradient(to left, rgba(0,0,0,.38), transparent);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .88rem;
+  background: var(--card-bg);
+}
+
+thead tr { background: var(--green-dark); color: #fff; }
+thead th {
+  padding: 11px 14px;
+  text-align: left;
+  font-weight: 700;
+  font-size: .78rem;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+tbody tr { border-bottom: 1px solid var(--border); }
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: var(--green-bg); }
+tbody tr:nth-child(even) { background: #f4fbf6; }
+tbody tr:nth-child(even):hover { background: var(--green-bg); }
+
+td {
+  padding: 9px 14px;
+  vertical-align: top;
+}
+
+.table-compact th { padding: 9px 10px; font-size: .72rem; }
+.table-compact td { padding: 7px 10px; font-size: .83rem; }
+
+.table-scroll-hint {
+  display: none;
+  font-size: .68rem;
+  color: var(--text-muted);
+  text-align: right;
+  margin-bottom: 3px;
+  letter-spacing: .3px;
+}
+
+.it { color: var(--green-dark); font-style: italic; font-weight: 600; }
+.ru { color: var(--text-muted); font-size: .83rem; }
+.form-highlight { color: var(--red-soft); font-weight: 700; }
+.accent-cell { background: var(--green-pale) !important; font-weight: 700; }
+
+/* ============================================================
+   EXAMPLE CARDS
+   ============================================================ */
+.example-list { list-style: none; margin: 14px 0; }
+.example-list li {
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 11px 16px;
+  margin-bottom: 8px;
+  display: flex; flex-direction: column; gap: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,.04);
+  transition: border-color var(--transition), transform var(--transition);
+}
+.example-list li:hover {
+  border-color: var(--green-light);
+  transform: translateX(3px);
+}
+.example-list .it-ex {
+  font-style: italic; font-weight: 600; color: var(--green-dark); font-size: .92rem;
+}
+.example-list .ru-ex { color: var(--text-muted); font-size: .85rem; }
+
+.it-inline {
+  font-style: italic; font-weight: 700; color: var(--green-dark);
+  background: var(--green-pale); padding: 1px 6px; border-radius: 4px;
+}
+
+/* ============================================================
+   VOCAB GRID
+   ============================================================ */
+.vocab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px; margin: 14px 0;
+}
+.vocab-card {
+  background: var(--card-bg); border: 1.5px solid var(--border);
+  border-radius: var(--radius); padding: 12px 14px;
+  transition: all var(--transition); cursor: default;
+  position: relative;
+}
+.vocab-card:hover {
+  border-color: var(--green-light); box-shadow: 0 4px 14px rgba(45,106,79,.14);
+  transform: translateY(-2px);
+}
+.vocab-card .vw { font-weight: 700; color: var(--green-dark); font-size: .92rem; }
+.vocab-card .vr { color: var(--text-muted); font-size: .8rem; margin-top: 3px; }
+
+/* Flip vocab card on click (mobile-friendly) */
+.vocab-card.flipped .vw { display: none; }
+.vocab-card.flipped .vr { color: var(--text); font-size: .92rem; font-weight: 600; }
+.vocab-card.flipped { border-color: var(--green); background: var(--green-pale); }
+
+/* ============================================================
+   BOOKMARK / STAR SYSTEM
+   ============================================================ */
+.star-btn {
+  position: absolute; right: 32px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; cursor: pointer;
+  font-size: .85rem; padding: 2px; line-height: 1;
+  color: var(--text-muted); transition: color var(--transition), transform var(--transition);
+  z-index: 2;
+}
+.star-btn:hover { color: var(--accent-dark); transform: translateY(-50%) scale(1.2); }
+.star-btn.starred { color: var(--accent-dark); }
+.nav-item .topic-check { right: 12px; }
+
+/* Important badge on section title */
+.section-star-btn {
+  background: none; border: none; cursor: pointer;
+  font-size: 1.4rem; vertical-align: middle; margin-left: 8px;
+  transition: transform var(--transition);
+  color: var(--text-muted);
+}
+.section-star-btn:hover { transform: scale(1.15); }
+.section-star-btn.starred { color: var(--accent-dark); }
+
+.important-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: #fff8e1; border: 1.5px solid var(--accent-dark);
+  color: var(--accent-dark); border-radius: 20px;
+  padding: 3px 10px; font-size: .75rem; font-weight: 700;
+  letter-spacing: .4px; margin-left: 10px; vertical-align: middle;
+}
+
+/* Bookmarks floating panel */
+.bookmarks-panel {
+  position: fixed; bottom: 130px; right: 24px; z-index: 790;
+  width: 260px; max-height: 360px; overflow-y: auto;
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: 14px; box-shadow: 0 8px 32px rgba(0,0,0,.18);
+  display: none; flex-direction: column;
+  animation: fadeIn .18s ease;
+}
+.bookmarks-panel.open { display: flex; }
+.bookmarks-panel-header {
+  padding: 12px 16px 8px;
+  font-weight: 700; font-size: .82rem; letter-spacing: .5px;
+  text-transform: uppercase; color: var(--green-dark);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.bookmarks-panel-header button {
+  background: none; border: none; cursor: pointer;
+  color: var(--text-muted); font-size: .8rem;
+  padding: 2px 6px; border-radius: 6px;
+  transition: var(--transition);
+}
+.bookmarks-panel-header button:hover { background: var(--green-pale); color: var(--green); }
+.bookmarks-list { padding: 8px; display: flex; flex-direction: column; gap: 6px; }
+.bookmark-item {
+  background: var(--green-bg); border: 1px solid var(--border);
+  border-radius: 8px; padding: 9px 12px; cursor: pointer;
+  font-size: .83rem; font-weight: 600; color: var(--green-dark);
+  transition: var(--transition); display: flex; align-items: center; gap: 8px;
+}
+.bookmark-item:hover { background: var(--green-pale); border-color: var(--green-light); }
+.bookmark-item .bm-icon { font-size: .9rem; }
+.bm-empty { padding: 16px; text-align: center; color: var(--text-muted); font-size: .82rem; }
+
+/* Bookmarks toggle button */
+.bookmarks-toggle {
+  position: fixed; bottom: 74px; right: 24px; z-index: 801;
+  width: 42px; height: 42px; border-radius: 50%;
+  background: var(--accent-dark); color: #fff;
+  border: none; cursor: pointer; font-size: 1.1rem;
+  box-shadow: 0 4px 14px rgba(0,0,0,.2);
+  display: flex; align-items: center; justify-content: center;
+  transition: var(--transition);
+}
+.bookmarks-toggle:hover { transform: scale(1.08); }
+.bookmarks-toggle .bm-count {
+  position: absolute; top: -4px; right: -4px;
+  background: var(--red-soft); color: #fff;
+  border-radius: 50%; width: 17px; height: 17px;
+  font-size: .6rem; font-weight: 700;
+  display: none; align-items: center; justify-content: center;
+}
+.bookmarks-toggle .bm-count.visible { display: flex; }
+
+/* ============================================================
+   BADGE / TAG
+   ============================================================ */
+.badge {
+  display: inline-block; padding: 2px 8px; border-radius: 30px;
+  font-size: .72rem; font-weight: 700; letter-spacing: .4px;
+}
+.badge-green { background: var(--green-pale); color: var(--green-dark); }
+.badge-yellow { background: #fff3cd; color: #856404; }
+.badge-red { background: #fdecea; color: var(--red-soft); }
+
+/* ============================================================
+   HERO / WELCOME CARD
+   ============================================================ */
+.hero {
+  background: linear-gradient(135deg, var(--green-dark) 0%, #2d6a4f 55%, #52b788 100%);
+  color: #fff; border-radius: 18px; padding: 44px 40px;
+  margin-bottom: 28px;
+  position: relative; overflow: hidden;
+  box-shadow: 0 8px 32px rgba(27,67,50,.25);
+}
+.hero::after {
+  content: '🇮🇹'; font-size: 160px; position: absolute;
+  right: -10px; bottom: -28px; opacity: .1; line-height: 1;
+  pointer-events: none;
+}
+.hero h1 {
+  font-size: 2rem; font-weight: 900; margin-bottom: 10px; line-height: 1.2;
+  font-family: 'Lora', Georgia, serif;
+}
+.hero p { font-size: 1rem; opacity: .88; max-width: 520px; margin-bottom: 22px; }
+.hero .modules-overview {
+  display: flex; gap: 10px; flex-wrap: wrap;
+}
+.hero .mod-pill {
+  background: rgba(255,255,255,.15); border: 1.5px solid rgba(255,255,255,.3);
+  border-radius: 30px; padding: 5px 14px; font-size: .82rem; font-weight: 600;
+  backdrop-filter: blur(4px); cursor: pointer;
+  transition: background var(--transition);
+}
+.hero .mod-pill:hover { background: rgba(255,255,255,.28); }
+
+/* ============================================================
+   PROGRESS BAR (home page)
+   ============================================================ */
+.progress-widget {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px 22px; margin-bottom: 24px;
+  box-shadow: var(--shadow);
+}
+.progress-widget h3 {
+  font-size: .88rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .6px; color: var(--text-muted); margin: 0 0 12px;
+}
+.progress-bar-wrap {
+  background: var(--border); border-radius: 10px; height: 10px; overflow: hidden;
+  margin-bottom: 8px;
+}
+.progress-bar-fill {
+  height: 100%; background: linear-gradient(90deg, var(--green) 0%, var(--green-light) 100%);
+  border-radius: 10px; transition: width .5s ease;
+}
+.progress-label {
+  font-size: .8rem; color: var(--text-muted); display: flex;
+  justify-content: space-between;
+}
+.progress-modules {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px; margin-top: 14px;
+}
+.progress-mod-item {
+  background: var(--green-bg); border-radius: 8px; padding: 10px 12px;
+  font-size: .8rem;
+}
+.progress-mod-item .pmi-label { color: var(--text-muted); margin-bottom: 4px; }
+.progress-mod-item .pmi-bar {
+  background: var(--border); border-radius: 4px; height: 5px; overflow: hidden;
+}
+.progress-mod-item .pmi-fill {
+  height: 100%; background: var(--green); border-radius: 4px; transition: width .5s ease;
+}
+
+/* ============================================================
+   BREADCRUMB
+   ============================================================ */
+.breadcrumb {
+  font-size: .78rem; color: var(--text-muted); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+}
+.breadcrumb .sep { opacity: .4; }
+
+/* ============================================================
+   COLLAPSIBLE SUBSECTIONS
+   ============================================================ */
+.collapsible-header {
+  cursor: pointer; user-select: none;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px;
+  background: var(--green-pale); border-radius: var(--radius);
+  margin-bottom: 4px;
+  font-weight: 600; color: var(--green-dark);
+  transition: background var(--transition);
+}
+.collapsible-header:hover { background: #b7e4c7; }
+.collapsible-header .chev { transition: transform var(--transition); }
+.collapsible-header.open .chev { transform: rotate(180deg); }
+.collapsible-body { display: none; padding: 14px 4px 4px; }
+.collapsible-body.open { display: block; }
+
+/* ============================================================
+   FORMULA BLOCK
+   ============================================================ */
+.formula {
+  background: var(--green-dark); color: #fff;
+  border-radius: var(--radius); padding: 13px 20px;
+  font-family: 'Courier New', monospace; font-size: .92rem;
+  margin: 14px 0; letter-spacing: .3px;
+}
+.formula .f-label {
+  font-size: .68rem; letter-spacing: 1px; text-transform: uppercase;
+  opacity: .55; margin-bottom: 6px;
+}
+
+/* ============================================================
+   SCROLL TO TOP BUTTON
+   ============================================================ */
+.back-to-top {
+  position: fixed; bottom: 24px; right: 24px; z-index: 800;
+  width: 42px; height: 42px; border-radius: 50%;
+  background: var(--green-dark); color: #fff;
+  border: none; cursor: pointer; font-size: 1.1rem;
+  box-shadow: 0 4px 14px rgba(0,0,0,.2);
+  display: none; align-items: center; justify-content: center;
+  transition: var(--transition);
+}
+.back-to-top.visible { display: flex; }
+.back-to-top:hover { background: var(--green); transform: translateY(-2px); }
+
+/* ============================================================
+   OVERLAY
+   ============================================================ */
+.overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,.5); z-index: 850;
+  backdrop-filter: blur(2px);
+}
+.overlay.visible { display: block; }
+
+/* ============================================================
+   RESPONSIVE — TABLET (≤ 960px)
+   ============================================================ */
+@media (max-width: 960px) {
+  .main {
+    padding: 30px 32px 70px;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — MOBILE (≤ 768px)
+   ============================================================ */
+@media (max-width: 768px) {
+  :root { --header-h: 56px; }
+
+  .sidebar {
+    transform: translateX(-100%);
+    width: min(280px, 85vw);
+  }
+  .sidebar.mobile-open {
+    transform: translateX(0);
+    box-shadow: 8px 0 32px rgba(0,0,0,.2);
+  }
+  .main {
+    margin-left: 0;
+    padding: 24px 18px 70px;
+    max-width: 100%;
+  }
+  .burger { display: flex; }
+
+  .hero { padding: 28px 20px 40px; }
+  .hero h1 { font-size: 1.6rem; }
+  .hero p { font-size: .92rem; }
+
+  .section-title { font-size: 1.55rem; }
+  h2 { font-size: 1.15rem; margin: 28px 0 10px; }
+
+  .vocab-grid { grid-template-columns: repeat(auto-fill, minmax(145px, 1fr)); }
+  .progress-modules { grid-template-columns: repeat(2, 1fr); }
+
+  .header-progress { display: none !important; }
+  .theme-toggle .toggle-text { display: none; }
+}
+
+/* ============================================================
+   RESPONSIVE — SMALL MOBILE (≤ 420px)
+   ============================================================ */
+@media (max-width: 420px) {
+  .main { padding: 18px 12px 70px; }
+  .section-title { font-size: 1.35rem; }
+
+  /* Tighter table cells on small screens */
+  table { font-size: .78rem; }
+  td { padding: 6px 8px; }
+  th { padding: 8px 8px; font-size: .7rem; }
+
+  /* Show scroll hint label on small screens */
+  .table-scroll-hint { display: block; }
+
+  .hero h1 { font-size: 1.3rem; }
+  .vocab-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero .modules-overview { flex-direction: column; }
+  .hero .mod-pill { text-align: center; }
+  .progress-modules { grid-template-columns: 1fr; }
+  .back-to-top { bottom: 16px; right: 16px; }
+  .bookmarks-toggle { bottom: 68px; right: 16px; }
+  .bookmarks-panel { bottom: 120px; right: 8px; width: calc(100vw - 16px); max-width: 320px; }
+}
+
+/* ============================================================
+   RESPONSIVE — TABLES ONLY
+   Stack 2-column tables on very small screens
+   ============================================================ */
+@media (max-width: 480px) {
+  /* For simple 2-column tables (label + value), stack them */
+  table.table-stack { display: block; }
+  table.table-stack thead { display: none; }
+  table.table-stack tbody { display: block; }
+  table.table-stack tr {
+    display: block;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    padding: 4px 0;
+    background: var(--card-bg);
+  }
+  table.table-stack td {
+    display: block;
+    padding: 6px 12px;
+    border-bottom: 1px solid var(--border);
+    font-size: .84rem;
+  }
+  table.table-stack td:last-child { border-bottom: none; }
+  table.table-stack td::before {
+    content: attr(data-label);
+    display: block;
+    font-size: .68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    color: var(--text-muted);
+    margin-bottom: 2px;
+  }
+}
+
+/* ============================================================
+   SEARCH HIGHLIGHT
+   ============================================================ */
+mark { background: var(--accent); color: var(--green-dark); border-radius: 2px; padding: 0 2px; }
+
+/* ============================================================
+   PRINT
+   ============================================================ */
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer {
+  margin-left: var(--sidebar-w);
+  padding: 24px 48px;
+  border-top: 1px solid var(--border);
+  background: var(--card-bg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: .8rem;
+  color: var(--text-muted);
+  transition: background .3s ease;
+}
+.site-footer .footer-author {
+  font-weight: 600;
+  color: var(--text);
+}
+.site-footer .footer-email {
+  color: var(--green);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--transition);
+}
+.site-footer .footer-email:hover {
+  color: var(--green-dark);
+  text-decoration: underline;
+}
+.site-footer .footer-right {
+  opacity: .6;
+  font-size: .75rem;
+}
+
+@media (max-width: 768px) {
+  .site-footer {
+    margin-left: 0;
+    padding: 18px 18px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}
+
+
+/* ============================================================
+   LANGUAGE SWITCHER
+   ============================================================ */
+.lang-switcher {
+  position: relative;
+  flex-shrink: 0;
+}
+.lang-btn {
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 20px;
+  padding: 5px 10px 5px 8px;
+  color: #fff;
+  cursor: pointer;
+  font-size: .8rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: background var(--transition);
+  white-space: nowrap;
+}
+.lang-btn:hover { background: rgba(255,255,255,.22); }
+.lang-btn .lang-flag { font-size: 1rem; line-height: 1; }
+.lang-btn .lang-chevron { font-size: .55rem; opacity: .7; margin-left: 2px; }
+
+.lang-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 8px 28px rgba(0,0,0,.18);
+  overflow: hidden;
+  min-width: 150px;
+  display: none;
+  z-index: 2000;
+  animation: fadeIn .15s ease;
+}
+.lang-dropdown.open { display: block; }
+.lang-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: .85rem;
+  color: var(--text);
+  transition: background var(--transition);
+  border-bottom: 1px solid var(--border);
+}
+.lang-option:last-child { border-bottom: none; }
+.lang-option:hover { background: var(--green-bg); }
+.lang-option.active { background: var(--green-pale); font-weight: 600; color: var(--green-dark); }
+.lang-option .lo-flag { font-size: 1.15rem; }
+.lang-option .lo-name { flex: 1; }
+.lang-option .lo-check { color: var(--green); font-size: .8rem; opacity: 0; }
+.lang-option.active .lo-check { opacity: 1; }
+
+@media (max-width: 768px) {
+  .lang-btn .lang-label { display: none; }
+  .lang-dropdown { right: 0; }
+}
+
+@media print {
+  .sidebar, header, .burger, .overlay, .back-to-top { display: none; }
+  .main { margin: 0; padding: 0; max-width: 100%; }
+  .section { display: block !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- OVERLAY for mobile -->
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<!-- HEADER -->
+<header>
+  <a href="#" class="header-logo" onclick="showSection('home'); return false;">
+    <span class="flag">🇮🇹</span>
+    <div class="title-wrap">
+      <div class="site-title" data-i18n="siteTitle">Italiano — Справочник</div>
+      <div class="site-sub" data-i18n="siteSub">Грамматика и лексика</div>
+    </div>
+  </a>
+  <div class="header-actions">
+    <span class="header-progress" id="headerProgress">0 / 16</span>
+    <div class="lang-switcher" id="langSwitcher">
+      <button class="lang-btn" onclick="toggleLangDropdown(event)" id="langBtn">
+        <span class="lang-flag" id="langFlag">🇷🇺</span>
+        <span class="lang-label" id="langLabel">RU</span>
+        <span class="lang-chevron">▼</span>
+      </button>
+      <div class="lang-dropdown" id="langDropdown">
+        <div class="lang-option active" data-lang="ru" onclick="setLang('ru', event)">
+          <span class="lo-flag">🇷🇺</span><span class="lo-name">Русский</span><span class="lo-check">✓</span>
+        </div>
+        <div class="lang-option" data-lang="en" onclick="setLang('en', event)">
+          <span class="lo-flag">🇬🇧</span><span class="lo-name">English</span><span class="lo-check">✓</span>
+        </div>
+        <div class="lang-option" data-lang="es" onclick="setLang('es', event)">
+          <span class="lo-flag">🇪🇸</span><span class="lo-name">Español</span><span class="lo-check">✓</span>
+        </div>
+        <div class="lang-option" data-lang="fr" onclick="setLang('fr', event)">
+          <span class="lo-flag">🇫🇷</span><span class="lo-name">Français</span><span class="lo-check">✓</span>
+        </div>
+        <div class="lang-option" data-lang="de" onclick="setLang('de', event)">
+          <span class="lo-flag">🇩🇪</span><span class="lo-name">Deutsch</span><span class="lo-check">✓</span>
+        </div>
+        <div class="lang-option" data-lang="zh" onclick="setLang('zh', event)">
+          <span class="lo-flag">🇨🇳</span><span class="lo-name">中文</span><span class="lo-check">✓</span>
+        </div>
+      </div>
+    </div>
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Сменить тему">
+      <span id="themeIcon">🌙</span><span class="toggle-text" data-i18n="theme">Тема</span>
+    </button>
+    <button class="burger" id="burgerBtn" onclick="toggleSidebar()" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-search">
+      <input type="text" id="searchInput" placeholder="Поиск по темам... (Ctrl+K)" oninput="filterNav(this.value)">
+    </div>
+    <div class="sidebar-hint">
+      <span data-i18n="sidebarHint">✓ — изучено &nbsp;|&nbsp; ⭐ — важное</span>
+    </div>
+
+    <!-- MODULE 0: HOME -->
+    <div class="module-group open" data-module="home">
+      <div class="module-header" onclick="toggleModule(this)">
+        <span class="mod-icon">🏠</span> <span data-i18n="navHome">Главная</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="module-items">
+        <a href="#" class="nav-item active" onclick="showSection('home'); return false;" data-label="Обзор курса"><span data-i18n="navOverview">Обзор курса</span></a>
+      </div>
+    </div>
+
+    <!-- MODULE 1 -->
+    <div class="module-group open" data-module="mod1">
+      <div class="module-header" onclick="toggleModule(this)">
+        <span class="mod-icon">📐</span> <span data-i18n="mod1title">Модуль 1: Базовая грамматика</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="module-items">
+        <a href="#" class="nav-item" onclick="showSection('articles'); return false;" data-label="Артикли и предлоги" data-key="articles"><span data-i18n="navArticles">Артикли и предлоги</span><button class="star-btn" onclick="toggleStar(event,'articles','Артикли и предлоги')">☆</button><span class="topic-check" onclick="toggleDone(event,'articles')"></span></a>
+        <a href="#" class="nav-item" onclick="showSection('tenses'); return false;" data-label="Времена изъявительного наклонения" data-key="tenses"><span data-i18n="navTenses">Времена изъявительного</span><button class="star-btn" onclick="toggleStar(event,'tenses','Времена изъявительного')">☆</button><span class="topic-check" onclick="toggleDone(event,'tenses')"></span></a>
+        <a href="#" class="nav-item" onclick="showSection('pronouns'); return false;" data-label="Прямые и косвенные местоимения" data-key="pronouns"><span data-i18n="navPronouns">Прямые и косвенные местоим.</span><button class="star-btn" onclick="toggleStar(event,'pronouns','Местоимения')">☆</button><span class="topic-check" onclick="toggleDone(event,'pronouns')"></span></a>
+        <a href="#" class="nav-item" onclick="showSection('congiuntivo'); return false;" data-label="Сослагательное наклонение" data-key="congiuntivo"><span data-i18n="navCongiuntivo">Сослагательное наклонение</span><button class="star-btn" onclick="toggleStar(event,'congiuntivo','Конджунтиво')">☆</button><span class="topic-check" onclick="toggleDone(event,'congiuntivo')"></span></a>
+      </div>
+    </div>
+
+    <!-- MODULE 2 -->
+    <div class="module-group open" data-module="mod2">
+      <div class="module-header" onclick="toggleModule(this)">
+        <span class="mod-icon">🔬</span> <span data-i18n="mod2title">Модуль 2: Наука и питание</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="module-items">
+        <a href="#" class="nav-item" onclick="showSection('imperativo'); return false;" data-label="Повелительное наклонение" data-key="imperativo"><span data-i18n="navImperativo">Повелительное наклонение</span><button class="star-btn" onclick="toggleStar(event,'imperativo','Imperativo')">☆</button><span class="topic-check" onclick="toggleDone(event,'imperativo')"></span></a>
+        <a href="#" class="nav-item" onclick="showSection('passivo'); return false;" data-label="Пассивный залог" data-key="passivo"><span data-i18n="navPassivo">Пассивный залог</span><button class="star-btn" onclick="toggleStar(event,'passivo','Пассивный залог')">☆</button><span class="topic-check" onclick="toggleDone(event,'passivo')"></span></a>
+        <a href="#" class="nav-item" onclick="showSection('si-passivante'); return false;" data-label="Si passivante" data-key="si-passivante"><span data-i18n="navSiPassivante">Si passivante</span><button class="star-btn" onclick="toggleStar(event,'si-passivante','Si passivante')">☆</button><span class="topic-check" onclick="toggleDone(event,'si-passivante')"></span></a>
+        <a href="#" class="nav-item" onclick="showSection('cui'); return false;" data-label="Местоимение CUI" data-key="cui"><span data-i18n="navCui">Местоимение «cui»</span><button class="star-btn" onclick="toggleStar(event,'cui','Местоимение cui')">☆</button><span class="topic-check" onclick="toggleDone(event,'cui')"></span></a>
+        <a href="#" class="nav-item" onclick="showSection('adj-a'); return false;" data-label="Прилаг. с предлогом a" data-key="adj-a"><span data-i18n="navAdjA">Прилаг. + предлог «a»</span><button class="star-btn" onclick="toggleStar(event,'adj-a','Прилаг. + a')">☆</button><span class="topic-check" onclick="toggleDone(event,'adj-a')"></span></a>
+        <a href="#" class="nav-item" onclick="showSection('vocab-mod2'); return false;" data-label="Лексика Модуля 2" data-key="vocab-mod2"><span data-i18n="navVocabMod2">Лексика: Наука / Еда</span><button class="star-btn" onclick="toggleStar(event,'vocab-mod2','Лексика Мод.2')">☆</button><span class="topic-check" onclick="toggleDone(event,'vocab-mod2')"></span></a>
+      </div>
+    </div>
+
+    <!-- MODULE 3 -->
+    <div class="module-group open" data-module="mod3">
+      <div class="module-header" onclick="toggleModule(this)">
+        <span class="mod-icon">✈️</span> <span data-i18n="mod3title">Модуль 3: Литература и путешествия</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="module-items">
+        <a href="#" class="nav-item" onclick="showSection('indefiniti'); return false;" data-label="Неопределённые прилагательные" data-key="indefiniti"><span data-i18n="navIndefiniti">Неопредел. прил. и местоим.</span><button class="star-btn" onclick="toggleStar(event,'indefiniti','Indefiniti')">☆</button><span class="topic-check" onclick="toggleDone(event,'indefiniti')"></span></a>
+        <a href="#" class="nav-item" onclick="showSection('impersonale'); return false;" data-label="Безличная форма" data-key="impersonale"><span data-i18n="navImpersonale">Безличная форма</span><button class="star-btn" onclick="toggleStar(event,'impersonale','Безличная форма')">☆</button><span class="topic-check" onclick="toggleDone(event,'impersonale')"></span></a>
+        <a href="#" class="nav-item" onclick="showSection('condizionale'); return false;" data-label="Условное наклонение" data-key="condizionale"><span data-i18n="navCondizionale">Условное наклонение</span><button class="star-btn" onclick="toggleStar(event,'condizionale','Condizionale')">☆</button><span class="topic-check" onclick="toggleDone(event,'condizionale')"></span></a>
+        <a href="#" class="nav-item" onclick="showSection('quale'); return false;" data-label="Местоимение QUALE" data-key="quale"><span data-i18n="navQuale">Местоимение «quale»</span><button class="star-btn" onclick="toggleStar(event,'quale','Quale')">☆</button><span class="topic-check" onclick="toggleDone(event,'quale')"></span></a>
+        <a href="#" class="nav-item" onclick="showSection('gerundio'); return false;" data-label="Герундий настоящего времени" data-key="gerundio"><span data-i18n="navGerundio">Герундий настоящего вр.</span><button class="star-btn" onclick="toggleStar(event,'gerundio','Gerundio')">☆</button><span class="topic-check" onclick="toggleDone(event,'gerundio')"></span></a>
+        <a href="#" class="nav-item" onclick="showSection('vocab-mod3'); return false;" data-label="Лексика Модуля 3" data-key="vocab-mod3"><span data-i18n="navVocabMod3">Лексика: Путешествия / Лит-ра</span><button class="star-btn" onclick="toggleStar(event,'vocab-mod3','Лексика Мод.3')">☆</button><span class="topic-check" onclick="toggleDone(event,'vocab-mod3')"></span></a>
+      </div>
+    </div>
+
+    <!-- MODULE EXTRA: ДОПОЛНИТЕЛЬНО -->
+    <div class="module-group open" data-module="extra">
+      <div class="module-header" onclick="toggleModule(this)">
+        <span class="mod-icon">📚</span> <span data-i18n="modExtra">Дополнительно</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="module-items">
+        <a href="#" class="nav-item" onclick="showSection('verbi-irreg'); return false;" data-label="Неправильные глаголы" data-key="verbi-irreg"><span data-i18n="navVerbiIrreg">Неправильные глаголы</span><button class="star-btn" onclick="toggleStar(event,'verbi-irreg','Неправильные глаголы')">☆</button><span class="topic-check" onclick="toggleDone(event,'verbi-irreg')"></span></a>
+        <a href="#" class="nav-item" onclick="showSection('numeri'); return false;" data-label="Числительные" data-key="numeri"><span data-i18n="navNumeri">Числительные</span><button class="star-btn" onclick="toggleStar(event,'numeri','Числительные')">☆</button><span class="topic-check" onclick="toggleDone(event,'numeri')"></span></a>
+        <a href="#" class="nav-item" onclick="showSection('futuro'); return false;" data-label="Futuro semplice" data-key="futuro"><span data-i18n="navFuturo">Futuro semplice</span><button class="star-btn" onclick="toggleStar(event,'futuro','Futuro semplice')">☆</button><span class="topic-check" onclick="toggleDone(event,'futuro')"></span></a>
+        <a href="#" class="nav-item" onclick="showSection('trapassato'); return false;" data-label="Trapassato prossimo" data-key="trapassato"><span data-i18n="navTrapassato">Trapassato prossimo</span><button class="star-btn" onclick="toggleStar(event,'trapassato','Trapassato prossimo')">☆</button><span class="topic-check" onclick="toggleDone(event,'trapassato')"></span></a>
+        <a href="#" class="nav-item" onclick="showSection('frasali'); return false;" data-label="Устойчивые выражения" data-key="frasali"><span data-i18n="navFrasali">Устойчивые выражения</span><button class="star-btn" onclick="toggleStar(event,'frasali','Устойчивые выражения')">☆</button><span class="topic-check" onclick="toggleDone(event,'frasali')"></span></a>
+      </div>
+    </div>
+
+  </nav>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- ======================================================
+         HOME
+         ====================================================== -->
+    <section class="section active" id="sec-home">
+      <div class="hero">
+        <h1 data-i18n="heroTitle">Справочник по итальянскому языку 🇮🇹</h1>
+        <p data-i18n="heroDesc">Грамматика, лексика, неправильные глаголы и речевые выражения итальянского языка. Все объяснения — на русском языке.</p>
+        <div class="modules-overview">
+          <span class="mod-pill" data-i18n="pill1">📐 Модуль 1 — Базовая грамматика</span>
+          <span class="mod-pill" data-i18n="pill2">🔬 Модуль 2 — Наука и питание</span>
+          <span class="mod-pill" data-i18n="pill3">✈️ Модуль 3 — Литература и путешествия</span>
+        </div>
+      </div>
+
+      <h2 data-i18n="howTitle">Как пользоваться</h2>
+      <p data-i18n="howDesc">Используй боковое меню для перехода к нужной теме. Каждый раздел содержит:</p>
+      <ul style="margin: 0 0 20px 22px; line-height: 2;">
+        <li data-i18n="howItem1"><strong>Правила</strong> — объяснение на русском языке</li>
+        <li data-i18n="howItem2"><strong>Таблицы</strong> — наглядные грамматические схемы</li>
+        <li data-i18n="howItem3"><strong>Примеры</strong> — итальянские предложения с переводом</li>
+        <li data-i18n="howItem4"><strong>Важные блоки</strong> — выделенные исключения и подсказки</li>
+      </ul>
+
+      <div class="rule-box info">
+        <div class="rule-title" data-i18n="tipTitle">💡 Совет</div>
+        <p data-i18n="tipText">Начни с <strong>Модуля 1</strong> для изучения базовой грамматики. Модули 2 и 3 охватывают более сложные конструкции и тематическую лексику. Раздел «Дополнительно» содержит глаголы, числа и речевые клише.</p>
+      </div>
+
+      <div class="progress-widget" id="progressWidget">
+        <h3 data-i18n="progressTitle">📊 Мой прогресс изучения</h3>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill" id="mainProgressFill" style="width:0%"></div>
+        </div>
+        <div class="progress-label">
+          <span id="progressText" data-i18n-progress="true">Изучено 0 из 21 тем</span>
+          <span id="progressPct">0%</span>
+        </div>
+        <div class="progress-modules">
+          <div class="progress-mod-item">
+            <div class="pmi-label">📐 Модуль 1 <span id="mod1count">0/4</span></div>
+            <div class="pmi-bar"><div class="pmi-fill" id="mod1fill" style="width:0%"></div></div>
+          </div>
+          <div class="progress-mod-item">
+            <div class="pmi-label">🔬 Модуль 2 <span id="mod2count">0/6</span></div>
+            <div class="pmi-bar"><div class="pmi-fill" id="mod2fill" style="width:0%"></div></div>
+          </div>
+          <div class="progress-mod-item">
+            <div class="pmi-label">✈️ Модуль 3 <span id="mod3count">0/6</span></div>
+            <div class="pmi-bar"><div class="pmi-fill" id="mod3fill" style="width:0%"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         M1: АРТИКЛИ
+         ====================================================== -->
+    <section class="section" id="sec-articles">
+      <div class="breadcrumb"><span>Модуль 1</span><span class="sep">›</span><span>Артикли и предлоги</span></div>
+      <h1 class="section-title">Артикли и предлоги</h1>
+      <p class="section-subtitle">Артикли (gli articoli) — обязательный элемент итальянского существительного. Правильный выбор артикля зависит от рода, числа и начального звука слова.</p>
+
+      <h2>Определённые артикли (Articoli determinativi)</h2>
+      <p>Определённые артикли соответствуют русскому слову «тот/та/то» (указывают на конкретный предмет).</p>
+
+      <p class="table-scroll-hint">← прокрути таблицу →</p>
+        <div class="table-wrap"><div class="table-scroller">
+        <table class="table-compact">
+          <thead>
+            <tr><th>Условие</th><th>Мужской род (ед.ч.)</th><th>Мужской род (мн.ч.)</th><th>Женский род (ед.ч.)</th><th>Женский род (мн.ч.)</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Перед согласной</td>
+              <td class="it">il</td><td class="it">i</td>
+              <td class="it">la</td><td class="it">le</td>
+            </tr>
+            <tr>
+              <td>Перед гласной</td>
+              <td class="it">l'</td><td class="it">gli</td>
+              <td class="it">l'</td><td class="it">le</td>
+            </tr>
+            <tr>
+              <td>Перед z, s+согл., gn, ps, x, y, sc</td>
+              <td class="it">lo</td><td class="it">gli</td>
+              <td class="it">la</td><td class="it">le</td>
+            </tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <ul class="example-list">
+        <li><span class="it-ex">il libro, i libri</span><span class="ru-ex">книга, книги</span></li>
+        <li><span class="it-ex">lo studente, gli studenti</span><span class="ru-ex">студент, студенты</span></li>
+        <li><span class="it-ex">l'amico, gli amici</span><span class="ru-ex">друг, друзья</span></li>
+        <li><span class="it-ex">la casa, le case</span><span class="ru-ex">дом, дома</span></li>
+      </ul>
+
+      <h2>Неопределённые артикли (Articoli indeterminativi)</h2>
+      <div class="table-wrap"><div class="table-scroller">
+        <table>
+          <thead>
+            <tr><th>Условие</th><th>Мужской род</th><th>Женский род</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Перед согласной</td><td class="it">un</td><td class="it">una</td></tr>
+            <tr><td>Перед гласной</td><td class="it">un</td><td class="it">un'</td></tr>
+            <tr><td>Перед z, s+согл., gn...</td><td class="it">uno</td><td class="it">una</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <h2>Предлоги (Preposizioni semplici)</h2>
+      <div class="table-wrap"><div class="table-scroller">
+        <table>
+          <thead><tr><th>Предлог</th><th>Основные значения</th><th>Примеры</th></tr></thead>
+          <tbody>
+            <tr><td class="it">di</td><td>принадлежность, происхождение, материал</td><td class="it">il libro di Marco / una borsa di pelle</td></tr>
+            <tr><td class="it">a</td><td>место, направление, время (час), косвенное дополнение</td><td class="it">vado a Roma / alle tre</td></tr>
+            <tr><td class="it">da</td><td>откуда, с какого времени, назначение, от кого</td><td class="it">vengo da Milano / studio da tre anni</td></tr>
+            <tr><td class="it">in</td><td>место внутри, страна, транспорт</td><td class="it">abito in Italia / vado in treno</td></tr>
+            <tr><td class="it">con</td><td>совместность, инструмент</td><td class="it">vengo con te / scrivo con la penna</td></tr>
+            <tr><td class="it">su</td><td>сверху, на поверхности, о чём-то (тема)</td><td class="it">il libro è sul tavolo / un film su Roma</td></tr>
+            <tr><td class="it">per</td><td>цель, направление, срок, причина</td><td class="it">parto per Napoli / studio per imparare</td></tr>
+            <tr><td class="it">tra / fra</td><td>между, через (время)</td><td class="it">tra me e te / arrivo tra un'ora</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <h2>Сочленённые предлоги (Preposizioni articolate)</h2>
+      <p>Предлоги <span class="it-inline">di, a, da, in, su</span> сливаются с определённым артиклем в одно слово.</p>
+      <p class="table-scroll-hint">← прокрути таблицу →</p>
+        <div class="table-wrap"><div class="table-scroller">
+        <table class="table-compact">
+          <thead><tr><th>Предлог</th><th>+ il</th><th>+ lo</th><th>+ l'</th><th>+ i</th><th>+ gli</th><th>+ la</th><th>+ le</th></tr></thead>
+          <tbody>
+            <tr><td class="it">di</td><td class="it">del</td><td class="it">dello</td><td class="it">dell'</td><td class="it">dei</td><td class="it">degli</td><td class="it">della</td><td class="it">delle</td></tr>
+            <tr><td class="it">a</td><td class="it">al</td><td class="it">allo</td><td class="it">all'</td><td class="it">ai</td><td class="it">agli</td><td class="it">alla</td><td class="it">alle</td></tr>
+            <tr><td class="it">da</td><td class="it">dal</td><td class="it">dallo</td><td class="it">dall'</td><td class="it">dai</td><td class="it">dagli</td><td class="it">dalla</td><td class="it">dalle</td></tr>
+            <tr><td class="it">in</td><td class="it">nel</td><td class="it">nello</td><td class="it">nell'</td><td class="it">nei</td><td class="it">negli</td><td class="it">nella</td><td class="it">nelle</td></tr>
+            <tr><td class="it">su</td><td class="it">sul</td><td class="it">sullo</td><td class="it">sull'</td><td class="it">sui</td><td class="it">sugli</td><td class="it">sulla</td><td class="it">sulle</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <ul class="example-list">
+        <li><span class="it-ex">Vengo <strong>dall'</strong>Italia.</span><span class="ru-ex">Я приехал из Италии.</span></li>
+        <li><span class="it-ex">Il libro è <strong>sul</strong> tavolo.</span><span class="ru-ex">Книга лежит на столе.</span></li>
+        <li><span class="it-ex">Parlo <strong>degli</strong> studenti.</span><span class="ru-ex">Я говорю о студентах.</span></li>
+      </ul>
+    </section>
+
+    <!-- ======================================================
+         M1: ВРЕМЕНА
+         ====================================================== -->
+    <section class="section" id="sec-tenses">
+      <div class="breadcrumb"><span>Модуль 1</span><span class="sep">›</span><span>Времена изъявительного наклонения</span></div>
+      <h1 class="section-title">Времена изъявительного наклонения</h1>
+      <p class="section-subtitle">Четыре основных времени изъявительного наклонения: Presente, Passato Prossimo, Imperfetto, Futuro Semplice.</p>
+
+      <!-- PRESENTE -->
+      <h2>1. Presente (Настоящее время)</h2>
+      <p>Используется для обозначения действий, происходящих сейчас, регулярных действий, а также будущих событий, запланированных в близком будущем.</p>
+      <p class="table-scroll-hint">← прокрути таблицу →</p>
+        <div class="table-wrap"><div class="table-scroller">
+        <table class="table-compact">
+          <thead><tr><th>Местоимение</th><th>-ARE (parlare)</th><th>-ERE (scrivere)</th><th>-IRE тип 1 (partire)</th><th>-IRE тип 2 (finire)</th></tr></thead>
+          <tbody>
+            <tr><td>io</td><td class="it">parl<span class="form-highlight">o</span></td><td class="it">scriv<span class="form-highlight">o</span></td><td class="it">part<span class="form-highlight">o</span></td><td class="it">fin<span class="form-highlight">isco</span></td></tr>
+            <tr><td>tu</td><td class="it">parl<span class="form-highlight">i</span></td><td class="it">scriv<span class="form-highlight">i</span></td><td class="it">part<span class="form-highlight">i</span></td><td class="it">fin<span class="form-highlight">isci</span></td></tr>
+            <tr><td>lui/lei</td><td class="it">parl<span class="form-highlight">a</span></td><td class="it">scriv<span class="form-highlight">e</span></td><td class="it">part<span class="form-highlight">e</span></td><td class="it">fin<span class="form-highlight">isce</span></td></tr>
+            <tr><td>noi</td><td class="it">parl<span class="form-highlight">iamo</span></td><td class="it">scriv<span class="form-highlight">iamo</span></td><td class="it">part<span class="form-highlight">iamo</span></td><td class="it">fin<span class="form-highlight">iamo</span></td></tr>
+            <tr><td>voi</td><td class="it">parl<span class="form-highlight">ate</span></td><td class="it">scriv<span class="form-highlight">ete</span></td><td class="it">part<span class="form-highlight">ite</span></td><td class="it">fin<span class="form-highlight">ite</span></td></tr>
+            <tr><td>loro</td><td class="it">parl<span class="form-highlight">ano</span></td><td class="it">scriv<span class="form-highlight">ono</span></td><td class="it">part<span class="form-highlight">ono</span></td><td class="it">fin<span class="form-highlight">iscono</span></td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <!-- PASSATO PROSSIMO -->
+      <h2>2. Passato Prossimo (Прошедшее завершённое)</h2>
+      <p>Обозначает завершённые действия в прошлом, которые имеют связь с настоящим или воспринимаются как конкретный факт.</p>
+      <div class="formula">
+        <div class="f-label">Формула</div>
+        avere / essere (presente) + participio passato
+      </div>
+      <div class="rule-box warning">
+        <div class="rule-title">⚠️ Когда использовать ESSERE?</div>
+        <p>С глаголами движения и состояния (<span class="it-inline">andare, venire, partire, tornare, arrivare, nascere, morire, stare, essere, rimanere, entrare, uscire</span>), а также со всеми возвратными глаголами. При использовании <em>essere</em> причастие согласуется в роде и числе с подлежащим!</p>
+      </div>
+      <div class="table-wrap"><div class="table-scroller">
+        <table>
+          <thead><tr><th>Infinito</th><th>Participio passato</th><th>Вспом. глагол</th></tr></thead>
+          <tbody>
+            <tr><td class="it">parlare</td><td class="it">parlato</td><td class="badge badge-yellow">avere</td></tr>
+            <tr><td class="it">scrivere</td><td class="it">scritto</td><td class="badge badge-yellow">avere</td></tr>
+            <tr><td class="it">leggere</td><td class="it">letto</td><td class="badge badge-yellow">avere</td></tr>
+            <tr><td class="it">fare</td><td class="it">fatto</td><td class="badge badge-yellow">avere</td></tr>
+            <tr><td class="it">andare</td><td class="it">andato/a/i/e</td><td class="badge badge-green">essere</td></tr>
+            <tr><td class="it">venire</td><td class="it">venuto/a/i/e</td><td class="badge badge-green">essere</td></tr>
+            <tr><td class="it">nascere</td><td class="it">nato/a/i/e</td><td class="badge badge-green">essere</td></tr>
+            <tr><td class="it">alzarsi</td><td class="it">alzato/a/i/e</td><td class="badge badge-green">essere</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <ul class="example-list">
+        <li><span class="it-ex">Ho mangiato una pizza.</span><span class="ru-ex">Я съел(-а) пиццу.</span></li>
+        <li><span class="it-ex">Siamo andati al cinema ieri.</span><span class="ru-ex">Вчера мы ходили в кино.</span></li>
+        <li><span class="it-ex">Maria si è alzata tardi.</span><span class="ru-ex">Мария встала поздно.</span></li>
+      </ul>
+
+      <!-- IMPERFETTO -->
+      <h2>3. Imperfetto (Прошедшее несовершённое)</h2>
+      <p>Используется для описания: 1) привычных действий в прошлом, 2) незавершённого фонового действия, 3) описания состояний, погоды, времени в прошлом, 4) вежливой просьбы.</p>
+      <p class="table-scroll-hint">← прокрути таблицу →</p>
+        <div class="table-wrap"><div class="table-scroller">
+        <table class="table-compact">
+          <thead><tr><th></th><th>-ARE (parlare)</th><th>-ERE (scrivere)</th><th>-IRE (partire)</th></tr></thead>
+          <tbody>
+            <tr><td>io</td><td class="it">parl<span class="form-highlight">avo</span></td><td class="it">scriv<span class="form-highlight">evo</span></td><td class="it">part<span class="form-highlight">ivo</span></td></tr>
+            <tr><td>tu</td><td class="it">parl<span class="form-highlight">avi</span></td><td class="it">scriv<span class="form-highlight">evi</span></td><td class="it">part<span class="form-highlight">ivi</span></td></tr>
+            <tr><td>lui/lei</td><td class="it">parl<span class="form-highlight">ava</span></td><td class="it">scriv<span class="form-highlight">eva</span></td><td class="it">part<span class="form-highlight">iva</span></td></tr>
+            <tr><td>noi</td><td class="it">parl<span class="form-highlight">avamo</span></td><td class="it">scriv<span class="form-highlight">evamo</span></td><td class="it">part<span class="form-highlight">ivamo</span></td></tr>
+            <tr><td>voi</td><td class="it">parl<span class="form-highlight">avate</span></td><td class="it">scriv<span class="form-highlight">evate</span></td><td class="it">part<span class="form-highlight">ivate</span></td></tr>
+            <tr><td>loro</td><td class="it">parl<span class="form-highlight">avano</span></td><td class="it">scriv<span class="form-highlight">evano</span></td><td class="it">part<span class="form-highlight">ivano</span></td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="rule-box">
+        <div class="rule-title">🔑 Passato Prossimo vs Imperfetto</div>
+        <p><strong>Passato Prossimo</strong> = конкретное завершённое действие («что произошло?»)<br>
+        <strong>Imperfetto</strong> = фон, описание, привычка в прошлом («каков был контекст?»)</p>
+      </div>
+      <ul class="example-list">
+        <li><span class="it-ex">Da bambino <strong>giocavo</strong> sempre in giardino.</span><span class="ru-ex">В детстве я всегда играл в саду. (привычное действие)</span></li>
+        <li><span class="it-ex">Mentre <strong>leggevo</strong>, il telefono <strong>ha squillato</strong>.</span><span class="ru-ex">Пока я читал, зазвонил телефон. (фон + конкретное событие)</span></li>
+      </ul>
+
+      <!-- FUTURO SEMPLICE -->
+      <h2>4. Futuro Semplice (Простое будущее)</h2>
+      <p>Обозначает действия в будущем, предположения о настоящем, обещания и неопределённость.</p>
+      <p class="table-scroll-hint">← прокрути таблицу →</p>
+        <div class="table-wrap"><div class="table-scroller">
+        <table class="table-compact">
+          <thead><tr><th></th><th>-ARE (parlare)</th><th>-ERE (scrivere)</th><th>-IRE (partire)</th></tr></thead>
+          <tbody>
+            <tr><td>io</td><td class="it">parler<span class="form-highlight">ò</span></td><td class="it">scriver<span class="form-highlight">ò</span></td><td class="it">partir<span class="form-highlight">ò</span></td></tr>
+            <tr><td>tu</td><td class="it">parler<span class="form-highlight">ai</span></td><td class="it">scriver<span class="form-highlight">ai</span></td><td class="it">partir<span class="form-highlight">ai</span></td></tr>
+            <tr><td>lui/lei</td><td class="it">parler<span class="form-highlight">à</span></td><td class="it">scriver<span class="form-highlight">à</span></td><td class="it">partir<span class="form-highlight">à</span></td></tr>
+            <tr><td>noi</td><td class="it">parler<span class="form-highlight">emo</span></td><td class="it">scriver<span class="form-highlight">emo</span></td><td class="it">partir<span class="form-highlight">emo</span></td></tr>
+            <tr><td>voi</td><td class="it">parler<span class="form-highlight">ete</span></td><td class="it">scriver<span class="form-highlight">ete</span></td><td class="it">partir<span class="form-highlight">ete</span></td></tr>
+            <tr><td>loro</td><td class="it">parler<span class="form-highlight">anno</span></td><td class="it">scriver<span class="form-highlight">anno</span></td><td class="it">partir<span class="form-highlight">anno</span></td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="rule-box warning">
+        <div class="rule-title">⚠️ Глаголы на -ARE: важное изменение</div>
+        <p>Глаголы на <strong>-are</strong> теряют «а» в основе: <span class="it-inline">parlare → parler-</span>. Глаголы на <strong>-care / -gare</strong> добавляют «h»: <span class="it-inline">cercare → cercherò, pagare → pagherò</span>.</p>
+      </div>
+      <h3>Неправильные основы Futuro Semplice</h3>
+      <div class="table-wrap"><div class="table-scroller">
+        <table>
+          <thead><tr><th>Infinito</th><th>Основа будущего</th><th>Пример (io)</th></tr></thead>
+          <tbody>
+            <tr><td class="it">essere</td><td class="it">sar-</td><td class="it">sarò</td></tr>
+            <tr><td class="it">avere</td><td class="it">avr-</td><td class="it">avrò</td></tr>
+            <tr><td class="it">fare</td><td class="it">far-</td><td class="it">farò</td></tr>
+            <tr><td class="it">andare</td><td class="it">andr-</td><td class="it">andrò</td></tr>
+            <tr><td class="it">venire</td><td class="it">verr-</td><td class="it">verrò</td></tr>
+            <tr><td class="it">potere</td><td class="it">potr-</td><td class="it">potrò</td></tr>
+            <tr><td class="it">volere</td><td class="it">vorr-</td><td class="it">vorrò</td></tr>
+            <tr><td class="it">dovere</td><td class="it">dovr-</td><td class="it">dovrò</td></tr>
+            <tr><td class="it">sapere</td><td class="it">sapr-</td><td class="it">saprò</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         M1: МЕСТОИМЕНИЯ
+         ====================================================== -->
+    <section class="section" id="sec-pronouns">
+      <div class="breadcrumb"><span>Модуль 1</span><span class="sep">›</span><span>Прямые и косвенные местоимения</span></div>
+      <h1 class="section-title">Прямые и косвенные местоимения</h1>
+      <p class="section-subtitle">Местоимения заменяют существительные и позволяют избежать повторений. Правильная позиция и форма местоимений — основа беглой итальянской речи.</p>
+
+      <h2>Прямые местоимения (Pronomi diretti)</h2>
+      <p>Отвечают на вопрос «кого? что?» (прямое дополнение). Заменяют существительное без предлога.</p>
+      <div class="table-wrap"><div class="table-scroller">
+        <table>
+          <thead><tr><th>Лицо</th><th>Местоимение</th><th>Значение</th></tr></thead>
+          <tbody>
+            <tr><td>1 ед.</td><td class="it">mi</td><td>меня / мне</td></tr>
+            <tr><td>2 ед.</td><td class="it">ti</td><td>тебя / тебе</td></tr>
+            <tr><td>3 ед. м.р.</td><td class="it">lo</td><td>его / его (предмет м.р.)</td></tr>
+            <tr><td>3 ед. ж.р.</td><td class="it">la</td><td>её / её (предмет ж.р.)</td></tr>
+            <tr><td>вежл. (Lei)</td><td class="it">La</td><td>Вас (вежливо)</td></tr>
+            <tr><td>1 мн.</td><td class="it">ci</td><td>нас</td></tr>
+            <tr><td>2 мн.</td><td class="it">vi</td><td>вас</td></tr>
+            <tr><td>3 мн.</td><td class="it">li / le</td><td>их (м.р.) / их (ж.р.)</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <h2>Косвенные местоимения (Pronomi indiretti)</h2>
+      <p>Отвечают на вопрос «кому? для кого?» (косвенное дополнение — с предлогом <em>a</em>).</p>
+      <div class="table-wrap"><div class="table-scroller">
+        <table>
+          <thead><tr><th>Лицо</th><th>Местоимение</th><th>Значение</th></tr></thead>
+          <tbody>
+            <tr><td>1 ед.</td><td class="it">mi</td><td>мне</td></tr>
+            <tr><td>2 ед.</td><td class="it">ti</td><td>тебе</td></tr>
+            <tr><td>3 ед. м./ж.</td><td class="it">gli / le</td><td>ему / ей</td></tr>
+            <tr><td>вежл. (Lei)</td><td class="it">Le</td><td>Вам</td></tr>
+            <tr><td>1 мн.</td><td class="it">ci</td><td>нам</td></tr>
+            <tr><td>2 мн.</td><td class="it">vi</td><td>вам</td></tr>
+            <tr><td>3 мн.</td><td class="it">gli (= loro)</td><td>им</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="rule-box">
+        <div class="rule-title">🔑 Позиция местоимений</div>
+        <p>Местоимения стоят <strong>перед</strong> спрягаемым глаголом: <span class="it-inline">Lo mangio.</span><br>
+        При инфинитиве они прикрепляются к нему (последний гласный инфинитива теряется): <span class="it-inline">Voglio mangiarlo.</span><br>
+        При повелительном наклонении (tu, noi, voi) — тоже прикрепляются: <span class="it-inline">Mangial<strong>o</strong>!</span></p>
+      </div>
+
+      <h2>Комбинированные местоимения (Pronomi combinati)</h2>
+      <p>Когда в предложении два местоимения (косвенное + прямое), они объединяются. Косвенное стоит первым и меняет форму.</p>
+      <p class="table-scroll-hint">← прокрути таблицу →</p>
+        <div class="table-wrap"><div class="table-scroller">
+        <table class="table-compact">
+          <thead><tr><th>Косв. → Прям.</th><th>lo</th><th>la</th><th>li</th><th>le</th></tr></thead>
+          <tbody>
+            <tr><td class="it">mi →</td><td class="it">me lo</td><td class="it">me la</td><td class="it">me li</td><td class="it">me le</td></tr>
+            <tr><td class="it">ti →</td><td class="it">te lo</td><td class="it">te la</td><td class="it">te li</td><td class="it">te le</td></tr>
+            <tr><td class="it">gli/le →</td><td class="it">glielo</td><td class="it">gliela</td><td class="it">glieli</td><td class="it">gliele</td></tr>
+            <tr><td class="it">ci →</td><td class="it">ce lo</td><td class="it">ce la</td><td class="it">ce li</td><td class="it">ce le</td></tr>
+            <tr><td class="it">vi →</td><td class="it">ve lo</td><td class="it">ve la</td><td class="it">ve li</td><td class="it">ve le</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <ul class="example-list">
+        <li><span class="it-ex">— Hai dato il libro a Marco? — Sì, <strong>gliel'ho</strong> dato.</span><span class="ru-ex">— Ты дал книгу Марко? — Да, я её ему дал.</span></li>
+        <li><span class="it-ex">Puoi spiegarmelo?</span><span class="ru-ex">Можешь мне это объяснить?</span></li>
+      </ul>
+    </section>
+
+    <!-- ======================================================
+         M1: CONGIUNTIVO
+         ====================================================== -->
+    <section class="section" id="sec-congiuntivo">
+      <div class="breadcrumb"><span>Модуль 1</span><span class="sep">›</span><span>Сослагательное наклонение</span></div>
+      <h1 class="section-title">Сослагательное наклонение (Congiuntivo)</h1>
+      <p class="section-subtitle">Congiuntivo выражает субъективные суждения: желания, мнения, сомнения, эмоции, предположения. Используется в придаточных предложениях после определённых выражений.</p>
+
+      <h2>Congiuntivo Presente — образование</h2>
+      <p class="table-scroll-hint">← прокрути таблицу →</p>
+        <div class="table-wrap"><div class="table-scroller">
+        <table class="table-compact">
+          <thead><tr><th></th><th>-ARE (parlare)</th><th>-ERE (credere)</th><th>-IRE (partire)</th></tr></thead>
+          <tbody>
+            <tr><td>io</td><td class="it">parl<span class="form-highlight">i</span></td><td class="it">cred<span class="form-highlight">a</span></td><td class="it">part<span class="form-highlight">a</span></td></tr>
+            <tr><td>tu</td><td class="it">parl<span class="form-highlight">i</span></td><td class="it">cred<span class="form-highlight">a</span></td><td class="it">part<span class="form-highlight">a</span></td></tr>
+            <tr><td>lui/lei</td><td class="it">parl<span class="form-highlight">i</span></td><td class="it">cred<span class="form-highlight">a</span></td><td class="it">part<span class="form-highlight">a</span></td></tr>
+            <tr><td>noi</td><td class="it">parl<span class="form-highlight">iamo</span></td><td class="it">cred<span class="form-highlight">iamo</span></td><td class="it">part<span class="form-highlight">iamo</span></td></tr>
+            <tr><td>voi</td><td class="it">parl<span class="form-highlight">iate</span></td><td class="it">cred<span class="form-highlight">iate</span></td><td class="it">part<span class="form-highlight">iate</span></td></tr>
+            <tr><td>loro</td><td class="it">parl<span class="form-highlight">ino</span></td><td class="it">cred<span class="form-highlight">ano</span></td><td class="it">part<span class="form-highlight">ano</span></td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="rule-box warning">
+        <div class="rule-title">⚠️ Внимание: io=tu=lui/lei</div>
+        <p>Три формы единственного числа совпадают! Чтобы избежать неоднозначности, местоимение обязательно указывается: <span class="it-inline">Penso che <strong>tu</strong> parta domani.</span></p>
+      </div>
+      <h2>Когда использовать Congiuntivo?</h2>
+      <div class="table-wrap"><div class="table-scroller">
+        <table>
+          <thead><tr><th>Тип выражения</th><th>Примеры</th></tr></thead>
+          <tbody>
+            <tr><td>Мнение / мысль</td><td class="it">pensare che, credere che, ritenere che, sembrare che</td></tr>
+            <tr><td>Желание / воля</td><td class="it">volere che, preferire che, desiderare che, sperare che</td></tr>
+            <tr><td>Эмоция</td><td class="it">essere felice che, avere paura che, dispiacere che</td></tr>
+            <tr><td>Сомнение</td><td class="it">dubitare che, non essere sicuro che</td></tr>
+            <tr><td>Безличные выражения</td><td class="it">è importante che, è necessario che, è possibile che, bisogna che</td></tr>
+            <tr><td>Союзы</td><td class="it">benché, sebbene, affinché, prima che, a condizione che, nel caso in cui</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <ul class="example-list">
+        <li><span class="it-ex">Penso che Marco <strong>abbia</strong> ragione.</span><span class="ru-ex">Я думаю, что Марко прав. (essere → sia → avere → abbia)</span></li>
+        <li><span class="it-ex">È necessario che voi <strong>studiate</strong> di più.</span><span class="ru-ex">Вам необходимо учиться больше.</span></li>
+        <li><span class="it-ex">Benché <strong>faccia</strong> freddo, esco lo stesso.</span><span class="ru-ex">Хотя холодно, я всё равно выхожу.</span></li>
+      </ul>
+    </section>
+
+    <!-- ======================================================
+         M2: IMPERATIVO
+         ====================================================== -->
+    <section class="section" id="sec-imperativo">
+      <div class="breadcrumb"><span>Модуль 2</span><span class="sep">›</span><span>Повелительное наклонение</span></div>
+      <h1 class="section-title">Повелительное наклонение (Imperativo)</h1>
+      <p class="section-subtitle">Imperativo используется для приказов, просьб, советов, инструкций и запретов. Необходимо знать как неформальные формы (tu/noi/voi), так и вежливую форму (Lei).</p>
+
+      <h2>Образование Imperativo</h2>
+      <p class="table-scroll-hint">← прокрути таблицу →</p>
+        <div class="table-wrap"><div class="table-scroller">
+        <table class="table-compact">
+          <thead><tr><th>Лицо</th><th>-ARE (parlare)</th><th>-ERE (scrivere)</th><th>-IRE тип 1 (partire)</th><th>-IRE тип 2 (finire)</th></tr></thead>
+          <tbody>
+            <tr><td><strong>tu</strong></td><td class="it form-highlight">parla!</td><td class="it form-highlight">scrivi!</td><td class="it form-highlight">parti!</td><td class="it form-highlight">finisci!</td></tr>
+            <tr><td><strong>noi</strong></td><td class="it">parliamo!</td><td class="it">scriviamo!</td><td class="it">partiamo!</td><td class="it">finiamo!</td></tr>
+            <tr><td><strong>voi</strong></td><td class="it">parlate!</td><td class="it">scrivete!</td><td class="it">partite!</td><td class="it">finite!</td></tr>
+            <tr class="accent-cell">
+              <td><strong>Lei (вежл.)</strong></td>
+              <td class="it">parli!</td><td class="it">scriva!</td><td class="it">parta!</td><td class="it">finisca!</td>
+            </tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="rule-box danger">
+        <div class="rule-title">❗ Критическое исключение: tu-форма глаголов на -ARE</div>
+        <p>Форма «tu» для глаголов на <strong>-are</strong> НЕ заканчивается на <em>-i</em>, как Present, а на <em>-a</em>: <span class="it-inline">Parla!</span>, <span class="it-inline">Mangia!</span>, <span class="it-inline">Ascolta!</span></p>
+      </div>
+
+      <div class="rule-box warning">
+        <div class="rule-title">⚠️ Вежливая форма (Lei)</div>
+        <p>Форма «Lei» совпадает с Congiuntivo Presente! Это важно помнить, чтобы не путать наклонения.</p>
+      </div>
+
+      <h2>Неправильные формы Imperativo</h2>
+      <p class="table-scroll-hint">← прокрути таблицу →</p>
+        <div class="table-wrap"><div class="table-scroller">
+        <table class="table-compact">
+          <thead><tr><th>Глагол</th><th>tu</th><th>noi</th><th>voi</th><th>Lei (вежл.)</th></tr></thead>
+          <tbody>
+            <tr><td class="it">essere</td><td class="it">sii!</td><td class="it">siamo!</td><td class="it">siate!</td><td class="it">sia!</td></tr>
+            <tr><td class="it">avere</td><td class="it">abbi!</td><td class="it">abbiamo!</td><td class="it">abbiate!</td><td class="it">abbia!</td></tr>
+            <tr><td class="it">andare</td><td class="it">va'! / vai!</td><td class="it">andiamo!</td><td class="it">andate!</td><td class="it">vada!</td></tr>
+            <tr><td class="it">fare</td><td class="it">fa'! / fai!</td><td class="it">facciamo!</td><td class="it">fate!</td><td class="it">faccia!</td></tr>
+            <tr><td class="it">dare</td><td class="it">da'! / dai!</td><td class="it">diamo!</td><td class="it">date!</td><td class="it">dia!</td></tr>
+            <tr><td class="it">dire</td><td class="it">di'!</td><td class="it">diciamo!</td><td class="it">dite!</td><td class="it">dica!</td></tr>
+            <tr><td class="it">stare</td><td class="it">sta'! / stai!</td><td class="it">stiamo!</td><td class="it">state!</td><td class="it">stia!</td></tr>
+            <tr><td class="it">venire</td><td class="it">vieni!</td><td class="it">veniamo!</td><td class="it">venite!</td><td class="it">venga!</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <h2>Позиция местоимений при Imperativo</h2>
+      <div class="rule-box">
+        <div class="rule-title">🔑 Правило позиции</div>
+        <p>
+          <strong>tu / noi / voi:</strong> местоимения <em>прикрепляются</em> к концу глагола → <span class="it-inline">Dimmi! Mangialo! Alzatevi!</span><br>
+          <strong>Lei (вежливая):</strong> местоимения ставятся <em>перед</em> глаголом → <span class="it-inline">Mi dica! Lo prenda!</span><br>
+          <strong>Отрицание (tu):</strong> non + infinito (или non + verbo + местоимение прикреплённое) → <span class="it-inline">Non andare! / Non ci andare!</span>
+        </p>
+      </div>
+      <div class="rule-box warning">
+        <div class="rule-title">⚠️ Удвоение согласной</div>
+        <p>С усечёнными формами (<span class="it-inline">va', fa', da', di', sta'</span>) при прикреплении местоимений согласная удваивается: <span class="it-inline">va' + ci = <strong>vacci!</strong></span>, <span class="it-inline">fa' + lo = <strong>fallo!</strong></span>, <span class="it-inline">di' + mi = <strong>dimmi!</strong></span>. Исключение: <span class="it-inline">gli</span> не удваивается: <span class="it-inline">di' + gli = <strong>digli!</strong></span></p>
+      </div>
+      <ul class="example-list">
+        <li><span class="it-ex">Parla più lentamente, per favore!</span><span class="ru-ex">Говори помедленнее, пожалуйста!</span></li>
+        <li><span class="it-ex">Mangialo subito!</span><span class="ru-ex">Съешь это немедленно!</span></li>
+        <li><span class="it-ex">Signora, mi dica tutto.</span><span class="ru-ex">Синьора, расскажите мне всё. (вежл.)</span></li>
+        <li><span class="it-ex">Non dimenticare il passaporto!</span><span class="ru-ex">Не забудь паспорт!</span></li>
+        <li><span class="it-ex">Andiamo! È tardi!</span><span class="ru-ex">Пойдём! Уже поздно!</span></li>
+      </ul>
+    </section>
+
+    <!-- ======================================================
+         M2: PASSIVO
+         ====================================================== -->
+    <section class="section" id="sec-passivo">
+      <div class="breadcrumb"><span>Модуль 2</span><span class="sep">›</span><span>Пассивный залог</span></div>
+      <h1 class="section-title">Пассивный залог (La forma passiva)</h1>
+      <p class="section-subtitle">Пассивный залог используется, когда важно то, <em>что</em> происходит с предметом, а не то, <em>кто</em> это делает. В итальянском пассив образуется с глаголами <strong>essere</strong> и <strong>venire</strong>.</p>
+
+      <div class="formula">
+        <div class="f-label">Формула пассива</div>
+        soggetto + essere / venire + participio passato (+ da + агент)
+      </div>
+
+      <h2>Essere vs Venire в пассиве</h2>
+      <div class="table-wrap"><div class="table-scroller">
+        <table>
+          <thead><tr><th>Глагол</th><th>Значение / употребление</th><th>Время</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="it"><strong>essere</strong></td>
+              <td>Описывает <strong>состояние</strong> (результат действия). Употребляется во <em>всех</em> временах.</td>
+              <td>Presente, Passato Prossimo, Imperfetto, Futuro...</td>
+            </tr>
+            <tr>
+              <td class="it"><strong>venire</strong></td>
+              <td>Описывает <strong>процесс</strong> (само действие в момент его совершения). Употребляется только в <em>простых</em> временах (не в составных).</td>
+              <td>Presente, Imperfetto, Futuro Semplice</td>
+            </tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="rule-box">
+        <div class="rule-title">🔑 Ключевое различие</div>
+        <p><span class="it-inline">La porta <strong>è chiusa</strong>.</span> → Дверь <em>закрыта</em> (состояние — результат)<br>
+        <span class="it-inline">La porta <strong>viene chiusa</strong> ogni sera.</span> → Дверь <em>закрывается</em> каждый вечер (процесс, действие)</p>
+      </div>
+
+      <h2>Пассив во всех временах (с essere)</h2>
+      <div class="table-wrap"><div class="table-scroller">
+        <table>
+          <thead><tr><th>Время</th><th>Формула</th><th>Пример</th></tr></thead>
+          <tbody>
+            <tr><td>Presente</td><td class="it">è + p.p.</td><td class="it">Il libro <strong>è scritto</strong> in italiano.</td></tr>
+            <tr><td>Imperfetto</td><td class="it">era + p.p.</td><td class="it">Il libro <strong>era scritto</strong> a mano.</td></tr>
+            <tr><td>Passato Prossimo</td><td class="it">è stato + p.p.</td><td class="it">Il libro <strong>è stato scritto</strong> nel 1800.</td></tr>
+            <tr><td>Futuro Semplice</td><td class="it">sarà + p.p.</td><td class="it">Il libro <strong>sarà pubblicato</strong> presto.</td></tr>
+            <tr><td>Condizionale</td><td class="it">sarebbe + p.p.</td><td class="it">Il libro <strong>sarebbe letto</strong> da tutti.</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="rule-box warning">
+        <div class="rule-title">⚠️ Согласование причастия</div>
+        <p>В пассиве причастие всегда согласуется в роде и числе с подлежащим:<br>
+        <span class="it-inline">Il pane è <strong>prodotto</strong> qui.</span> (м.р. ед.ч.)<br>
+        <span class="it-inline">Le pizze sono <strong>preparate</strong> con ingredienti freschi.</span> (ж.р. мн.ч.)</p>
+      </div>
+      <ul class="example-list">
+        <li><span class="it-ex">Il formaggio <strong>viene prodotto</strong> in Emilia-Romagna.</span><span class="ru-ex">Сыр производится в Эмилии-Романье. (процесс)</span></li>
+        <li><span class="it-ex">Questo progetto <strong>è stato approvato</strong> dal direttore.</span><span class="ru-ex">Этот проект был одобрен директором.</span></li>
+        <li><span class="it-ex">I nuovi medicinali <strong>saranno testati</strong> in laboratorio.</span><span class="ru-ex">Новые лекарства будут протестированы в лаборатории.</span></li>
+      </ul>
+    </section>
+
+    <!-- ======================================================
+         M2: SI PASSIVANTE
+         ====================================================== -->
+    <section class="section" id="sec-si-passivante">
+      <div class="breadcrumb"><span>Модуль 2</span><span class="sep">›</span><span>Si passivante</span></div>
+      <h1 class="section-title">Si passivante (Пассивная конструкция с «si»)</h1>
+      <p class="section-subtitle">Конструкция «si passivante» — это ещё один способ выразить пассивное значение. Она очень распространена в итальянском, особенно в устной речи и в текстах о правилах, инструкциях и обычаях.</p>
+
+      <div class="formula">
+        <div class="f-label">Формула</div>
+        si + verbo (3-е лицо ед. или мн. числа, в зависимости от подлежащего)
+      </div>
+
+      <div class="rule-box">
+        <div class="rule-title">🔑 Логика конструкции</div>
+        <p>Глагол согласуется с <strong>существительным</strong>, которое следует за ним (логическое подлежащее). Если существительное в единственном числе → глагол в 3-м л. ед.ч. Если во множественном → глагол в 3-м л. мн.ч.</p>
+      </div>
+
+      <p class="table-scroll-hint">← прокрути таблицу →</p>
+        <div class="table-wrap"><div class="table-scroller">
+        <table class="table-compact">
+          <thead><tr><th>Существительное</th><th>Глагол</th><th>Пример</th><th>Перевод</th></tr></thead>
+          <tbody>
+            <tr><td>ед.ч. (м.р.)</td><td>3 л. ед.ч.</td><td class="it">Si <strong>mangia</strong> il pane.</td><td>Хлеб едят. / Хлеб едят здесь.</td></tr>
+            <tr><td>мн.ч. (м.р.)</td><td>3 л. мн.ч.</td><td class="it">Si <strong>mangiano</strong> molti tipi di pasta.</td><td>Едят много видов пасты.</td></tr>
+            <tr><td>ед.ч. (ж.р.)</td><td>3 л. ед.ч.</td><td class="it">Si <strong>produce</strong> molta energia solare.</td><td>Производится много солнечной энергии.</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <h2>Si passivante vs Si impersonale</h2>
+      <div class="table-wrap"><div class="table-scroller">
+        <table>
+          <thead><tr><th></th><th>Si passivante</th><th>Si impersonale</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Что следует за si?</strong></td><td>Переходный глагол + прямое дополнение</td><td>Непереходный глагол (или без дополнения)</td></tr>
+            <tr><td><strong>Согласование</strong></td><td>Глагол согласуется с дополнением</td><td>Всегда 3-е л. ед.ч.</td></tr>
+            <tr><td><strong>Пример</strong></td><td class="it">Si <strong>leggono</strong> i giornali.</td><td class="it">Si <strong>va</strong> a scuola.</td></tr>
+            <tr><td><strong>Перевод</strong></td><td>Читают газеты.</td><td>Ходят в школу.</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <ul class="example-list">
+        <li><span class="it-ex">In Italia <strong>si mangia</strong> molta pasta.</span><span class="ru-ex">В Италии едят много пасты.</span></li>
+        <li><span class="it-ex">In questo laboratorio <strong>si studiano</strong> i microrganismi.</span><span class="ru-ex">В этой лаборатории изучают микроорганизмы.</span></li>
+        <li><span class="it-ex"><strong>Si dice</strong> che il caffè italiano sia il migliore al mondo.</span><span class="ru-ex">Говорят, что итальянский кофе — лучший в мире.</span></li>
+      </ul>
+    </section>
+
+    <!-- ======================================================
+         M2: CUI
+         ====================================================== -->
+    <section class="section" id="sec-cui">
+      <div class="breadcrumb"><span>Модуль 2</span><span class="sep">›</span><span>Местоимение «cui»</span></div>
+      <h1 class="section-title">Относительное местоимение «cui»</h1>
+      <p class="section-subtitle">«Cui» — неизменяемое относительное местоимение. Оно используется после предлогов и в особой конструкции для выражения притяжательности.</p>
+
+      <h2>Основные функции «cui»</h2>
+      <p class="table-scroll-hint">← прокрути таблицу →</p>
+        <div class="table-wrap"><div class="table-scroller">
+        <table class="table-compact">
+          <thead><tr><th>Функция</th><th>Конструкция</th><th>Пример</th><th>Перевод</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>После предлога</td>
+              <td class="it">prep. + cui</td>
+              <td class="it">La città <strong>in cui</strong> vivo è bella.</td>
+              <td>Город, <em>в котором</em> я живу, красив.</td>
+            </tr>
+            <tr>
+              <td>Косвенное дополнение (a cui)</td>
+              <td class="it">a cui / cui</td>
+              <td class="it">La persona <strong>a cui</strong> ho scritto è mia sorella.</td>
+              <td>Человек, <em>которому</em> я написал, — моя сестра.</td>
+            </tr>
+            <tr>
+              <td>Притяжательность</td>
+              <td class="it">art. + cui + сущ.</td>
+              <td class="it">L'autore, <strong>il cui</strong> libro ho letto, è famoso.</td>
+              <td>Автор, <em>чью</em> книгу я прочитал, знаменит.</td>
+            </tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <h2>Притяжательный «cui» (il cui / la cui / i cui / le cui)</h2>
+      <p>Конструкция «il/la/i/le + cui + существительное» заменяет русское «чей/чья/чьё/чьи». Артикль согласуется с <em>последующим существительным</em>, а не с тем, к кому относится «cui».</p>
+      <div class="rule-box">
+        <div class="rule-title">🔑 Схема согласования</div>
+        <p>
+          <span class="it-inline">lo scrittore</span> [м.р.] + <span class="it-inline">il romanzo</span> [м.р.] → <span class="it-inline">lo scrittore <strong>il cui</strong> romanzo...</span> (чей роман)<br>
+          <span class="it-inline">la scrittrice</span> [ж.р.] + <span class="it-inline">le opere</span> [ж.р. мн.] → <span class="it-inline">la scrittrice <strong>le cui</strong> opere...</span> (чьи произведения)
+        </p>
+      </div>
+      <ul class="example-list">
+        <li><span class="it-ex">Il ricercatore, <strong>i cui</strong> studi sono famosi, ha vinto un premio.</span><span class="ru-ex">Исследователь, чьи работы известны, получил премию.</span></li>
+        <li><span class="it-ex">La ditta, <strong>con cui</strong> collaboriamo, produce prodotti biologici.</span><span class="ru-ex">Компания, с которой мы сотрудничаем, производит органические продукты.</span></li>
+        <li><span class="it-ex">Questo è il motivo <strong>per cui</strong> studio l'italiano.</span><span class="ru-ex">Вот почему я изучаю итальянский.</span></li>
+      </ul>
+    </section>
+
+    <!-- ======================================================
+         M2: ADJ + A
+         ====================================================== -->
+    <section class="section" id="sec-adj-a">
+      <div class="breadcrumb"><span>Модуль 2</span><span class="sep">›</span><span>Прилагательные + предлог «a»</span></div>
+      <h1 class="section-title">Прилагательные, требующие предлога «a»</h1>
+      <p class="section-subtitle">Ряд прилагательных в итальянском требует после себя предлога «a» перед инфинитивом. Это фиксированные сочетания, которые нужно запомнить.</p>
+
+      <div class="rule-box">
+        <div class="rule-title">🔑 Конструкция</div>
+        <p>essere / sembrare + прилагательное + <strong>a</strong> + инфинитив</p>
+      </div>
+
+      <div class="table-wrap"><div class="table-scroller">
+        <table>
+          <thead><tr><th>Прилагательное</th><th>Перевод</th><th>Пример</th></tr></thead>
+          <tbody>
+            <tr><td class="it">pronto/a</td><td>готов/-а</td><td class="it">Sono <strong>pronto a partire</strong>.</td></tr>
+            <tr><td class="it">abituato/a</td><td>привыкший/-ая</td><td class="it">Sono <strong>abituata a lavorare</strong> tardi.</td></tr>
+            <tr><td class="it">disposto/a</td><td>склонный/-ая, готовый/-ая</td><td class="it">È <strong>disposta ad aiutare</strong> tutti.</td></tr>
+            <tr><td class="it">capace</td><td>способный/-ая</td><td class="it">È <strong>capace di risolvere</strong> problemi.</td></tr>
+            <tr><td class="it">difficile / facile</td><td>трудный / лёгкий</td><td class="it">È <strong>difficile da capire</strong>.</td></tr>
+            <tr><td class="it">lento/a</td><td>медленный/-ая</td><td class="it">È <strong>lento a rispondere</strong>.</td></tr>
+            <tr><td class="it">primo/a / ultimo/a</td><td>первый / последний</td><td class="it">È stato il <strong>primo ad arrivare</strong>.</td></tr>
+            <tr><td class="it">bravo/a</td><td>умелый/-ая, хороший/-ая</td><td class="it">È <strong>bravo a cucinare</strong>.</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         M2: ЛЕКСИКА
+         ====================================================== -->
+    <section class="section" id="sec-vocab-mod2">
+      <div class="breadcrumb"><span>Модуль 2</span><span class="sep">›</span><span>Лексика: Наука / Еда</span></div>
+      <h1 class="section-title">Лексика: Наука, питание, биотехнологии</h1>
+
+      <h2>Наречия на -mente</h2>
+      <p>Образуются от прилагательного женского рода (если прилагательное оканчивается на -o/-a) или от базовой формы (если на -e) + суффикс <strong>-mente</strong>.</p>
+      <div class="vocab-grid">
+        <div class="vocab-card"><div class="vw">lentamente</div><div class="vr">медленно (lento → lenta + mente)</div></div>
+        <div class="vocab-card"><div class="vw">rapidamente</div><div class="vr">быстро</div></div>
+        <div class="vocab-card"><div class="vw">chiaramente</div><div class="vr">ясно, чётко</div></div>
+        <div class="vocab-card"><div class="vw">generalmente</div><div class="vr">как правило</div></div>
+        <div class="vocab-card"><div class="vw">attualmente</div><div class="vr">в настоящее время</div></div>
+        <div class="vocab-card"><div class="vw">principalmente</div><div class="vr">главным образом</div></div>
+        <div class="vocab-card"><div class="vw">naturalmente</div><div class="vr">естественно, конечно</div></div>
+        <div class="vocab-card"><div class="vw">facilmente</div><div class="vr">легко</div></div>
+      </div>
+      <div class="rule-box warning">
+        <div class="rule-title">⚠️ Исключение</div>
+        <p>Прилагательные на <strong>-le</strong> и <strong>-re</strong> теряют конечный гласный перед -mente: <span class="it-inline">facil<del>e</del> → facilmente</span>, <span class="it-inline">regolar<del>e</del> → regolarmente</span>.</p>
+      </div>
+
+      <h2>Словообразование: -tore / -trice</h2>
+      <p>Суффикс <strong>-tore</strong> (м.р.) / <strong>-trice</strong> (ж.р.) образует существительные «деятель» от глаголов.</p>
+      <p class="table-scroll-hint">← прокрути таблицу →</p>
+        <div class="table-wrap"><div class="table-scroller">
+        <table class="table-compact">
+          <thead><tr><th>Глагол</th><th>-tore (м.р.)</th><th>-trice (ж.р.)</th><th>Перевод</th></tr></thead>
+          <tbody>
+            <tr><td class="it">produrre</td><td class="it">produttore</td><td class="it">produttrice</td><td>производитель</td></tr>
+            <tr><td class="it">ricercare</td><td class="it">ricercatore</td><td class="it">ricercatrice</td><td>исследователь</td></tr>
+            <tr><td class="it">coltivare</td><td class="it">coltivatore</td><td class="it">coltivatrice</td><td>земледелец</td></tr>
+            <tr><td class="it">consumare</td><td class="it">consumatore</td><td class="it">consumatrice</td><td>потребитель</td></tr>
+            <tr><td class="it">distribuire</td><td class="it">distributore</td><td class="it">distributrice</td><td>дистрибьютор</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <h2>Причинно-следственные союзы</h2>
+      <p class="table-scroll-hint">← прокрути таблицу →</p>
+        <div class="table-wrap"><div class="table-scroller">
+        <table class="table-compact">
+          <thead><tr><th>Союз</th><th>Тип</th><th>Перевод</th><th>Пример</th></tr></thead>
+          <tbody>
+            <tr><td class="it">perché</td><td>причина</td><td>потому что</td><td class="it">Mangio sano <strong>perché</strong> voglio stare bene.</td></tr>
+            <tr><td class="it">poiché / siccome</td><td>причина (в нач. предл.)</td><td>так как, поскольку</td><td class="it"><strong>Poiché</strong> fa caldo, beviamo molta acqua.</td></tr>
+            <tr><td class="it">quindi</td><td>следствие</td><td>поэтому, значит</td><td class="it">Ho fame, <strong>quindi</strong> mangio.</td></tr>
+            <tr><td class="it">perciò</td><td>следствие</td><td>поэтому</td><td class="it">È tardi, <strong>perciò</strong> vado a letto.</td></tr>
+            <tr><td class="it">di conseguenza</td><td>следствие</td><td>следовательно, в результате</td><td class="it">I prezzi aumentano; <strong>di conseguenza</strong>, i consumi calano.</td></tr>
+            <tr><td class="it">dunque</td><td>следствие / вывод</td><td>итак, следовательно</td><td class="it"><strong>Dunque</strong>, possiamo concludere che...</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <h2>Тематическая лексика: Агрономия и еда</h2>
+      <div class="vocab-grid">
+        <div class="vocab-card"><div class="vw">l'agricoltura biologica</div><div class="vr">органическое земледелие</div></div>
+        <div class="vocab-card"><div class="vw">i pesticidi</div><div class="vr">пестициды</div></div>
+        <div class="vocab-card"><div class="vw">i fertilizzanti</div><div class="vr">удобрения</div></div>
+        <div class="vocab-card"><div class="vw">il raccolto</div><div class="vr">урожай</div></div>
+        <div class="vocab-card"><div class="vw">la coltivazione</div><div class="vr">возделывание, выращивание</div></div>
+        <div class="vocab-card"><div class="vw">il suolo</div><div class="vr">почва</div></div>
+        <div class="vocab-card"><div class="vw">la filiera alimentare</div><div class="vr">пищевая цепочка</div></div>
+        <div class="vocab-card"><div class="vw">i prodotti OGM</div><div class="vr">ГМО-продукты</div></div>
+        <div class="vocab-card"><div class="vw">la biodiversità</div><div class="vr">биоразнообразие</div></div>
+        <div class="vocab-card"><div class="vw">la sostenibilità</div><div class="vr">устойчивость, экологичность</div></div>
+        <div class="vocab-card"><div class="vw">l'etichetta alimentare</div><div class="vr">пищевая маркировка</div></div>
+        <div class="vocab-card"><div class="vw">i nutrienti</div><div class="vr">питательные вещества</div></div>
+      </div>
+
+      <h2>Выражения для публичных выступлений</h2>
+      <div class="table-wrap"><div class="table-scroller">
+        <table>
+          <thead><tr><th>Выражение</th><th>Использование</th></tr></thead>
+          <tbody>
+            <tr><td class="it">Vorrei parlarvi di...</td><td>Я хотел(-а) бы рассказать вам о... (начало)</td></tr>
+            <tr><td class="it">In primo luogo... / In secondo luogo...</td><td>Во-первых... / Во-вторых...</td></tr>
+            <tr><td class="it">Come si può vedere dal grafico...</td><td>Как видно из графика...</td></tr>
+            <tr><td class="it">Vorrei concludere dicendo che...</td><td>В заключение хотел(-а) бы сказать, что...</td></tr>
+            <tr><td class="it">È importante sottolineare che...</td><td>Важно подчеркнуть, что...</td></tr>
+            <tr><td class="it">Da un lato... dall'altro...</td><td>С одной стороны... с другой...</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         M3: INDEFINITI
+         ====================================================== -->
+    <section class="section" id="sec-indefiniti">
+      <div class="breadcrumb"><span>Модуль 3</span><span class="sep">›</span><span>Неопределённые прилагательные и местоимения</span></div>
+      <h1 class="section-title">Неопределённые прилагательные и местоимения</h1>
+      <p class="section-subtitle">Неопределённые выражения (aggettivi e pronomi indefiniti) указывают на неточное количество или качество предметов и людей.</p>
+
+      <p class="table-scroll-hint">← прокрути таблицу →</p>
+        <div class="table-wrap"><div class="table-scroller">
+        <table class="table-compact">
+          <thead><tr><th>Слово</th><th>Тип</th><th>Значение</th><th>Пример</th></tr></thead>
+          <tbody>
+            <tr><td class="it">qualcuno</td><td>только мест.</td><td>кто-то, кто-нибудь</td><td class="it"><strong>Qualcuno</strong> ha chiamato.</td></tr>
+            <tr><td class="it">qualcosa</td><td>только мест.</td><td>что-то, что-нибудь</td><td class="it">Vuoi mangiare <strong>qualcosa</strong>?</td></tr>
+            <tr><td class="it">qualche</td><td>только прил.</td><td>несколько, какой-нибудь</td><td class="it">Ho letto <strong>qualche</strong> libro interessante.</td></tr>
+            <tr><td class="it">alcuni/alcune</td><td>прил. и мест.</td><td>некоторые, несколько</td><td class="it"><strong>Alcune</strong> persone preferiscono il treno.</td></tr>
+            <tr><td class="it">ogni</td><td>только прил.</td><td>каждый (ед.ч.)</td><td class="it"><strong>Ogni</strong> giorno imparo qualcosa di nuovo.</td></tr>
+            <tr><td class="it">ognuno/a</td><td>только мест.</td><td>каждый/каждая</td><td class="it"><strong>Ognuno</strong> ha le sue opinioni.</td></tr>
+            <tr><td class="it">tutto/a/i/e</td><td>прил. и мест.</td><td>весь, все</td><td class="it">Ho mangiato <strong>tutto</strong>. / <strong>Tutti</strong> sanno.</td></tr>
+            <tr><td class="it">nessuno/a</td><td>прил. и мест.</td><td>никто, никакой</td><td class="it"><strong>Nessuno</strong> ha risposto.</td></tr>
+            <tr><td class="it">molto/a/i/e</td><td>прил. и мест.</td><td>много, многие</td><td class="it">Ho <strong>molti</strong> amici in Italia.</td></tr>
+            <tr><td class="it">poco/a, pochi/e</td><td>прил. и мест.</td><td>мало, немного</td><td class="it">Ho <strong>poco</strong> tempo libero.</td></tr>
+            <tr><td class="it">troppo/a/i/e</td><td>прил. и мест.</td><td>слишком много</td><td class="it">C'è <strong>troppo</strong> traffico.</td></tr>
+            <tr><td class="it">tanto/a/i/e</td><td>прил. и мест.</td><td>столько, очень много</td><td class="it">Ha <strong>tanta</strong> pazienza.</td></tr>
+            <tr><td class="it">chiunque</td><td>только мест.</td><td>кто угодно, любой</td><td class="it"><strong>Chiunque</strong> può partecipare.</td></tr>
+            <tr><td class="it">qualsiasi / qualunque</td><td>только прил.</td><td>любой, какой угодно</td><td class="it">In <strong>qualsiasi</strong> caso, vengo.</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="rule-box warning">
+        <div class="rule-title">⚠️ Qualche — всегда единственное число!</div>
+        <p><span class="it-inline">qualche</span> используется только с существительными в единственном числе, даже если смысл множественный: <span class="it-inline">qualche libro</span> (несколько книг), а не <span class="it-inline">~~qualche libri~~</span>.</p>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         M3: IMPERSONALE
+         ====================================================== -->
+    <section class="section" id="sec-impersonale">
+      <div class="breadcrumb"><span>Модуль 3</span><span class="sep">›</span><span>Безличная форма</span></div>
+      <h1 class="section-title">Безличная форма (La forma impersonale)</h1>
+      <p class="section-subtitle">Безличные конструкции используются, когда субъект действия не определён или неважен. Аналог русских конструкций «говорят, что...», «нельзя...», «принято...».</p>
+
+      <h2>Способы выражения безличности</h2>
+
+      <div class="collapsible-header" onclick="toggleCollapsible(this)">
+        1. Si + verbo (3-е л. ед.ч.) <span class="chev">▼</span>
+      </div>
+      <div class="collapsible-body">
+        <p>Самая распространённая безличная конструкция. Глагол всегда стоит в 3-м л. ед.ч.</p>
+        <ul class="example-list">
+          <li><span class="it-ex">In Italia <strong>si mangia</strong> tardi.</span><span class="ru-ex">В Италии едят поздно.</span></li>
+          <li><span class="it-ex"><strong>Si dice</strong> che il futuro sia incerto.</span><span class="ru-ex">Говорят, что будущее неопределённо.</span></li>
+          <li><span class="it-ex">Come <strong>si fa</strong>?</span><span class="ru-ex">Как это делается?</span></li>
+        </ul>
+        <div class="rule-box warning">
+          <div class="rule-title">⚠️ Si impersonale + essere</div>
+          <p>Прилагательное после <span class="it-inline">si + essere</span> всегда стоит в мужском роде множественного числа: <span class="it-inline">Quando si è <strong>stanchi</strong>, si sbaglia.</span> (Когда устаёшь, ошибаешься.)</p>
+        </div>
+      </div>
+
+      <div class="collapsible-header" onclick="toggleCollapsible(this)">
+        2. Bisogna + infinito <span class="chev">▼</span>
+      </div>
+      <div class="collapsible-body">
+        <p>Выражает необходимость. Глагол «bisognare» используется только в 3-м л. ед.ч.</p>
+        <ul class="example-list">
+          <li><span class="it-ex"><strong>Bisogna</strong> prenotare in anticipo.</span><span class="ru-ex">Нужно бронировать заранее.</span></li>
+          <li><span class="it-ex"><strong>Bisogna</strong> rispettare l'ambiente.</span><span class="ru-ex">Нужно уважать окружающую среду.</span></li>
+        </ul>
+      </div>
+
+      <div class="collapsible-header" onclick="toggleCollapsible(this)">
+        3. È + aggettivo + infinito / che + congiuntivo <span class="chev">▼</span>
+      </div>
+      <div class="collapsible-body">
+        <div class="table-wrap"><div class="table-scroller">
+          <table>
+            <thead><tr><th>Выражение</th><th>Значение</th></tr></thead>
+            <tbody>
+              <tr><td class="it">è necessario / è importante</td><td>необходимо / важно</td></tr>
+              <tr><td class="it">è possibile / è impossibile</td><td>возможно / невозможно</td></tr>
+              <tr><td class="it">è meglio / è peggio</td><td>лучше / хуже</td></tr>
+              <tr><td class="it">è giusto / è sbagliato</td><td>правильно / неправильно</td></tr>
+              <tr><td class="it">è strano / è ovvio</td><td>странно / очевидно</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+        <ul class="example-list">
+          <li><span class="it-ex">È <strong>importante</strong> viaggiare per conoscere il mondo.</span><span class="ru-ex">Важно путешествовать, чтобы познать мир.</span></li>
+          <li><span class="it-ex">È <strong>meglio</strong> che tu parta subito.</span><span class="ru-ex">Лучше, чтобы ты уехал сразу.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         M3: CONDIZIONALE
+         ====================================================== -->
+    <section class="section" id="sec-condizionale">
+      <div class="breadcrumb"><span>Модуль 3</span><span class="sep">›</span><span>Условное наклонение</span></div>
+      <h1 class="section-title">Условное наклонение (Condizionale)</h1>
+      <p class="section-subtitle">Condizionale — наклонение желания, вежливости, гипотезы и условия. Различают Condizionale Presente и Condizionale Passato.</p>
+
+      <h2>Condizionale Presente — образование</h2>
+      <p>Основа та же, что и у Futuro Semplice, но окончания другие.</p>
+      <p class="table-scroll-hint">← прокрути таблицу →</p>
+        <div class="table-wrap"><div class="table-scroller">
+        <table class="table-compact">
+          <thead><tr><th></th><th>-ARE (parlare)</th><th>-ERE (scrivere)</th><th>-IRE (partire)</th></tr></thead>
+          <tbody>
+            <tr><td>io</td><td class="it">parler<span class="form-highlight">ei</span></td><td class="it">scriver<span class="form-highlight">ei</span></td><td class="it">partir<span class="form-highlight">ei</span></td></tr>
+            <tr><td>tu</td><td class="it">parler<span class="form-highlight">esti</span></td><td class="it">scriver<span class="form-highlight">esti</span></td><td class="it">partir<span class="form-highlight">esti</span></td></tr>
+            <tr><td>lui/lei</td><td class="it">parler<span class="form-highlight">ebbe</span></td><td class="it">scriver<span class="form-highlight">ebbe</span></td><td class="it">partir<span class="form-highlight">ebbe</span></td></tr>
+            <tr><td>noi</td><td class="it">parler<span class="form-highlight">emmo</span></td><td class="it">scriver<span class="form-highlight">emmo</span></td><td class="it">partir<span class="form-highlight">emmo</span></td></tr>
+            <tr><td>voi</td><td class="it">parler<span class="form-highlight">este</span></td><td class="it">scriver<span class="form-highlight">este</span></td><td class="it">partir<span class="form-highlight">este</span></td></tr>
+            <tr><td>loro</td><td class="it">parler<span class="form-highlight">ebbero</span></td><td class="it">scriver<span class="form-highlight">ebbero</span></td><td class="it">partir<span class="form-highlight">ebbero</span></td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <p>Неправильные основы те же, что и у Futuro: <span class="it-inline">essere → sar-</span>, <span class="it-inline">avere → avr-</span>, <span class="it-inline">fare → far-</span>, <span class="it-inline">andare → andr-</span>, <span class="it-inline">venire → verr-</span> и т.д.</p>
+
+      <h2>Condizionale Passato — образование</h2>
+      <div class="formula">
+        <div class="f-label">Формула</div>
+        avere / essere (Condizionale Presente) + participio passato
+      </div>
+      <ul class="example-list">
+        <li><span class="it-ex"><strong>Avrei mangiato</strong> la pizza, ma non avevo fame.</span><span class="ru-ex">Я бы съел пиццу, но не был голоден.</span></li>
+        <li><span class="it-ex"><strong>Sarebbe andato</strong> al mare, se avesse avuto tempo.</span><span class="ru-ex">Он бы поехал к морю, если бы у него было время.</span></li>
+      </ul>
+
+      <h2>Когда использовать Condizionale?</h2>
+      <div class="table-wrap"><div class="table-scroller">
+        <table>
+          <thead><tr><th>Функция</th><th>Пример</th><th>Перевод</th></tr></thead>
+          <tbody>
+            <tr><td>Вежливая просьба/желание</td><td class="it"><strong>Vorrei</strong> un caffè, per favore.</td><td>Я бы хотел кофе, пожалуйста.</td></tr>
+            <tr><td>Совет</td><td class="it"><strong>Dovresti</strong> studiare di più.</td><td>Тебе стоило бы учиться больше.</td></tr>
+            <tr><td>Гипотеза / предположение</td><td class="it">Al tuo posto, <strong>andrei</strong> dal medico.</td><td>На твоём месте я бы пошёл к врачу.</td></tr>
+            <tr><td>Условное предложение</td><td class="it">Se avessi soldi, <strong>viaggerei</strong> di più.</td><td>Если бы у меня были деньги, я бы путешествовал больше.</td></tr>
+            <tr><td>Невыполненное желание в прошлом</td><td class="it"><strong>Avrei voluto</strong> visitare Firenze.</td><td>Я бы хотел посетить Флоренцию (но не посетил).</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         M3: QUALE
+         ====================================================== -->
+    <section class="section" id="sec-quale">
+      <div class="breadcrumb"><span>Модуль 3</span><span class="sep">›</span><span>Местоимение «quale»</span></div>
+      <h1 class="section-title">Относительное местоимение «quale»</h1>
+      <p class="section-subtitle">«Quale» (il quale, la quale, i quali, le quali) — более формальная альтернатива «che». Используется для устранения двусмысленности и в письменной речи.</p>
+
+      <p class="table-scroll-hint">← прокрути таблицу →</p>
+        <div class="table-wrap"><div class="table-scroller">
+        <table class="table-compact">
+          <thead><tr><th></th><th>Ед.ч. м.р.</th><th>Ед.ч. ж.р.</th><th>Мн.ч. м.р.</th><th>Мн.ч. ж.р.</th></tr></thead>
+          <tbody>
+            <tr><td>Форма</td><td class="it">il quale</td><td class="it">la quale</td><td class="it">i quali</td><td class="it">le quali</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <p>Как и «cui», «quale» употребляется с предлогами, которые сливаются с артиклем: <span class="it-inline">del quale, alla quale, dai quali, nelle quali</span> и т.д.</p>
+
+      <h2>Che vs il quale</h2>
+      <div class="table-wrap"><div class="table-scroller">
+        <table>
+          <thead><tr><th></th><th>che</th><th>il quale / la quale...</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Стиль</strong></td><td>разговорный, нейтральный</td><td>формальный, письменный</td></tr>
+            <tr><td><strong>Функции</strong></td><td>подлежащее, прямое дополнение</td><td>все функции (с предлогами)</td></tr>
+            <tr><td><strong>Согласование</strong></td><td>не изменяется</td><td>согласуется с антецедентом</td></tr>
+            <tr><td><strong>Ясность</strong></td><td>может быть неоднозначным</td><td>чётко указывает на антецедент</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <ul class="example-list">
+        <li><span class="it-ex">Ho incontrato la sorella di Marco, <strong>la quale</strong> vive a Roma.</span><span class="ru-ex">Я встретил сестру Марко, которая живёт в Риме. (ясно: сестра, а не Марко)</span></li>
+        <li><span class="it-ex">L'università <strong>nella quale</strong> studio è molto antica.</span><span class="ru-ex">Университет, в котором я учусь, очень древний.</span></li>
+      </ul>
+    </section>
+
+    <!-- ======================================================
+         M3: GERUNDIO
+         ====================================================== -->
+    <section class="section" id="sec-gerundio">
+      <div class="breadcrumb"><span>Модуль 3</span><span class="sep">›</span><span>Герундий настоящего времени</span></div>
+      <h1 class="section-title">Герундий настоящего времени (Gerundio presente)</h1>
+      <p class="section-subtitle">Итальянский герундий (gerundio) соответствует русским деепричастиям («делая», «говоря», «идя»). Он неизменяем и выражает сопутствующее обстоятельство.</p>
+
+      <h2>Образование</h2>
+      <div class="table-wrap"><div class="table-scroller">
+        <table>
+          <thead><tr><th>Тип глагола</th><th>Суффикс</th><th>Пример</th></tr></thead>
+          <tbody>
+            <tr><td>-ARE</td><td class="form-highlight">-ando</td><td class="it">parlare → parl<strong>ando</strong></td></tr>
+            <tr><td>-ERE</td><td class="form-highlight">-endo</td><td class="it">scrivere → scriv<strong>endo</strong></td></tr>
+            <tr><td>-IRE</td><td class="form-highlight">-endo</td><td class="it">partire → part<strong>endo</strong></td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <p>Неправильные герундии: <span class="it-inline">fare → <strong>facendo</strong></span>, <span class="it-inline">dire → <strong>dicendo</strong></span>, <span class="it-inline">bere → <strong>bevendo</strong></span>, <span class="it-inline">tradurre → <strong>traducendo</strong></span>.</p>
+
+      <h2>Функции герундия</h2>
+      <div class="table-wrap"><div class="table-scroller">
+        <table>
+          <thead><tr><th>Значение</th><th>Пример</th><th>Перевод</th></tr></thead>
+          <tbody>
+            <tr><td>Время (одновременность)</td><td class="it"><strong>Ascoltando</strong> musica, studio meglio.</td><td>Слушая музыку, я учусь лучше.</td></tr>
+            <tr><td>Способ / образ действия</td><td class="it">È entrato <strong>correndo</strong>.</td><td>Он вбежал (буквально: вошёл бегом).</td></tr>
+            <tr><td>Причина</td><td class="it"><strong>Essendo</strong> stanco, è andato a letto presto.</td><td>Будучи усталым, он рано лёг спать.</td></tr>
+            <tr><td>Конструкция stare + gerundio</td><td class="it">Sto <strong>studiando</strong> ora.</td><td>Я сейчас учусь. (длящееся действие)</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="rule-box">
+        <div class="rule-title">🔑 Stare + gerundio</div>
+        <p>Конструкция <strong>stare + gerundio</strong> (аналог английского Present Continuous) подчёркивает, что действие происходит прямо сейчас:<br>
+        <span class="it-inline">Cosa stai facendo? — Sto leggendo un libro.</span><br>
+        Что ты делаешь? — Я читаю книгу.</p>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         M3: ЛЕКСИКА
+         ====================================================== -->
+    <section class="section" id="sec-vocab-mod3">
+      <div class="breadcrumb"><span>Модуль 3</span><span class="sep">›</span><span>Лексика: Путешествия / Литература</span></div>
+      <h1 class="section-title">Лексика: Путешествия и литература</h1>
+
+      <h2>Подготовка к путешествию</h2>
+      <div class="vocab-grid">
+        <div class="vocab-card"><div class="vw">prenotare</div><div class="vr">бронировать</div></div>
+        <div class="vocab-card"><div class="vw">il passaporto</div><div class="vr">паспорт</div></div>
+        <div class="vocab-card"><div class="vw">il visto</div><div class="vr">виза</div></div>
+        <div class="vocab-card"><div class="vw">il biglietto (di sola andata / di andata e ritorno)</div><div class="vr">билет (в одну сторону / туда-обратно)</div></div>
+        <div class="vocab-card"><div class="vw">il bagaglio a mano</div><div class="vr">ручная кладь</div></div>
+        <div class="vocab-card"><div class="vw">fare le valigie</div><div class="vr">собирать чемоданы</div></div>
+        <div class="vocab-card"><div class="vw">l'assicurazione di viaggio</div><div class="vr">страховка путешествия</div></div>
+        <div class="vocab-card"><div class="vw">il cambio (valuta)</div><div class="vr">обмен валюты</div></div>
+      </div>
+
+      <h2>Способы передвижения</h2>
+      <div class="vocab-grid">
+        <div class="vocab-card"><div class="vw">in aereo</div><div class="vr">на самолёте</div></div>
+        <div class="vocab-card"><div class="vw">in treno</div><div class="vw">на поезде</div></div>
+        <div class="vocab-card"><div class="vw">in macchina / in auto</div><div class="vr">на машине</div></div>
+        <div class="vocab-card"><div class="vw">in nave / in traghetto</div><div class="vr">на корабле / пароме</div></div>
+        <div class="vocab-card"><div class="vw">in autobus / in pullman</div><div class="vr">на автобусе</div></div>
+        <div class="vocab-card"><div class="vw">a piedi</div><div class="vr">пешком</div></div>
+        <div class="vocab-card"><div class="vw">noleggiare un'auto</div><div class="vr">взять машину напрокат</div></div>
+        <div class="vocab-card"><div class="vw">fare l'autostop</div><div class="vr">ехать автостопом</div></div>
+      </div>
+
+      <h2>Литературные термины</h2>
+      <div class="table-wrap"><div class="table-scroller">
+        <table>
+          <thead><tr><th>Термин</th><th>Перевод</th></tr></thead>
+          <tbody>
+            <tr><td class="it">il romanzo</td><td>роман</td></tr>
+            <tr><td class="it">il racconto / la novella</td><td>рассказ / новелла</td></tr>
+            <tr><td class="it">la poesia / la lirica</td><td>поэзия / лирика</td></tr>
+            <tr><td class="it">il saggio</td><td>эссе, научный труд</td></tr>
+            <tr><td class="it">il protagonista / l'antagonista</td><td>главный герой / антагонист</td></tr>
+            <tr><td class="it">la trama</td><td>сюжет</td></tr>
+            <tr><td class="it">il tema / l'argomento</td><td>тема / предмет произведения</td></tr>
+            <tr><td class="it">il narratore</td><td>рассказчик</td></tr>
+            <tr><td class="it">lo stile</td><td>стиль</td></tr>
+            <tr><td class="it">il capitolo</td><td>глава</td></tr>
+            <tr><td class="it">il personaggio</td><td>персонаж</td></tr>
+            <tr><td class="it">la metafora / la similitudine</td><td>метафора / сравнение</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <h2>Выражения для описания литературного текста</h2>
+      <div class="table-wrap"><div class="table-scroller">
+        <table>
+          <thead><tr><th>Выражение</th><th>Перевод</th></tr></thead>
+          <tbody>
+            <tr><td class="it">Il romanzo narra la storia di...</td><td>Роман рассказывает историю о...</td></tr>
+            <tr><td class="it">L'autore descrive con precisione...</td><td>Автор точно описывает...</td></tr>
+            <tr><td class="it">Il tema principale è...</td><td>Главная тема — это...</td></tr>
+            <tr><td class="it">Il testo si divide in...</td><td>Текст делится на...</td></tr>
+            <tr><td class="it">Il protagonista si trova di fronte a...</td><td>Главный герой оказывается перед лицом...</td></tr>
+            <tr><td class="it">L'opera appartiene al genere...</td><td>Произведение относится к жанру...</td></tr>
+            <tr><td class="it">Lo scrittore fa uso di...</td><td>Писатель использует...</td></tr>
+            <tr><td class="it">Il finale è aperto / chiuso</td><td>Финал открытый / закрытый</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <h2>Связующие слова (Connettivi)</h2>
+      <div class="table-wrap"><div class="table-scroller">
+        <table>
+          <thead><tr><th>Функция</th><th>Connettivi</th></tr></thead>
+          <tbody>
+            <tr><td>Добавление</td><td class="it">inoltre, anche, in aggiunta, non solo... ma anche</td></tr>
+            <tr><td>Противопоставление</td><td class="it">ma, però, tuttavia, al contrario, invece, d'altra parte</td></tr>
+            <tr><td>Причина</td><td class="it">perché, poiché, siccome, dato che, visto che</td></tr>
+            <tr><td>Следствие</td><td class="it">quindi, perciò, di conseguenza, dunque, pertanto</td></tr>
+            <tr><td>Уступка</td><td class="it">benché, sebbene, nonostante, anche se, pur + gerundio</td></tr>
+            <tr><td>Последовательность</td><td class="it">prima di tutto, in primo luogo, poi, successivamente, infine</td></tr>
+            <tr><td>Пример</td><td class="it">per esempio, ad esempio, come, tra cui</td></tr>
+            <tr><td>Итог</td><td class="it">in conclusione, in sintesi, insomma, in sostanza</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         НЕПРАВИЛЬНЫЕ ГЛАГОЛЫ
+         ====================================================== -->
+    <section class="section" id="sec-verbi-irreg">
+      <div class="breadcrumb"><span>Дополнительно</span><span class="sep">›</span><span>Неправильные глаголы</span></div>
+      <h1 class="section-title">Неправильные глаголы <button class="section-star-btn" onclick="toggleStar(event,'verbi-irreg','Неправильные глаголы')" id="star-verbi-irreg">☆</button></h1>
+      <p class="section-subtitle">Глаголы, которые не следуют стандартным правилам спряжения. Необходимо выучить наизусть.</p>
+
+      <div class="rule-box warning">
+        <div class="rule-title">⚡ Как пользоваться таблицей</div>
+        <p>Для каждого глагола указаны: инфинитив → Presente (1 л. ед.ч.) → Passato prossimo (participio passato) → Imperfetto (1 л. ед.ч.) → Futuro (1 л. ед.ч.).</p>
+      </div>
+
+      <h2>Essere и Avere — основа всего</h2>
+      <div class="table-wrap"><div class="table-scroller">
+        <table>
+          <thead><tr><th>Лицо</th><th>essere (быть)</th><th>avere (иметь)</th></tr></thead>
+          <tbody>
+            <tr><td>io</td><td class="it">sono</td><td class="it">ho</td></tr>
+            <tr><td>tu</td><td class="it">sei</td><td class="it">hai</td></tr>
+            <tr><td>lui/lei</td><td class="it">è</td><td class="it">ha</td></tr>
+            <tr><td>noi</td><td class="it">siamo</td><td class="it">abbiamo</td></tr>
+            <tr><td>voi</td><td class="it">siete</td><td class="it">avete</td></tr>
+            <tr><td>loro</td><td class="it">sono</td><td class="it">hanno</td></tr>
+            <tr><td class="accent-cell">Part. passato</td><td class="it accent-cell">stato</td><td class="it accent-cell">avuto</td></tr>
+            <tr><td class="accent-cell">Imperfetto (io)</td><td class="it accent-cell">ero</td><td class="it accent-cell">avevo</td></tr>
+            <tr><td class="accent-cell">Futuro (io)</td><td class="it accent-cell">sarò</td><td class="it accent-cell">avrò</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <h2>100 важных неправильных глаголов</h2>
+      <p class="table-scroll-hint">← прокрути таблицу →</p>
+        <div class="table-wrap"><div class="table-scroller">
+        <table class="table-compact">
+          <thead><tr><th>Инфинитив</th><th>Значение</th><th>Presente (io)</th><th>Part. passato</th><th>Imperfetto (io)</th><th>Futuro (io)</th></tr></thead>
+          <tbody>
+            <tr><td class="it">andare</td><td>идти, ехать</td><td class="it">vado</td><td class="it">andato</td><td class="it">andavo</td><td class="it">andrò</td></tr>
+            <tr><td class="it">venire</td><td>приходить</td><td class="it">vengo</td><td class="it">venuto</td><td class="it">venivo</td><td class="it">verrò</td></tr>
+            <tr><td class="it">fare</td><td>делать</td><td class="it">faccio</td><td class="it">fatto</td><td class="it">facevo</td><td class="it">farò</td></tr>
+            <tr><td class="it">dire</td><td>говорить</td><td class="it">dico</td><td class="it">detto</td><td class="it">dicevo</td><td class="it">dirò</td></tr>
+            <tr><td class="it">dare</td><td>давать</td><td class="it">do</td><td class="it">dato</td><td class="it">davo</td><td class="it">darò</td></tr>
+            <tr><td class="it">stare</td><td>находиться</td><td class="it">sto</td><td class="it">stato</td><td class="it">stavo</td><td class="it">starò</td></tr>
+            <tr><td class="it">sapere</td><td>знать</td><td class="it">so</td><td class="it">saputo</td><td class="it">sapevo</td><td class="it">saprò</td></tr>
+            <tr><td class="it">potere</td><td>мочь</td><td class="it">posso</td><td class="it">potuto</td><td class="it">potevo</td><td class="it">potrò</td></tr>
+            <tr><td class="it">volere</td><td>хотеть</td><td class="it">voglio</td><td class="it">voluto</td><td class="it">volevo</td><td class="it">vorrò</td></tr>
+            <tr><td class="it">dovere</td><td>быть должным</td><td class="it">devo</td><td class="it">dovuto</td><td class="it">dovevo</td><td class="it">dovrò</td></tr>
+            <tr><td class="it">uscire</td><td>выходить</td><td class="it">esco</td><td class="it">uscito</td><td class="it">uscivo</td><td class="it">uscirò</td></tr>
+            <tr><td class="it">salire</td><td>подниматься</td><td class="it">salgo</td><td class="it">salito</td><td class="it">salivo</td><td class="it">salirò</td></tr>
+            <tr><td class="it">tenere</td><td>держать</td><td class="it">tengo</td><td class="it">tenuto</td><td class="it">tenevo</td><td class="it">terrò</td></tr>
+            <tr><td class="it">porre</td><td>класть, ставить</td><td class="it">pongo</td><td class="it">posto</td><td class="it">ponevo</td><td class="it">porrò</td></tr>
+            <tr><td class="it">trarre</td><td>тянуть, извлекать</td><td class="it">traggo</td><td class="it">tratto</td><td class="it">traevo</td><td class="it">trarrò</td></tr>
+            <tr><td class="it">bere</td><td>пить</td><td class="it">bevo</td><td class="it">bevuto</td><td class="it">bevevo</td><td class="it">berrò</td></tr>
+            <tr><td class="it">sedere</td><td>сидеть</td><td class="it">siedo</td><td class="it">seduto</td><td class="it">sedevo</td><td class="it">sederò</td></tr>
+            <tr><td class="it">vedere</td><td>видеть</td><td class="it">vedo</td><td class="it">visto</td><td class="it">vedevo</td><td class="it">vedrò</td></tr>
+            <tr><td class="it">leggere</td><td>читать</td><td class="it">leggo</td><td class="it">letto</td><td class="it">leggevo</td><td class="it">leggerò</td></tr>
+            <tr><td class="it">scrivere</td><td>писать</td><td class="it">scrivo</td><td class="it">scritto</td><td class="it">scrivevo</td><td class="it">scriverò</td></tr>
+            <tr><td class="it">aprire</td><td>открывать</td><td class="it">apro</td><td class="it">aperto</td><td class="it">aprivo</td><td class="it">aprirò</td></tr>
+            <tr><td class="it">chiudere</td><td>закрывать</td><td class="it">chiudo</td><td class="it">chiuso</td><td class="it">chiudevo</td><td class="it">chiuderò</td></tr>
+            <tr><td class="it">mettere</td><td>класть, надевать</td><td class="it">metto</td><td class="it">messo</td><td class="it">mettevo</td><td class="it">metterò</td></tr>
+            <tr><td class="it">prendere</td><td>брать</td><td class="it">prendo</td><td class="it">preso</td><td class="it">prendevo</td><td class="it">prenderò</td></tr>
+            <tr><td class="it">perdere</td><td>терять</td><td class="it">perdo</td><td class="it">perso/perduto</td><td class="it">perdevo</td><td class="it">perderò</td></tr>
+            <tr><td class="it">chiedere</td><td>спрашивать</td><td class="it">chiedo</td><td class="it">chiesto</td><td class="it">chiedevo</td><td class="it">chiederò</td></tr>
+            <tr><td class="it">rispondere</td><td>отвечать</td><td class="it">rispondo</td><td class="it">risposto</td><td class="it">rispondevo</td><td class="it">risponderò</td></tr>
+            <tr><td class="it">correre</td><td>бежать</td><td class="it">corro</td><td class="it">corso</td><td class="it">correvo</td><td class="it">correrò</td></tr>
+            <tr><td class="it">vivere</td><td>жить</td><td class="it">vivo</td><td class="it">vissuto</td><td class="it">vivevo</td><td class="it">vivrò</td></tr>
+            <tr><td class="it">nascere</td><td>рождаться</td><td class="it">nasco</td><td class="it">nato</td><td class="it">nascevo</td><td class="it">nascerò</td></tr>
+            <tr><td class="it">morire</td><td>умирать</td><td class="it">muoio</td><td class="it">morto</td><td class="it">morivo</td><td class="it">morirò</td></tr>
+            <tr><td class="it">conoscere</td><td>знать (лично)</td><td class="it">conosco</td><td class="it">conosciuto</td><td class="it">conoscevo</td><td class="it">conoscerò</td></tr>
+            <tr><td class="it">crescere</td><td>расти</td><td class="it">cresco</td><td class="it">cresciuto</td><td class="it">crescevo</td><td class="it">crescerò</td></tr>
+            <tr><td class="it">scegliere</td><td>выбирать</td><td class="it">scelgo</td><td class="it">scelto</td><td class="it">sceglievo</td><td class="it">sceglierò</td></tr>
+            <tr><td class="it">togliere</td><td>снимать, убирать</td><td class="it">tolgo</td><td class="it">tolto</td><td class="it">toglievo</td><td class="it">toglierò</td></tr>
+            <tr><td class="it">raccogliere</td><td>собирать</td><td class="it">raccolgo</td><td class="it">raccolto</td><td class="it">raccoglievo</td><td class="it">raccoglierò</td></tr>
+            <tr><td class="it">spegnere</td><td>выключать</td><td class="it">spengo</td><td class="it">spento</td><td class="it">spegnevo</td><td class="it">spegnerò</td></tr>
+            <tr><td class="it">spingere</td><td>толкать</td><td class="it">spingo</td><td class="it">spinto</td><td class="it">spingevo</td><td class="it">spingerò</td></tr>
+            <tr><td class="it">vincere</td><td>побеждать</td><td class="it">vinco</td><td class="it">vinto</td><td class="it">vincevo</td><td class="it">vincerò</td></tr>
+            <tr><td class="it">convincere</td><td>убеждать</td><td class="it">convinco</td><td class="it">convinto</td><td class="it">convincevo</td><td class="it">convincerò</td></tr>
+            <tr><td class="it">piangere</td><td>плакать</td><td class="it">piango</td><td class="it">pianto</td><td class="it">piangevo</td><td class="it">piangerò</td></tr>
+            <tr><td class="it">raggiungere</td><td>достигать</td><td class="it">raggiungo</td><td class="it">raggiunto</td><td class="it">raggiungevo</td><td class="it">raggiungerò</td></tr>
+            <tr><td class="it">giungere</td><td>прибывать</td><td class="it">giungo</td><td class="it">giunto</td><td class="it">giungevo</td><td class="it">giungerò</td></tr>
+            <tr><td class="it">aggiungere</td><td>добавлять</td><td class="it">aggiungo</td><td class="it">aggiunto</td><td class="it">aggiungevo</td><td class="it">aggiungerò</td></tr>
+            <tr><td class="it">rimanere</td><td>оставаться</td><td class="it">rimango</td><td class="it">rimasto</td><td class="it">rimanevo</td><td class="it">rimarrò</td></tr>
+            <tr><td class="it">mantenere</td><td>поддерживать</td><td class="it">mantengo</td><td class="it">mantenuto</td><td class="it">mantenevo</td><td class="it">manterrò</td></tr>
+            <tr><td class="it">ottenere</td><td>получать, добиваться</td><td class="it">ottengo</td><td class="it">ottenuto</td><td class="it">ottenevo</td><td class="it">otterrò</td></tr>
+            <tr><td class="it">contenere</td><td>содержать</td><td class="it">contengo</td><td class="it">contenuto</td><td class="it">contenevo</td><td class="it">conterrò</td></tr>
+            <tr><td class="it">proporre</td><td>предлагать</td><td class="it">propongo</td><td class="it">proposto</td><td class="it">proponevo</td><td class="it">proporrò</td></tr>
+            <tr><td class="it">supporre</td><td>предполагать</td><td class="it">suppongo</td><td class="it">supposto</td><td class="it">supponevo</td><td class="it">supporrò</td></tr>
+            <tr><td class="it">comporre</td><td>составлять</td><td class="it">compongo</td><td class="it">composto</td><td class="it">componevo</td><td class="it">comporrò</td></tr>
+            <tr><td class="it">tradurre</td><td>переводить</td><td class="it">traduco</td><td class="it">tradotto</td><td class="it">traducevo</td><td class="it">tradurrò</td></tr>
+            <tr><td class="it">produrre</td><td>производить</td><td class="it">produco</td><td class="it">prodotto</td><td class="it">producevo</td><td class="it">produrrò</td></tr>
+            <tr><td class="it">ridurre</td><td>сокращать</td><td class="it">riduco</td><td class="it">ridotto</td><td class="it">riducevo</td><td class="it">ridurrò</td></tr>
+            <tr><td class="it">condurre</td><td>вести, управлять</td><td class="it">conduco</td><td class="it">condotto</td><td class="it">conducevo</td><td class="it">condurrò</td></tr>
+            <tr><td class="it">introdurre</td><td>вводить</td><td class="it">introduco</td><td class="it">introdotto</td><td class="it">introducevo</td><td class="it">introdurrò</td></tr>
+            <tr><td class="it">piacere</td><td>нравиться</td><td class="it">piaccio</td><td class="it">piaciuto</td><td class="it">piacevo</td><td class="it">piacerò</td></tr>
+            <tr><td class="it">tacere</td><td>молчать</td><td class="it">taccio</td><td class="it">taciuto</td><td class="it">tacevo</td><td class="it">tacerò</td></tr>
+            <tr><td class="it">giacere</td><td>лежать</td><td class="it">giaccio</td><td class="it">giaciuto</td><td class="it">giacevo</td><td class="it">giacerò</td></tr>
+            <tr><td class="it">nuocere</td><td>вредить</td><td class="it">noccio</td><td class="it">nociuto</td><td class="it">nuocevo</td><td class="it">nuocerò</td></tr>
+            <tr><td class="it">cuocere</td><td>готовить (пищу)</td><td class="it">cuocio</td><td class="it">cotto</td><td class="it">cuocevo</td><td class="it">cuocerò</td></tr>
+            <tr><td class="it">cadere</td><td>падать</td><td class="it">cado</td><td class="it">caduto</td><td class="it">cadevo</td><td class="it">cadrò</td></tr>
+            <tr><td class="it">valere</td><td>стоить, быть действительным</td><td class="it">valgo</td><td class="it">valso</td><td class="it">valevo</td><td class="it">varrò</td></tr>
+            <tr><td class="it">volere (volare)</td><td>лететь</td><td class="it">volo</td><td class="it">volato</td><td class="it">volavo</td><td class="it">volerò</td></tr>
+            <tr><td class="it">apparire</td><td>появляться</td><td class="it">appaio</td><td class="it">apparso</td><td class="it">apparivo</td><td class="it">apparirò</td></tr>
+            <tr><td class="it">scomparire</td><td>исчезать</td><td class="it">scompaio</td><td class="it">scomparso</td><td class="it">scomparivo</td><td class="it">scomparirò</td></tr>
+            <tr><td class="it">offrire</td><td>предлагать, угощать</td><td class="it">offro</td><td class="it">offerto</td><td class="it">offrivo</td><td class="it">offrirò</td></tr>
+            <tr><td class="it">soffrire</td><td>страдать</td><td class="it">soffro</td><td class="it">sofferto</td><td class="it">soffrivo</td><td class="it">soffrirò</td></tr>
+            <tr><td class="it">coprire</td><td>покрывать</td><td class="it">copro</td><td class="it">coperto</td><td class="it">coprivo</td><td class="it">coprirò</td></tr>
+            <tr><td class="it">scoprire</td><td>обнаруживать</td><td class="it">scopro</td><td class="it">scoperto</td><td class="it">scoprivo</td><td class="it">scoprirò</td></tr>
+            <tr><td class="it">dormire</td><td>спать</td><td class="it">dormo</td><td class="it">dormito</td><td class="it">dormivo</td><td class="it">dormirò</td></tr>
+            <tr><td class="it">sentire</td><td>слышать, чувствовать</td><td class="it">sento</td><td class="it">sentito</td><td class="it">sentivo</td><td class="it">sentirò</td></tr>
+            <tr><td class="it">partire</td><td>отправляться</td><td class="it">parto</td><td class="it">partito</td><td class="it">partivo</td><td class="it">partirò</td></tr>
+            <tr><td class="it">seguire</td><td>следовать</td><td class="it">seguo</td><td class="it">seguito</td><td class="it">seguivo</td><td class="it">seguirò</td></tr>
+            <tr><td class="it">costruire</td><td>строить</td><td class="it">costruisco</td><td class="it">costruito</td><td class="it">costruivo</td><td class="it">costruirò</td></tr>
+            <tr><td class="it">capire</td><td>понимать</td><td class="it">capisco</td><td class="it">capito</td><td class="it">capivo</td><td class="it">capirò</td></tr>
+            <tr><td class="it">finire</td><td>заканчивать</td><td class="it">finisco</td><td class="it">finito</td><td class="it">finivo</td><td class="it">finirò</td></tr>
+            <tr><td class="it">preferire</td><td>предпочитать</td><td class="it">preferisco</td><td class="it">preferito</td><td class="it">preferivo</td><td class="it">preferirò</td></tr>
+            <tr><td class="it">spedire</td><td>отправлять</td><td class="it">spedisco</td><td class="it">spedito</td><td class="it">spedivo</td><td class="it">spedirò</td></tr>
+            <tr><td class="it">sparire</td><td>исчезать</td><td class="it">sparisco</td><td class="it">sparito</td><td class="it">sparivo</td><td class="it">sparirò</td></tr>
+            <tr><td class="it">riunire</td><td>объединять</td><td class="it">riunisco</td><td class="it">riunito</td><td class="it">riunivo</td><td class="it">riunirò</td></tr>
+            <tr><td class="it">guarire</td><td>выздоравливать</td><td class="it">guarisco</td><td class="it">guarito</td><td class="it">guarivo</td><td class="it">guarirò</td></tr>
+            <tr><td class="it">dipingere</td><td>рисовать (красками)</td><td class="it">dipingo</td><td class="it">dipinto</td><td class="it">dipingevo</td><td class="it">dipingerò</td></tr>
+            <tr><td class="it">tingere</td><td>красить, окрашивать</td><td class="it">tingo</td><td class="it">tinto</td><td class="it">tingevo</td><td class="it">tingerò</td></tr>
+            <tr><td class="it">stringere</td><td>сжимать</td><td class="it">stringo</td><td class="it">stretto</td><td class="it">stringevo</td><td class="it">stringerò</td></tr>
+            <tr><td class="it">costringere</td><td>принуждать</td><td class="it">costringo</td><td class="it">costretto</td><td class="it">costringevo</td><td class="it">costringerò</td></tr>
+            <tr><td class="it">attendere</td><td>ждать</td><td class="it">attendo</td><td class="it">atteso</td><td class="it">attendevo</td><td class="it">attenderò</td></tr>
+            <tr><td class="it">accendere</td><td>включать</td><td class="it">accendo</td><td class="it">acceso</td><td class="it">accendevo</td><td class="it">accenderò</td></tr>
+            <tr><td class="it">rendere</td><td>возвращать, делать</td><td class="it">rendo</td><td class="it">reso</td><td class="it">rendevo</td><td class="it">renderò</td></tr>
+            <tr><td class="it">scendere</td><td>спускаться</td><td class="it">scendo</td><td class="it">sceso</td><td class="it">scendevo</td><td class="it">scenderò</td></tr>
+            <tr><td class="it">vendere</td><td>продавать</td><td class="it">vendo</td><td class="it">venduto</td><td class="it">vendevo</td><td class="it">venderò</td></tr>
+            <tr><td class="it">diffondere</td><td>распространять</td><td class="it">diffondo</td><td class="it">diffuso</td><td class="it">diffondevo</td><td class="it">diffonderò</td></tr>
+            <tr><td class="it">nascondere</td><td>прятать</td><td class="it">nascondo</td><td class="it">nascosto</td><td class="it">nascondevo</td><td class="it">nasconderò</td></tr>
+            <tr><td class="it">dividere</td><td>делить</td><td class="it">divido</td><td class="it">diviso</td><td class="it">dividevo</td><td class="it">dividerò</td></tr>
+            <tr><td class="it">uccidere</td><td>убивать</td><td class="it">uccido</td><td class="it">ucciso</td><td class="it">uccidevo</td><td class="it">ucciderò</td></tr>
+            <tr><td class="it">decidere</td><td>решать</td><td class="it">decido</td><td class="it">deciso</td><td class="it">decidevo</td><td class="it">deciderò</td></tr>
+            <tr><td class="it">sorridere</td><td>улыбаться</td><td class="it">sorrido</td><td class="it">sorriso</td><td class="it">sorridevo</td><td class="it">sorriderò</td></tr>
+            <tr><td class="it">spendere</td><td>тратить</td><td class="it">spendo</td><td class="it">speso</td><td class="it">spendevo</td><td class="it">spenderò</td></tr>
+            <tr><td class="it">dipendere</td><td>зависеть</td><td class="it">dipendo</td><td class="it">dipeso</td><td class="it">dipendevo</td><td class="it">dipenderò</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="rule-box info">
+        <div class="rule-title">🧠 Группы по participio passato</div>
+        <p><strong>-sto:</strong> porre→posto, proporre→proposto, comporre→composto<br>
+        <strong>-tto:</strong> fare→fatto, dire→detto, scrivere→scritto, leggere→letto, tradurre→tradotto, produrre→prodotto<br>
+        <strong>-so:</strong> prendere→preso, chiudere→chiuso, rispondere→risposto, mettere→messo (→-sso)<br>
+        <strong>-to (нерегул.):</strong> vedere→visto, aprire→aperto, venire→venuto, vivere→vissuto</p>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         ЧИСЛИТЕЛЬНЫЕ
+         ====================================================== -->
+    <section class="section" id="sec-numeri">
+      <div class="breadcrumb"><span>Дополнительно</span><span class="sep">›</span><span>Числительные</span></div>
+      <h1 class="section-title">Числительные (Numeri) <button class="section-star-btn" onclick="toggleStar(event,'numeri','Числительные')" id="star-numeri">☆</button></h1>
+      <p class="section-subtitle">Порядковые и количественные числительные, дроби, время и даты.</p>
+
+      <h2>Количественные числительные (0–100)</h2>
+      <p class="table-scroll-hint">← прокрути таблицу →</p>
+        <div class="table-wrap"><div class="table-scroller">
+        <table class="table-compact">
+          <thead><tr><th>Число</th><th>Итальянский</th><th>Число</th><th>Итальянский</th></tr></thead>
+          <tbody>
+            <tr><td>0</td><td class="it">zero</td><td>10</td><td class="it">dieci</td></tr>
+            <tr><td>1</td><td class="it">uno / una</td><td>11</td><td class="it">undici</td></tr>
+            <tr><td>2</td><td class="it">due</td><td>12</td><td class="it">dodici</td></tr>
+            <tr><td>3</td><td class="it">tre</td><td>13</td><td class="it">tredici</td></tr>
+            <tr><td>4</td><td class="it">quattro</td><td>14</td><td class="it">quattordici</td></tr>
+            <tr><td>5</td><td class="it">cinque</td><td>15</td><td class="it">quindici</td></tr>
+            <tr><td>6</td><td class="it">sei</td><td>16</td><td class="it">sedici</td></tr>
+            <tr><td>7</td><td class="it">sette</td><td>17</td><td class="it">diciassette</td></tr>
+            <tr><td>8</td><td class="it">otto</td><td>18</td><td class="it">diciotto</td></tr>
+            <tr><td>9</td><td class="it">nove</td><td>19</td><td class="it">diciannove</td></tr>
+            <tr><td>20</td><td class="it">venti</td><td>30</td><td class="it">trenta</td></tr>
+            <tr><td>21</td><td class="it">ventuno</td><td>40</td><td class="it">quaranta</td></tr>
+            <tr><td>22</td><td class="it">ventidue</td><td>50</td><td class="it">cinquanta</td></tr>
+            <tr><td>28</td><td class="it">ventotto</td><td>60</td><td class="it">sessanta</td></tr>
+            <tr><td>100</td><td class="it">cento</td><td>70</td><td class="it">settanta</td></tr>
+            <tr><td>1000</td><td class="it">mille</td><td>80</td><td class="it">ottanta</td></tr>
+            <tr><td>1.000.000</td><td class="it">un milione</td><td>90</td><td class="it">novanta</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="rule-box warning">
+        <div class="rule-title">⚡ Важные правила</div>
+        <p>Перед 1 и 8 отбрасывается конечная гласная: <span class="it-inline">ventuno</span> (не ventiuno), <span class="it-inline">ventotto</span> (не ventiotto). <strong>tre</strong> в конце числа пишется с акцентом: <span class="it-inline">ventitré, trentatré</span>.</p>
+      </div>
+
+      <h2>Порядковые числительные (1–20)</h2>
+      <p class="table-scroll-hint">← прокрути таблицу →</p>
+        <div class="table-wrap"><div class="table-scroller">
+        <table class="table-compact">
+          <thead><tr><th>Число</th><th>Порядковое</th><th>Число</th><th>Порядковое</th></tr></thead>
+          <tbody>
+            <tr><td>1°</td><td class="it">primo/a</td><td>7°</td><td class="it">settimo/a</td></tr>
+            <tr><td>2°</td><td class="it">secondo/a</td><td>8°</td><td class="it">ottavo/a</td></tr>
+            <tr><td>3°</td><td class="it">terzo/a</td><td>9°</td><td class="it">nono/a</td></tr>
+            <tr><td>4°</td><td class="it">quarto/a</td><td>10°</td><td class="it">decimo/a</td></tr>
+            <tr><td>5°</td><td class="it">quinto/a</td><td>11°+</td><td class="it">-esimo/a</td></tr>
+            <tr><td>6°</td><td class="it">sesto/a</td><td>100°</td><td class="it">centesimo/a</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <h2>Который час? (Che ore sono?)</h2>
+      <ul class="example-list">
+        <li><span class="it-ex">Sono le tre.</span><span class="ru-ex">Три часа.</span></li>
+        <li><span class="it-ex">È l'una e mezza.</span><span class="ru-ex">Половина второго.</span></li>
+        <li><span class="it-ex">Sono le otto e un quarto.</span><span class="ru-ex">Четверть девятого.</span></li>
+        <li><span class="it-ex">Sono le nove meno venti.</span><span class="ru-ex">Без двадцати девять.</span></li>
+        <li><span class="it-ex">È mezzogiorno / mezzanotte.</span><span class="ru-ex">Полдень / полночь.</span></li>
+      </ul>
+    </section>
+
+    <!-- ======================================================
+         FUTURO SEMPLICE
+         ====================================================== -->
+    <section class="section" id="sec-futuro">
+      <div class="breadcrumb"><span>Дополнительно</span><span class="sep">›</span><span>Futuro semplice</span></div>
+      <h1 class="section-title">Futuro semplice <button class="section-star-btn" onclick="toggleStar(event,'futuro','Futuro semplice')" id="star-futuro">☆</button></h1>
+      <p class="section-subtitle">Простое будущее время — действие, которое произойдёт в будущем, а также предположение о настоящем.</p>
+
+      <h2>Образование правильных форм</h2>
+      <p class="table-scroll-hint">← прокрути таблицу →</p>
+        <div class="table-wrap"><div class="table-scroller">
+        <table class="table-compact">
+          <thead><tr><th>Лицо</th><th>-are → -erò</th><th>-ere → -erò</th><th>-ire → -irò</th></tr></thead>
+          <tbody>
+            <tr><td>io</td><td class="it">parlerò</td><td class="it">prenderò</td><td class="it">partirò</td></tr>
+            <tr><td>tu</td><td class="it">parlerai</td><td class="it">prenderai</td><td class="it">partirai</td></tr>
+            <tr><td>lui/lei</td><td class="it">parlerà</td><td class="it">prenderà</td><td class="it">partirà</td></tr>
+            <tr><td>noi</td><td class="it">parleremo</td><td class="it">prenderemo</td><td class="it">partiremo</td></tr>
+            <tr><td>voi</td><td class="it">parlerete</td><td class="it">prenderete</td><td class="it">partirete</td></tr>
+            <tr><td>loro</td><td class="it">parleranno</td><td class="it">prenderanno</td><td class="it">partiranno</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="rule-box danger">
+        <div class="rule-title">⚠️ Глаголы на -care/-gare/-ciare/-giare</div>
+        <p><span class="it-inline">cercare → cercherò</span>, <span class="it-inline">pagare → pagherò</span> — добавляется h.<br>
+        <span class="it-inline">cominciare → comincerò</span>, <span class="it-inline">mangiare → mangerò</span> — одна i теряется.</p>
+      </div>
+
+      <h2>Неправильные формы Futuro</h2>
+      <div class="table-wrap"><div class="table-scroller">
+        <table>
+          <thead><tr><th>Инфинитив</th><th>Основа Futuro</th><th>io / tu / lui</th></tr></thead>
+          <tbody>
+            <tr><td class="it">essere</td><td class="it">sar-</td><td class="it">sarò / sarai / sarà</td></tr>
+            <tr><td class="it">avere</td><td class="it">avr-</td><td class="it">avrò / avrai / avrà</td></tr>
+            <tr><td class="it">fare</td><td class="it">far-</td><td class="it">farò / farai / farà</td></tr>
+            <tr><td class="it">andare</td><td class="it">andr-</td><td class="it">andrò / andrai / andrà</td></tr>
+            <tr><td class="it">venire</td><td class="it">verr-</td><td class="it">verrò / verrai / verrà</td></tr>
+            <tr><td class="it">tenere</td><td class="it">terr-</td><td class="it">terrò / terrai / terrà</td></tr>
+            <tr><td class="it">potere</td><td class="it">potr-</td><td class="it">potrò / potrai / potrà</td></tr>
+            <tr><td class="it">dovere</td><td class="it">dovr-</td><td class="it">dovrò / dovrai / dovrà</td></tr>
+            <tr><td class="it">volere</td><td class="it">vorr-</td><td class="it">vorrò / vorrai / vorrà</td></tr>
+            <tr><td class="it">sapere</td><td class="it">sapr-</td><td class="it">saprò / saprai / saprà</td></tr>
+            <tr><td class="it">vedere</td><td class="it">vedr-</td><td class="it">vedrò / vedrai / vedrà</td></tr>
+            <tr><td class="it">vivere</td><td class="it">vivr-</td><td class="it">vivrò / vivrai / vivrà</td></tr>
+            <tr><td class="it">cadere</td><td class="it">cadr-</td><td class="it">cadrò / cadrai / cadrà</td></tr>
+            <tr><td class="it">rimanere</td><td class="it">rimarr-</td><td class="it">rimarrò / rimarrai / rimarrà</td></tr>
+            <tr><td class="it">bere</td><td class="it">berr-</td><td class="it">berrò / berrai / berrà</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <h2>Употребление Futuro</h2>
+      <ul class="example-list">
+        <li><span class="it-ex">Domani andrò al cinema.</span><span class="ru-ex">Завтра я пойду в кино. (будущее действие)</span></li>
+        <li><span class="it-ex">Saranno le dieci, non di più.</span><span class="ru-ex">Наверное, около десяти, не больше. (предположение о настоящем)</span></li>
+        <li><span class="it-ex">Quando arriverai, ti chiamerò.</span><span class="ru-ex">Когда приедешь, я тебе позвоню. (futuro в придаточном после quando)</span></li>
+        <li><span class="it-ex">Se studierò, migliorerò il mio italiano.</span><span class="ru-ex">Если буду учиться, добьюсь успехов. (1-й тип условного)</span></li>
+      </ul>
+    </section>
+
+    <!-- ======================================================
+         TRAPASSATO PROSSIMO
+         ====================================================== -->
+    <section class="section" id="sec-trapassato">
+      <div class="breadcrumb"><span>Дополнительно</span><span class="sep">›</span><span>Trapassato prossimo</span></div>
+      <h1 class="section-title">Trapassato prossimo <button class="section-star-btn" onclick="toggleStar(event,'trapassato','Trapassato prossimo')" id="star-trapassato">☆</button></h1>
+      <p class="section-subtitle">Давнопрошедшее время — действие, которое произошло ДО другого прошедшего действия.</p>
+
+      <div class="formula">
+        <div class="f-label">Формула</div>
+        Imperfetto di essere/avere + participio passato
+      </div>
+
+      <h2>Спряжение</h2>
+      <div class="table-wrap"><div class="table-scroller">
+        <table>
+          <thead><tr><th>Лицо</th><th>с avere (mangiare)</th><th>с essere (andare)</th></tr></thead>
+          <tbody>
+            <tr><td>io</td><td class="it">avevo mangiato</td><td class="it">ero andato/a</td></tr>
+            <tr><td>tu</td><td class="it">avevi mangiato</td><td class="it">eri andato/a</td></tr>
+            <tr><td>lui/lei</td><td class="it">aveva mangiato</td><td class="it">era andato/a</td></tr>
+            <tr><td>noi</td><td class="it">avevamo mangiato</td><td class="it">eravamo andati/e</td></tr>
+            <tr><td>voi</td><td class="it">avevate mangiato</td><td class="it">eravate andati/e</td></tr>
+            <tr><td>loro</td><td class="it">avevano mangiato</td><td class="it">erano andati/e</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <h2>Когда употреблять</h2>
+      <ul class="example-list">
+        <li><span class="it-ex">Quando sono arrivato, lei aveva già mangiato.</span><span class="ru-ex">Когда я пришёл, она уже поела. (поела раньше, чем я пришёл)</span></li>
+        <li><span class="it-ex">Non sapevo che Marco era partito.</span><span class="ru-ex">Я не знал, что Марко уехал.</span></li>
+        <li><span class="it-ex">Avevo studiato tutta la notte, ma il compito era difficile.</span><span class="ru-ex">Я учил всю ночь, но задание оказалось трудным.</span></li>
+      </ul>
+
+      <div class="rule-box info">
+        <div class="rule-title">🔗 Связь времён</div>
+        <p>Passato prossimo → Trapassato prossimo (ближайшее прошлое)<br>
+        Imperfetto → Trapassato prossimo (общий фон → предшествующее действие)</p>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         УСТОЙЧИВЫЕ ВЫРАЖЕНИЯ
+         ====================================================== -->
+    <section class="section" id="sec-frasali">
+      <div class="breadcrumb"><span>Дополнительно</span><span class="sep">›</span><span>Устойчивые выражения</span></div>
+      <h1 class="section-title">Устойчивые выражения <button class="section-star-btn" onclick="toggleStar(event,'frasali','Устойчивые выражения')" id="star-frasali">☆</button></h1>
+      <p class="section-subtitle">Фразеологизмы, устойчивые обороты и готовые речевые блоки итальянского языка.</p>
+
+      <h2>Повседневные выражения</h2>
+      <div class="table-wrap"><div class="table-scroller">
+        <table>
+          <thead><tr><th>Выражение</th><th>Перевод / Употребление</th></tr></thead>
+          <tbody>
+            <tr><td class="it">Ci vuole / ci vogliono</td><td>Нужно (время, предметы): <em>Ci vogliono due ore.</em></td></tr>
+            <tr><td class="it">Fare a meno di</td><td>Обходиться без: <em>Non posso fare a meno del caffè.</em></td></tr>
+            <tr><td class="it">Avere voglia di</td><td>Хотеть, желать: <em>Ho voglia di dormire.</em></td></tr>
+            <tr><td class="it">Avere bisogno di</td><td>Нуждаться в: <em>Ho bisogno di aiuto.</em></td></tr>
+            <tr><td class="it">Avere fretta</td><td>Торопиться: <em>Ho fretta, devo andare.</em></td></tr>
+            <tr><td class="it">Avere ragione / torto</td><td>Быть правым / неправым</td></tr>
+            <tr><td class="it">Stare per + infinito</td><td>Вот-вот (собираться): <em>Stavo per chiamarti.</em></td></tr>
+            <tr><td class="it">Metterci (del tempo)</td><td>Тратить (время): <em>Ci metto un'ora.</em></td></tr>
+            <tr><td class="it">Volerci (del tempo)</td><td>Требовать (времени): <em>Ci vuole pazienza.</em></td></tr>
+            <tr><td class="it">Farcela</td><td>Справляться: <em>Non ce la faccio più!</em></td></tr>
+            <tr><td class="it">Andarsene</td><td>Уходить: <em>Me ne vado.</em></td></tr>
+            <tr><td class="it">Prendersi cura di</td><td>Заботиться о: <em>Si prende cura dei bambini.</em></td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <h2>Выражения для письма и устной речи</h2>
+      <div class="table-wrap"><div class="table-scroller">
+        <table>
+          <thead><tr><th>Функция</th><th>Выражение</th></tr></thead>
+          <tbody>
+            <tr><td>Начало текста</td><td class="it">In questo testo si parla di... / L'argomento principale è...</td></tr>
+            <tr><td>Своё мнение</td><td class="it">Secondo me... / A mio parere... / Ritengo che + congiuntivo</td></tr>
+            <tr><td>Согласие</td><td class="it">Sono d'accordo con... / Condivido l'opinione che...</td></tr>
+            <tr><td>Несогласие</td><td class="it">Non sono d'accordo perché... / Al contrario, penso che...</td></tr>
+            <tr><td>Добавление</td><td class="it">Inoltre, bisogna sottolineare che... / In aggiunta a ciò...</td></tr>
+            <tr><td>Пример</td><td class="it">Per esempio, / Ad esempio, / Come si può vedere da...</td></tr>
+            <tr><td>Вывод</td><td class="it">In conclusione, / Per riassumere, / In sintesi,</td></tr>
+            <tr><td>Уступка</td><td class="it">Nonostante ciò, / Tuttavia, / D'altra parte,</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <h2>Полезные наречия и связки</h2>
+      <div class="vocab-grid">
+        <div class="vocab-card"><div class="vw">purtroppo</div><div class="vr">к сожалению</div></div>
+        <div class="vocab-card"><div class="vw">fortunatamente</div><div class="vr">к счастью</div></div>
+        <div class="vocab-card"><div class="vw">ovviamente</div><div class="vr">очевидно</div></div>
+        <div class="vocab-card"><div class="vw">probabilmente</div><div class="vr">вероятно</div></div>
+        <div class="vocab-card"><div class="vw">sicuramente</div><div class="vr">безусловно</div></div>
+        <div class="vocab-card"><div class="vw">effettivamente</div><div class="vr">фактически, на самом деле</div></div>
+        <div class="vocab-card"><div class="vw">in realtà</div><div class="vr">на самом деле</div></div>
+        <div class="vocab-card"><div class="vw">eppure</div><div class="vr">и всё же, однако</div></div>
+        <div class="vocab-card"><div class="vw">comunque</div><div class="vr">в любом случае</div></div>
+        <div class="vocab-card"><div class="vw">a proposito</div><div class="vr">кстати</div></div>
+        <div class="vocab-card"><div class="vw">nel frattempo</div><div class="vr">тем временем</div></div>
+        <div class="vocab-card"><div class="vw">di solito</div><div class="vr">обычно</div></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+<button class="back-to-top" id="backToTop" onclick="scrollToTop()" title="Наверх">▲</button>
+
+<!-- BOOKMARKS TOGGLE -->
+<button class="bookmarks-toggle" id="bmToggle" onclick="toggleBookmarksPanel()" title="Избранные темы">
+  ⭐<span class="bm-count" id="bmCount">0</span>
+</button>
+
+<!-- BOOKMARKS PANEL -->
+<div class="bookmarks-panel" id="bmPanel">
+  <div class="bookmarks-panel-header">
+    <span data-i18n="bmPanelTitle">⭐ Важные темы</span>
+    <button onclick="toggleBookmarksPanel()">✕</button>
+  </div>
+  <div class="bookmarks-list" id="bmList">
+    <div class="bm-empty" data-i18n="bmEmpty">Отметь ⭐ темы в меню, чтобы они появились здесь</div>
+  </div>
+</div>
+
+<script>
+
+// ============================================================
+// INTERNATIONALISATION (i18n)
+// ============================================================
+const LANGS = {
+  ru: { flag: '🇷🇺', label: 'RU' },
+  en: { flag: '🇬🇧', label: 'EN' },
+  es: { flag: '🇪🇸', label: 'ES' },
+  fr: { flag: '🇫🇷', label: 'FR' },
+  de: { flag: '🇩🇪', label: 'DE' },
+  zh: { flag: '🇨🇳', label: 'ZH' },
+};
+
+const T = {
+  // ── Site chrome ──────────────────────────────────────────────
+  siteTitle: {
+    ru:'Italiano — Справочник', en:'Italiano — Reference', es:'Italiano — Referencia',
+    fr:'Italiano — Référence', de:'Italiano — Nachschlagewerk', zh:'意大利语参考手册',
+  },
+  siteSub: {
+    ru:'Грамматика и лексика', en:'Grammar & Vocabulary', es:'Gramática y vocabulario',
+    fr:'Grammaire et vocabulaire', de:'Grammatik & Wortschatz', zh:'语法与词汇',
+  },
+  theme: {
+    ru:'Тема', en:'Theme', es:'Tema', fr:'Thème', de:'Thema', zh:'主题',
+  },
+
+  // ── Sidebar ──────────────────────────────────────────────────
+  sidebarHint: {
+    ru:'✓ — изучено &nbsp;|&nbsp; ⭐ — важное',
+    en:'✓ — studied &nbsp;|&nbsp; ⭐ — important',
+    es:'✓ — estudiado &nbsp;|&nbsp; ⭐ — importante',
+    fr:'✓ — étudié &nbsp;|&nbsp; ⭐ — important',
+    de:'✓ — gelernt &nbsp;|&nbsp; ⭐ — wichtig',
+    zh:'✓ — 已学 &nbsp;|&nbsp; ⭐ — 重要',
+  },
+  starFilter: {
+    ru:'⭐ Важные', en:'⭐ Starred', es:'⭐ Importantes',
+    fr:'⭐ Importants', de:'⭐ Markierte', zh:'⭐ 重要',
+  },
+  searchPlaceholder: {
+    ru:'Поиск по темам... (Ctrl+K)', en:'Search topics... (Ctrl+K)',
+    es:'Buscar temas... (Ctrl+K)', fr:'Rechercher... (Ctrl+K)',
+    de:'Themen suchen... (Ctrl+K)', zh:'搜索主题... (Ctrl+K)',
+  },
+  navHome: {
+    ru:'Главная', en:'Home', es:'Inicio', fr:'Accueil', de:'Startseite', zh:'首页',
+  },
+  mod1title: {
+    ru:'Модуль 1: Базовая грамматика', en:'Module 1: Basic Grammar',
+    es:'Módulo 1: Gramática básica', fr:'Module 1 : Grammaire de base',
+    de:'Modul 1: Grundgrammatik', zh:'模块1：基础语法',
+  },
+  mod2title: {
+    ru:'Модуль 2: Наука и питание', en:'Module 2: Science & Food',
+    es:'Módulo 2: Ciencia y alimentación', fr:'Module 2 : Sciences et alimentation',
+    de:'Modul 2: Wissenschaft & Ernährung', zh:'模块2：科学与饮食',
+  },
+  mod3title: {
+    ru:'Модуль 3: Литература и путешествия', en:'Module 3: Literature & Travel',
+    es:'Módulo 3: Literatura y viajes', fr:'Module 3 : Littérature et voyages',
+    de:'Modul 3: Literatur & Reisen', zh:'模块3：文学与旅行',
+  },
+  modExtra: {
+    ru:'Дополнительно', en:'Extra', es:'Adicional', fr:'Supplémentaire', de:'Zusätzlich', zh:'附加',
+  },
+
+  // ── Nav items ────────────────────────────────────────────────
+  navOverview: {
+    ru:'Обзор курса', en:'Course Overview', es:'Resumen del curso',
+    fr:'Aperçu du cours', de:'Kursübersicht', zh:'课程概览',
+  },
+  navArticles: {
+    ru:'Артикли и предлоги', en:'Articles & Prepositions', es:'Artículos y preposiciones',
+    fr:'Articles et prépositions', de:'Artikel & Präpositionen', zh:'冠词与介词',
+  },
+  navTenses: {
+    ru:'Времена изъявительного', en:'Indicative Tenses', es:'Tiempos indicativos',
+    fr:"Temps de l'indicatif", de:'Indikativ-Zeiten', zh:'陈述时态',
+  },
+  navPronouns: {
+    ru:'Прямые и косвенные местоим.', en:'Direct & Indirect Pronouns',
+    es:'Pronombres directos e indirectos', fr:'Pronoms directs et indirects',
+    de:'Direkte & indirekte Pronomen', zh:'直接与间接宾语代词',
+  },
+  navCongiuntivo: {
+    ru:'Сослагательное наклонение', en:'Subjunctive Mood', es:'Modo subjuntivo',
+    fr:'Mode subjonctif', de:'Konjunktiv', zh:'虚拟式',
+  },
+  navImperativo: {
+    ru:'Повелительное наклонение', en:'Imperative Mood', es:'Modo imperativo',
+    fr:'Mode impératif', de:'Imperativ', zh:'命令式',
+  },
+  navPassivo: {
+    ru:'Пассивный залог', en:'Passive Voice', es:'Voz pasiva',
+    fr:'Voix passive', de:'Passiv', zh:'被动语态',
+  },
+  navSiPassivante: {
+    ru:'Si passivante', en:'Si passivante', es:'Si pasivante',
+    fr:'Si passivant', de:'Si passivante', zh:'被动助词Si',
+  },
+  navCui: {
+    ru:'Местоимение «cui»', en:'Pronoun «cui»', es:'Pronombre «cui»',
+    fr:'Pronom «cui»', de:'Pronomen «cui»', zh:'代词«cui»',
+  },
+  navAdjA: {
+    ru:'Прилаг. + предлог «a»', en:'Adj. + preposition «a»', es:'Adj. + preposición «a»',
+    fr:'Adj. + préposition «a»', de:'Adj. + Präposition «a»', zh:'形容词+介词«a»',
+  },
+  navVocabMod2: {
+    ru:'Лексика: Наука / Еда', en:'Vocabulary: Science / Food', es:'Vocabulario: Ciencia / Comida',
+    fr:'Vocabulaire : Sciences / Nourriture', de:'Wortschatz: Wissenschaft / Essen', zh:'词汇：科学/食物',
+  },
+  navIndefiniti: {
+    ru:'Неопредел. прил. и местоим.', en:'Indefinite Adj. & Pronouns',
+    es:'Adj. y pronombres indefinidos', fr:'Adj. et pronoms indéfinis',
+    de:'Indefinite Adj. & Pronomen', zh:'不定形容词与代词',
+  },
+  navImpersonale: {
+    ru:'Безличная форма', en:'Impersonal Form', es:'Forma impersonal',
+    fr:'Forme impersonnelle', de:'Unpersönliche Form', zh:'非人称形式',
+  },
+  navCondizionale: {
+    ru:'Условное наклонение', en:'Conditional Mood', es:'Modo condicional',
+    fr:'Mode conditionnel', de:'Konditional', zh:'条件式',
+  },
+  navQuale: {
+    ru:'Местоимение «quale»', en:'Pronoun «quale»', es:'Pronombre «quale»',
+    fr:'Pronom «quale»', de:'Pronomen «quale»', zh:'代词«quale»',
+  },
+  navGerundio: {
+    ru:'Герундий настоящего вр.', en:'Present Gerund', es:'Gerundio presente',
+    fr:'Gérondif présent', de:'Gerundium Präsens', zh:'现在时动名词',
+  },
+  navVocabMod3: {
+    ru:'Лексика: Путешествия / Лит-ра', en:'Vocabulary: Travel / Literature',
+    es:'Vocabulario: Viajes / Literatura', fr:'Vocabulaire : Voyages / Littérature',
+    de:'Wortschatz: Reisen / Literatur', zh:'词汇：旅行/文学',
+  },
+  navVerbiIrreg: {
+    ru:'Неправильные глаголы', en:'Irregular Verbs', es:'Verbos irregulares',
+    fr:'Verbes irréguliers', de:'Unregelmäßige Verben', zh:'不规则动词',
+  },
+  navNumeri: {
+    ru:'Числительные', en:'Numerals', es:'Numerales',
+    fr:'Numéraux', de:'Zahlwörter', zh:'数词',
+  },
+  navFuturo: {
+    ru:'Futuro semplice', en:'Futuro semplice', es:'Futuro semplice',
+    fr:'Futuro semplice', de:'Futuro semplice', zh:'简单将来时',
+  },
+  navTrapassato: {
+    ru:'Trapassato prossimo', en:'Trapassato prossimo', es:'Trapassato prossimo',
+    fr:'Trapassato prossimo', de:'Trapassato prossimo', zh:'过去完成时',
+  },
+  navFrasali: {
+    ru:'Устойчивые выражения', en:'Fixed Expressions', es:'Expresiones fijas',
+    fr:'Expressions figées', de:'Feste Ausdrücke', zh:'固定搭配',
+  },
+
+  // ── Hero ─────────────────────────────────────────────────────
+  heroTitle: {
+    ru:'Справочник по итальянскому языку 🇮🇹',
+    en:'Italian Language Reference 🇮🇹',
+    es:'Referencia del idioma italiano 🇮🇹',
+    fr:'Référence de la langue italienne 🇮🇹',
+    de:'Italienisch-Nachschlagewerk 🇮🇹',
+    zh:'意大利语参考手册 🇮🇹',
+  },
+  heroDesc: {
+    ru:'Грамматика, лексика, неправильные глаголы и речевые выражения итальянского языка. Все объяснения — на русском языке.',
+    en:'Grammar, vocabulary, irregular verbs and speech expressions of the Italian language. All explanations in your language.',
+    es:'Gramática, vocabulario, verbos irregulares y expresiones del idioma italiano. Todas las explicaciones en tu idioma.',
+    fr:'Grammaire, vocabulaire, verbes irréguliers et expressions de la langue italienne. Toutes les explications dans votre langue.',
+    de:'Grammatik, Wortschatz, unregelmäßige Verben und Redewendungen der italienischen Sprache. Alle Erklärungen in Ihrer Sprache.',
+    zh:'意大利语语法、词汇、不规则动词和口语表达。所有说明均使用您的语言。',
+  },
+  pill1: {
+    ru:'📐 Модуль 1 — Базовая грамматика', en:'📐 Module 1 — Basic Grammar',
+    es:'📐 Módulo 1 — Gramática básica', fr:'📐 Module 1 — Grammaire de base',
+    de:'📐 Modul 1 — Grundgrammatik', zh:'📐 模块1 — 基础语法',
+  },
+  pill2: {
+    ru:'🔬 Модуль 2 — Наука и питание', en:'🔬 Module 2 — Science & Food',
+    es:'🔬 Módulo 2 — Ciencia y alimentación', fr:'🔬 Module 2 — Sciences & alimentation',
+    de:'🔬 Modul 2 — Wissenschaft & Ernährung', zh:'🔬 模块2 — 科学与饮食',
+  },
+  pill3: {
+    ru:'✈️ Модуль 3 — Литература и путешествия', en:'✈️ Module 3 — Literature & Travel',
+    es:'✈️ Módulo 3 — Literatura y viajes', fr:'✈️ Module 3 — Littérature & voyages',
+    de:'✈️ Modul 3 — Literatur & Reisen', zh:'✈️ 模块3 — 文学与旅行',
+  },
+
+  // ── How-to ───────────────────────────────────────────────────
+  howTitle: {
+    ru:'Как пользоваться', en:'How to use', es:'Cómo usar',
+    fr:'Comment utiliser', de:'Wie benutzen', zh:'如何使用',
+  },
+  howDesc: {
+    ru:'Используй боковое меню для перехода к нужной теме. Каждый раздел содержит:',
+    en:'Use the sidebar to navigate to the topic you need. Each section contains:',
+    es:'Usa el menú lateral para navegar al tema que necesitas. Cada sección contiene:',
+    fr:'Utilisez le menu latéral pour accéder au thème souhaité. Chaque section contient :',
+    de:'Nutze das Seitenmenü zur Navigation. Jeder Abschnitt enthält:',
+    zh:'使用侧边栏导航到所需主题。每个部分包含：',
+  },
+  howItem1: {
+    ru:'<strong>Правила</strong> — объяснение на русском языке',
+    en:'<strong>Rules</strong> — explanation in your language',
+    es:'<strong>Reglas</strong> — explicación en tu idioma',
+    fr:'<strong>Règles</strong> — explication dans votre langue',
+    de:'<strong>Regeln</strong> — Erklärung in Ihrer Sprache',
+    zh:'<strong>规则</strong> — 用您的语言解释',
+  },
+  howItem2: {
+    ru:'<strong>Таблицы</strong> — наглядные грамматические схемы',
+    en:'<strong>Tables</strong> — clear grammatical charts',
+    es:'<strong>Tablas</strong> — esquemas gramaticales claros',
+    fr:'<strong>Tableaux</strong> — schémas grammaticaux clairs',
+    de:'<strong>Tabellen</strong> — übersichtliche Grammatikschemata',
+    zh:'<strong>表格</strong> — 清晰的语法图表',
+  },
+  howItem3: {
+    ru:'<strong>Примеры</strong> — итальянские предложения с переводом',
+    en:'<strong>Examples</strong> — Italian sentences with translation',
+    es:'<strong>Ejemplos</strong> — oraciones italianas con traducción',
+    fr:'<strong>Exemples</strong> — phrases italiennes avec traduction',
+    de:'<strong>Beispiele</strong> — italienische Sätze mit Übersetzung',
+    zh:'<strong>例句</strong> — 带翻译的意大利语句子',
+  },
+  howItem4: {
+    ru:'<strong>Важные блоки</strong> — выделенные исключения и подсказки',
+    en:'<strong>Key notes</strong> — highlighted exceptions and tips',
+    es:'<strong>Notas clave</strong> — excepciones y sugerencias destacadas',
+    fr:'<strong>Notes clés</strong> — exceptions et conseils mis en évidence',
+    de:'<strong>Wichtige Hinweise</strong> — hervorgehobene Ausnahmen und Tipps',
+    zh:'<strong>重要提示</strong> — 突出显示的例外和技巧',
+  },
+  tipTitle: {
+    ru:'💡 Совет', en:'💡 Tip', es:'💡 Consejo', fr:'💡 Conseil', de:'💡 Tipp', zh:'💡 提示',
+  },
+  tipText: {
+    ru:'Начни с <strong>Модуля 1</strong> для изучения базовой грамматики. Модули 2 и 3 охватывают более сложные конструкции и тематическую лексику. Раздел «Дополнительно» содержит глаголы, числа и речевые клише.',
+    en:'Start with <strong>Module 1</strong> for basic grammar. Modules 2 and 3 cover more complex structures and thematic vocabulary. The "Extra" section has verbs, numbers and speech clichés.',
+    es:'Comienza con el <strong>Módulo 1</strong> para la gramática básica. Los módulos 2 y 3 cubren estructuras más complejas y vocabulario temático. La sección "Adicional" incluye verbos, números y expresiones.',
+    fr:'Commencez par le <strong>Module 1</strong> pour la grammaire de base. Les modules 2 et 3 couvrent des structures plus complexes. La section «Supplémentaire» contient des verbes, des chiffres et des expressions.',
+    de:'Beginne mit <strong>Modul 1</strong> für Grundgrammatik. Module 2 und 3 behandeln komplexere Strukturen. Der Bereich «Zusätzlich» enthält Verben, Zahlen und Redewendungen.',
+    zh:'从<strong>模块1</strong>开始学习基础语法。模块2和3涵盖更复杂的结构和主题词汇。"附加"部分包含动词、数字和套语。',
+  },
+
+  // ── Progress ──────────────────────────────────────────────────
+  progressTitle: {
+    ru:'📊 Мой прогресс изучения', en:'📊 My Study Progress', es:'📊 Mi progreso de estudio',
+    fr:'📊 Ma progression', de:'📊 Mein Lernfortschritt', zh:'📊 我的学习进度',
+  },
+  progressStudied: {
+    ru:'Изучено {done} из {total} тем', en:'Studied {done} of {total} topics',
+    es:'Estudiado {done} de {total} temas', fr:'Étudié {done} sur {total} thèmes',
+    de:'{done} von {total} Themen gelernt', zh:'已学习 {done}/{total} 个主题',
+  },
+
+  // ── Bookmarks ─────────────────────────────────────────────────
+  bmPanelTitle: {
+    ru:'⭐ Важные темы', en:'⭐ Starred Topics', es:'⭐ Temas importantes',
+    fr:'⭐ Sujets importants', de:'⭐ Markierte Themen', zh:'⭐ 重要主题',
+  },
+  bmEmpty: {
+    ru:'Отметь ⭐ темы в меню, чтобы они появились здесь',
+    en:'Star ⭐ topics in the menu to see them here',
+    es:'Marca ⭐ temas en el menú para verlos aquí',
+    fr:'Marquez ⭐ des sujets dans le menu pour les voir ici',
+    de:'Markiere ⭐ Themen im Menü, um sie hier zu sehen',
+    zh:'在菜单中标记⭐主题以在此处查看',
+  },
+
+  // ── Footer ────────────────────────────────────────────────────
+  footerRight: {
+    ru:'Italiano — Справочник по итальянскому языку',
+    en:'Italiano — Italian Language Reference',
+    es:'Italiano — Referencia del idioma italiano',
+    fr:'Italiano — Référence de la langue italienne',
+    de:'Italiano — Italienisch-Nachschlagewerk',
+    zh:'Italiano — 意大利语参考手册',
+  },
+};
+
+let currentLang = 'ru';
+
+function t(key, vars) {
+  const entry = T[key];
+  if (!entry) return key;
+  let str = entry[currentLang] || entry['ru'] || key;
+  if (vars) Object.keys(vars).forEach(k => { str = str.replace('{' + k + '}', vars[k]); });
+  return str;
+}
+
+function applyTranslations() {
+  // data-i18n elements (innerHTML replacement)
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (T[key]) el.innerHTML = t(key);
+  });
+
+  // Progress text special handling
+  const pt = document.getElementById('progressText');
+  if (pt) {
+    const done = [...doneTopics].filter(k => ALL_KEYS.includes(k)).length;
+    pt.innerHTML = t('progressStudied', { done, total: ALL_KEYS.length });
+  }
+
+  // Search placeholder
+  const si = document.getElementById('searchInput');
+  if (si) si.placeholder = t('searchPlaceholder');
+
+  // Page title
+  document.title = 'Italiano — ' + (
+    {ru:'Справочник', en:'Reference', es:'Referencia', fr:'Référence', de:'Nachschlagewerk', zh:'参考手册'}[currentLang] || 'Справочник'
+  );
+
+  // data-label on nav items for search filter
+  const navLabelMap = {
+    'navArticles': 'navArticles','navTenses':'navTenses','navPronouns':'navPronouns',
+    'navCongiuntivo':'navCongiuntivo','navImperativo':'navImperativo','navPassivo':'navPassivo',
+    'navSiPassivante':'navSiPassivante','navCui':'navCui','navAdjA':'navAdjA',
+    'navVocabMod2':'navVocabMod2','navIndefiniti':'navIndefiniti','navImpersonale':'navImpersonale',
+    'navCondizionale':'navCondizionale','navQuale':'navQuale','navGerundio':'navGerundio',
+    'navVocabMod3':'navVocabMod3','navVerbiIrreg':'navVerbiIrreg','navNumeri':'navNumeri',
+    'navFuturo':'navFuturo','navTrapassato':'navTrapassato','navFrasali':'navFrasali',
+  };
+  document.querySelectorAll('.nav-item[data-key]').forEach(el => {
+    // Find the span inside with data-i18n
+    const span = el.querySelector('[data-i18n]');
+    if (span) el.setAttribute('data-label', span.textContent);
+  });
+
+  // Update lang button
+  const flag = LANGS[currentLang]?.flag || '🌐';
+  const label = LANGS[currentLang]?.label || currentLang.toUpperCase();
+  const langFlag = document.getElementById('langFlag');
+  const langLabel = document.getElementById('langLabel');
+  if (langFlag) langFlag.textContent = flag;
+  if (langLabel) langLabel.textContent = label;
+
+  // Update active state in dropdown
+  document.querySelectorAll('.lang-option').forEach(opt => {
+    opt.classList.toggle('active', opt.dataset.lang === currentLang);
+  });
+
+  // Refresh bookmark panel empty message if visible
+  renderStars();
+}
+
+function setLang(lang, e) {
+  if (e) e.stopPropagation();
+  currentLang = lang;
+  try { localStorage.setItem('it_lang', lang); } catch(e2) {}
+  applyTranslations();
+  closeLangDropdown();
+}
+
+function toggleLangDropdown(e) {
+  if (e) e.stopPropagation();
+  document.getElementById('langDropdown').classList.toggle('open');
+}
+
+function closeLangDropdown() {
+  document.getElementById('langDropdown')?.classList.remove('open');
+}
+
+// (lang dropdown close merged into main click handler below)
+
+
+// ============================================================
+// PROGRESS TRACKING
+// ============================================================
+const MOD1_KEYS = ['articles','tenses','pronouns','congiuntivo'];
+const MOD2_KEYS = ['imperativo','passivo','si-passivante','cui','adj-a','vocab-mod2'];
+const MOD3_KEYS = ['indefiniti','impersonale','condizionale','quale','gerundio','vocab-mod3'];
+const EXTRA_KEYS = ['verbi-irreg','numeri','futuro','trapassato','frasali'];
+const ALL_KEYS = [...MOD1_KEYS, ...MOD2_KEYS, ...MOD3_KEYS, ...EXTRA_KEYS];
+
+let doneTopics = new Set(JSON.parse(localStorage.getItem('it_done') || '[]'));
+
+function saveDone() { try { localStorage.setItem('it_done', JSON.stringify([...doneTopics])); } catch(e) {} }
+
+function toggleDone(e, key) {
+  e.stopPropagation(); e.preventDefault();
+  doneTopics.has(key) ? doneTopics.delete(key) : doneTopics.add(key);
+  saveDone(); renderProgress();
+}
+
+function renderProgress() {
+  document.querySelectorAll('.nav-item[data-key]').forEach(el => {
+    const key = el.dataset.key;
+    const chk = el.querySelector('.topic-check');
+    if (chk) { chk.classList.toggle('done', doneTopics.has(key)); chk.textContent = doneTopics.has(key) ? '✓' : ''; }
+  });
+  const total = ALL_KEYS.length;
+  const done = [...doneTopics].filter(k => ALL_KEYS.includes(k)).length;
+  const pct = Math.round(done / total * 100);
+  const fill = document.getElementById('mainProgressFill');
+  if (fill) fill.style.width = pct + '%';
+  const pt = document.getElementById('progressText'); if (pt) pt.innerHTML = t('progressStudied', { done, total });
+  const pp = document.getElementById('progressPct'); if (pp) pp.textContent = pct + '%';
+  const m1 = MOD1_KEYS.filter(k => doneTopics.has(k)).length;
+  const m2 = MOD2_KEYS.filter(k => doneTopics.has(k)).length;
+  const m3 = MOD3_KEYS.filter(k => doneTopics.has(k)).length;
+  const f1=document.getElementById('mod1fill'),f2=document.getElementById('mod2fill'),f3=document.getElementById('mod3fill');
+  if(f1) f1.style.width=Math.round(m1/MOD1_KEYS.length*100)+'%';
+  if(f2) f2.style.width=Math.round(m2/MOD2_KEYS.length*100)+'%';
+  if(f3) f3.style.width=Math.round(m3/MOD3_KEYS.length*100)+'%';
+  const c1=document.getElementById('mod1count'),c2=document.getElementById('mod2count'),c3=document.getElementById('mod3count');
+  if(c1) c1.textContent=m1+'/'+MOD1_KEYS.length;
+  if(c2) c2.textContent=m2+'/'+MOD2_KEYS.length;
+  if(c3) c3.textContent=m3+'/'+MOD3_KEYS.length;
+  const hp = document.getElementById('headerProgress');
+  if (hp) { hp.textContent = done + ' / ' + total + ' ✓'; hp.style.display = done > 0 ? 'block' : 'none'; }
+}
+
+// ============================================================
+// BOOKMARK / STAR SYSTEM
+// ============================================================
+let starredTopics = JSON.parse(localStorage.getItem('it_starred') || '[]');
+// Format: [{key, label}]
+
+function saveStarred() { try { localStorage.setItem('it_starred', JSON.stringify(starredTopics)); } catch(e) {} }
+
+function toggleStar(e, key, label) {
+  e.stopPropagation(); e.preventDefault();
+  const idx = starredTopics.findIndex(s => s.key === key);
+  if (idx >= 0) starredTopics.splice(idx, 1);
+  else starredTopics.push({ key, label });
+  saveStarred();
+  renderStars();
+}
+
+function renderStars() {
+  // Update nav star buttons
+  document.querySelectorAll('.star-btn').forEach(btn => {
+    const onc = btn.getAttribute('onclick') || '';
+    const m = onc.match(/'([^']+)'/);
+    if (m) {
+      const key = m[1];
+      const isStarred = starredTopics.some(s => s.key === key);
+      btn.textContent = isStarred ? '⭐' : '☆';
+      btn.classList.toggle('starred', isStarred);
+    }
+  });
+
+  // Update section star buttons
+  document.querySelectorAll('.section-star-btn').forEach(btn => {
+    const onc = btn.getAttribute('onclick') || '';
+    const m = onc.match(/'([^']+)'/);
+    if (m) {
+      const key = m[1];
+      const isStarred = starredTopics.some(s => s.key === key);
+      btn.textContent = isStarred ? '⭐' : '☆';
+      btn.classList.toggle('starred', isStarred);
+    }
+  });
+
+  // Update panel
+  const list = document.getElementById('bmList');
+  const count = document.getElementById('bmCount');
+  if (count) {
+    count.textContent = starredTopics.length;
+    count.classList.toggle('visible', starredTopics.length > 0);
+  }
+  if (!list) return;
+  if (starredTopics.length === 0) {
+    list.innerHTML = `<div class="bm-empty">${t('bmEmpty')}</div>`;
+    return;
+  }
+  list.innerHTML = starredTopics.map(s => `
+    <div class="bookmark-item" onclick="showSection('${s.key}'); toggleBookmarksPanel();">
+      <span class="bm-icon">⭐</span>${s.label}
+    </div>
+  `).join('');
+}
+
+function toggleBookmarksPanel() {
+  document.getElementById('bmPanel').classList.toggle('open');
+}
+
+// Filter sidebar to show only starred
+let starFilterActive = false;
+function filterStarred() {
+  starFilterActive = !starFilterActive;
+  document.querySelectorAll('.nav-item[data-key]').forEach(item => {
+    if (!starFilterActive) { item.style.display = 'flex'; return; }
+    const key = item.dataset.key;
+    const isStarred = starredTopics.some(s => s.key === key);
+    item.style.display = isStarred ? 'flex' : 'none';
+  });
+  if (starFilterActive) document.querySelectorAll('.module-group').forEach(g => g.classList.add('open'));
+}
+
+// ============================================================
+// SECTION NAVIGATION
+// ============================================================
+const sectionMap = {
+  'home': 'sec-home',
+  'articles': 'sec-articles', 'tenses': 'sec-tenses', 'pronouns': 'sec-pronouns', 'congiuntivo': 'sec-congiuntivo',
+  'imperativo': 'sec-imperativo', 'passivo': 'sec-passivo', 'si-passivante': 'sec-si-passivante',
+  'cui': 'sec-cui', 'adj-a': 'sec-adj-a', 'vocab-mod2': 'sec-vocab-mod2',
+  'indefiniti': 'sec-indefiniti', 'impersonale': 'sec-impersonale', 'condizionale': 'sec-condizionale',
+  'quale': 'sec-quale', 'gerundio': 'sec-gerundio', 'vocab-mod3': 'sec-vocab-mod3',
+  'verbi-irreg': 'sec-verbi-irreg', 'numeri': 'sec-numeri', 'futuro': 'sec-futuro',
+  'trapassato': 'sec-trapassato', 'frasali': 'sec-frasali',
+};
+
+function showSection(key) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  const id = sectionMap[key];
+  if (id) document.getElementById(id)?.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(a => a.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(a => {
+    if (a.getAttribute('onclick')?.includes("'" + key + "'")) a.classList.add('active');
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (window.innerWidth <= 768) closeSidebar();
+  renderStars(); // refresh star buttons on new section
+}
+
+// ============================================================
+// MODULE TOGGLE
+// ============================================================
+function toggleModule(header) { header.parentElement.classList.toggle('open'); }
+
+// ============================================================
+// COLLAPSIBLE SUBSECTIONS
+// ============================================================
+function toggleCollapsible(header) {
+  header.classList.toggle('open');
+  header.nextElementSibling.classList.toggle('open');
+}
+
+// ============================================================
+// SIDEBAR MOBILE
+// ============================================================
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('mobile-open');
+  document.getElementById('overlay').classList.toggle('visible');
+  document.getElementById('burgerBtn').classList.toggle('open');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('mobile-open');
+  document.getElementById('overlay').classList.remove('visible');
+  document.getElementById('burgerBtn').classList.remove('open');
+}
+
+// ============================================================
+// DARK MODE
+// ============================================================
+function toggleTheme() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark');
+  document.getElementById('themeIcon').textContent = isDark ? '🌙' : '☀️';
+  try { localStorage.setItem('it_theme', isDark ? '' : 'dark'); } catch(e) {}
+}
+// Restore theme immediately
+(function() {
+  try {
+    if (localStorage.getItem('it_theme') === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  } catch(e) {}
+})();
+
+// ============================================================
+// NAV SEARCH FILTER
+// ============================================================
+function filterNav(query) {
+  starFilterActive = false;
+  const q = query.toLowerCase().trim();
+  document.querySelectorAll('.nav-item').forEach(item => {
+    const label = (item.dataset.label || item.textContent).toLowerCase();
+    item.style.display = (q === '' || label.includes(q)) ? 'flex' : 'none';
+  });
+  if (q !== '') document.querySelectorAll('.module-group').forEach(g => g.classList.add('open'));
+}
+
+// ============================================================
+// VOCAB CARD FLIP
+// ============================================================
+document.addEventListener('click', e => {
+  const card = e.target.closest('.vocab-card');
+  if (card && !e.target.closest('button')) card.classList.toggle('flipped');
+});
+
+// ============================================================
+// BACK TO TOP
+// ============================================================
+function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+window.addEventListener('scroll', () => {
+  document.getElementById('backToTop')?.classList.toggle('visible', window.scrollY > 300);
+}, { passive: true });
+
+// ============================================================
+// CLOSE PANELS ON OUTSIDE CLICK
+// ============================================================
+document.addEventListener('click', e => {
+  // Close bookmarks panel on outside click
+  const panel = document.getElementById('bmPanel');
+  const toggle = document.getElementById('bmToggle');
+  if (panel?.classList.contains('open') && !panel.contains(e.target) && e.target !== toggle && !toggle?.contains(e.target)) {
+    panel.classList.remove('open');
+  }
+  // Close lang dropdown on outside click
+  const switcher = document.getElementById('langSwitcher');
+  if (switcher && !switcher.contains(e.target)) closeLangDropdown();
+});
+
+// ============================================================
+// KEYBOARD SHORTCUTS
+// ============================================================
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeSidebar(); document.getElementById('bmPanel')?.classList.remove('open'); closeLangDropdown(); }
+  if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); document.getElementById('searchInput')?.focus(); }
+});
+
+// ============================================================
+// TABLE ENHANCEMENTS
+// ============================================================
+function initTables() {
+  document.querySelectorAll('.table-wrap').forEach(wrap => {
+    const scroller = wrap.querySelector('.table-scroller');
+    if (!scroller) return;
+
+    function updateShadows() {
+      const scrollLeft = scroller.scrollLeft;
+      const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+      wrap.classList.toggle('can-scroll-left',  scrollLeft > 2);
+      wrap.classList.toggle('can-scroll-right', maxScroll > 2 && scrollLeft < maxScroll - 2);
+    }
+
+    scroller.addEventListener('scroll', updateShadows, { passive: true });
+    window.addEventListener('resize', updateShadows, { passive: true });
+    updateShadows(); // initial check
+  });
+
+  // data-label for table-stack stacking
+  document.querySelectorAll('table.table-stack').forEach(table => {
+    const headers = [...table.querySelectorAll('thead th')].map(th => th.textContent.trim());
+    table.querySelectorAll('tbody tr').forEach(row => {
+      [...row.querySelectorAll('td')].forEach((td, i) => {
+        if (headers[i]) td.setAttribute('data-label', headers[i]);
+      });
+    });
+  });
+}
+
+// ============================================================
+// INIT
+// ============================================================
+// Restore language
+try {
+  const savedLang = localStorage.getItem('it_lang');
+  if (savedLang && savedLang in LANGS) currentLang = savedLang;
+} catch(e) {}
+
+// Restore theme icon
+try {
+  if (localStorage.getItem('it_theme') === 'dark') document.getElementById('themeIcon').textContent = '☀️';
+} catch(e) {}
+
+renderProgress();
+renderStars();
+initTables();
+applyTranslations(); // apply language last so all DOM is ready
+</script>
+
+<footer class="site-footer">
+  <div>
+    <span class="footer-author">Stashkevich Daniil</span>
+    &nbsp;·&nbsp;
+    <a class="footer-email" href="mailto:danikchok@gmail.com">danikchok@gmail.com</a>
+  </div>
+  <div class="footer-right" data-i18n="footerRight">Italiano — Справочник по итальянскому языку</div>
+</footer>
+</body>
+</html>
